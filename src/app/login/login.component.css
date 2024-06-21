@@ -1,0 +1,70 @@
+.loginBg {
+    background: linear-gradient( 270deg, #FEF5B6 0%, #FFFFFF 73.53%);
+}
+
+.forgot-pup .modal-dialog {
+    max-width: 540px;
+}
+
+.forgot-pup .modal-header {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-flow: column;
+    flex-flow: column;
+    padding: 0;
+}
+
+.forgot-pup .btn-close {
+    position: absolute;
+    right: 0;
+    top: 0;
+    background: #000;
+    color: #FFF;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    opacity: 1;
+}
+
+.forgot-pup .modal-header {
+    padding: 15px 0 10px;
+    margin-bottom: 0px;
+    position: relative;
+    border-bottom: 2px solid #E1E1E1;
+}
+
+.forgot-pup .modal-header::before {
+    content: '';
+    position: absolute;
+    height: 2px;
+    width: 80px;
+    background-color: #8bc540;
+    bottom: -2px;
+}
+
+.text-brown {
+    color: #3F1D0B !important;
+}
+
+.text-brown-light {
+    color: brown !important;
+}
+
+.forgot-pup .modal-title {
+    margin-bottom: 0;
+    line-height: 40px;
+    font-weight: 600;
+}
+
+.forgot-pup .modal-header img {
+    max-width: 10%;
+}

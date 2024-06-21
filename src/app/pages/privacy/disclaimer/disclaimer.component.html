@@ -1,0 +1,24 @@
+<form class="form" name="addUserForm" [formGroup]="disclaimForm">
+    <div class="row">
+
+        <div class="form-group col-md-12 mb-3">
+            <mat-form-field>
+                <mat-label>Title</mat-label>
+                <input matInput required placeholder="Enter Title" [formControl]="header" name="header">
+                <mat-error *ngIf="header.invalid">{{validateFormFields()}}</mat-error>
+            </mat-form-field>
+        </div>
+
+        <div class="form-group col-md-12 mb-3">
+            <mat-form-field>
+                <mat-label>Paragraph</mat-label>
+                <textarea matInput required placeholder="Enter Paragraph" [formControl]="pText1" name="content"></textarea>
+                <mat-error *ngIf="pText1.invalid">{{validateFormFields()}}</mat-error>
+            </mat-form-field>
+        </div>
+
+        <div class="form-group col-md-12 flex mt-4">
+            <button class="btn btn-green mb-3" (click)="disclaimSection()" [disabled]="disclaimForm.invalid">Update</button>
+        </div>
+    </div>
+</form>

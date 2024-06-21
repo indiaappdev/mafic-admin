@@ -1,0 +1,95 @@
+<div class="an-content-body {{datas.hideSidebarClass}}">
+    <div class="an-body-topbar wow fadeIn">
+        <div class="an-page-title">
+            <h2>Home page</h2>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="an-single-component with-shadow">
+
+                <div class="an-component-body">
+                    <div class="an-helper-block p-0">
+                        <div class="shadow-class m-3">
+                            <h2 *ngIf="!datas.editDisable" class="an-page-title mt-0" data-bs-toggle="collapse" href="#bannerEdit" role="button" aria-expanded="false" aria-controls="bannerEdit">FirstSection</h2>
+                            <h2 *ngIf="datas.editDisable" class="an-page-title mt-0" (click)="datas.denieAccess()">First Section</h2>
+                            <div *ngIf="!datas.editDisable" class="an-scrollable-x collapse" id="bannerEdit">
+
+                                <a class="btn btn-green mb-2" (click)="addBanner(1)">ADD BANNER</a>
+
+                                <table mat-table *ngIf="dataSource" [dataSource]="dataSource" class="mat-elevation-z8">
+
+                                    <ng-container matColumnDef="id" class="p-2">
+                                        <th mat-header-cell *matHeaderCellDef> ID </th>
+                                        <td mat-cell *matCellDef="let element;let i = index;"> {{i+1}} </td>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="text" class="p-2">
+                                        <th mat-header-cell *matHeaderCellDef> TEXT </th>
+                                        <td mat-cell *matCellDef="let element"> {{element.text}} </td>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="image" class="p-2">
+                                        <th mat-header-cell *matHeaderCellDef> IMAGE </th>
+                                        <td mat-cell *matCellDef="let element">
+                                            <span class="msg-tag bg-success cursor-pointer px-5" (click)="imageOpen(element.imageURL)">View</span>
+                                        </td>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="action">
+                                        <th mat-header-cell *matHeaderCellDef> ACTION </th>
+                                        <td mat-cell *matCellDef="let element">
+                                            <div class="d-flex">
+                                                <span class="cursor-pointer p-0" (click)="openEditDialog(element)"><i class="fas fa-edit" style="color: green;"></i></span>
+                                                <span class="cursor-pointer p-0 ms-3" (click)="openDeleteDialog(element)"><i class="fas fa-trash" style="color: red;"></i></span>
+                                            </div>
+                                        </td>
+                                    </ng-container>
+
+                                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+                                    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Select page of data elements">
+                                    </mat-paginator>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="shadow-class m-3">
+                            <h2 *ngIf="!datas.editDisable" class="an-page-title mt-0" data-bs-toggle="collapse" href="#categoryEdit" role="button" aria-expanded="false" aria-controls="categoryEdit">Secound Section</h2>
+                            <h2 *ngIf="datas.editDisable" class="an-page-title mt-0" (click)="datas.denieAccess()">Secound Section</h2>
+                            <div *ngIf="!datas.editDisable" class="an-scrollable-x collapse" id="categoryEdit">
+                                <app-category></app-category>
+                            </div>
+                        </div>
+
+                        <div class="shadow-class m-3">
+                            <h2 *ngIf="!datas.editDisable" class="an-page-title mt-0" data-bs-toggle="collapse" href="#whyChooseUs" role="button" aria-expanded="false" aria-controls="collapseExample">Third Section</h2>
+                            <h2 *ngIf="datas.editDisable" class="an-page-title mt-0" (click)="datas.denieAccess()">Third Section</h2>
+                            <div class="an-scrollable-x collapse" id="whyChooseUs">
+                                <app-about></app-about>
+                            </div>
+                        </div>
+
+                        <div class="shadow-class m-3">
+                            <h2 *ngIf="!datas.editDisable" class="an-page-title mt-0" data-bs-toggle="collapse" href="#coreelement" role="button" aria-expanded="false" aria-controls="coreelement">Fourth Section</h2>
+                            <h2 *ngIf="datas.editDisable" class="an-page-title mt-0" (click)="datas.denieAccess()">Fourth Section</h2>
+                            <div *ngIf="!datas.editDisable" class="an-scrollable-x collapse" id="coreelement">
+                                <app-core-elements></app-core-elements>
+                            </div>
+                        </div>
+
+                        <div class="shadow-class m-3">
+                            <h2 *ngIf="!datas.editDisable" class="an-page-title mt-0" data-bs-toggle="collapse" href="#lifeAtCompetition" role="button" aria-expanded="false" aria-controls="lifeAtCompetition">Fifth Section</h2>
+                            <h2 *ngIf="datas.editDisable" class="an-page-title mt-0" (click)="datas.denieAccess()">Fifth Section</h2>
+                            <div *ngIf="!datas.editDisable" class="an-scrollable-x collapse" id="lifeAtCompetition">
+                                <app-home-last-sec></app-home-last-sec>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

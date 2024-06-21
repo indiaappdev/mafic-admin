@@ -1,0 +1,20 @@
+<h2 mat-dialog-title>Query Details</h2>
+<div mat-dialog-content class="mat-typography">
+    <div class="row">
+        <div class="col-md-12 mb-3">
+            <p class="p-0">Name: {{queryData.firstName}} {{queryData.lastName}}</p>
+        </div>
+
+        <div class="col-md-12  mb-3">
+            <p class="p-0">Email ID: {{queryData.emailId}}</p>
+        </div>
+
+        <div class="col-md-12  mb-3">
+            <p class="p-0">Message:</p>
+            <p class="p-0">{{queryData.comments}}</p>
+        </div>
+    </div>
+</div>
+<div mat-dialog-actions>
+    <button mat-dialog-close class="btn btn-gold m-3">Close</button>
+</div>

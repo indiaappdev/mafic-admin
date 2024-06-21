@@ -1,0 +1,129 @@
+<div class="an-content-body {{data.hideSidebarClass}}">
+    <div class="moveUp">
+        <i class="fas fa-arrow-circle-left" [routerLink]="['/contest/entries/',contestId]"></i>
+    </div>
+    <div class="container_fluid">
+        <div class="row">
+
+            <div class="col-md-4 p-0">
+                <div class="hed_set">
+                    <h4>Contests Entries Details</h4>
+                    <div class="contest_profile">
+                        <div class="user_pro">
+                            <img [src]="entryDetails.profileUrl" class="" alt="Image">
+                        </div>
+                        <span class="name_con">{{entryDetails.firstName}} {{entryDetails.lastName}}</span>
+                        <span class="id_con">ID - {{entryDetails.identifier}}</span>
+                    </div>
+                    <div class="contest_details">
+                        <div class="live_setails">
+                            <label>Email ID</label>
+                            <span class="data_fild">{{entryDetails.emailId}}</span>
+                        </div>
+
+                        <div class="live_setails">
+                            <label>Mobile Number</label>
+                            <span class="data_fild">{{entryDetails.countryCode}} {{entryDetails.mobileNo}}</span>
+                        </div>
+
+                        <div class="live_setails">
+                            <label>Interest Category</label>
+                            <span class="data_fild">{{entryDetails.interestCat}}</span>
+                        </div>
+
+                        <div class="live_setails">
+                            <label>Experience in Years</label>
+                            <span class="data_fild">{{entryDetails.experience}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-md-8">
+                <div class="img_upl_rej">
+                    <div class="row">
+                        <div class="form-group col-sm-6 mb-3">
+                            <label>Art Name</label>
+                            <input type="text" class="an-form-control mb-3" placeholder="Enter Art Name" name="question" [(ngModel)]="artName" style="font-size:16px;" />
+                        </div>
+                        <div class="form-group col-sm-6 mb-3">
+                            <label>Contest Name</label>
+                            <select class="an-form-control mb-3 cursor-pointer" style="font-size:16px;" [(ngModel)]="contestName">
+                                    <option [value]="contest.id" *ngFor="let contest of contestDetails">{{contest.name}}</option>
+                                  </select>
+                            <!-- <mat-error *ngIf="experienceJury.invalid && experienceJury.touched">{{validateFormFields()}}</mat-error> -->
+                        </div>
+                        <div class="col-sm-6 mb-3">
+                            <button type="button" class="btn-green m-3 ms-0" (click)="changeContest()">Change Contest</button>
+                        </div>
+                    </div>
+                    <figure class="cont_img">
+                        <!-- <img [src]="entryDetails.image" class="img-fluid"> -->
+                        <lib-ngx-image-zoom [thumbImage]=entryDetails.image [fullImage]=entryDetails.image [magnification]="1" [enableScrollZoom]="true" [enableLens]="true" [lensWidth]="200"></lib-ngx-image-zoom>
+
+                        <!-- <a data-bs-toggle="modal" data-bs-target="#image_pup" class="pre_view cursor-pointer"></a> -->
+
+                    </figure>
+                    <button type="button" class="btn-gold m-3" data-bs-toggle="modal" data-bs-target="#image_pup">Preview Image</button>
+                    <!-- <button type="button" class="btn-green m-3" (click)="downloadImage(entryDetails.image)">Download Image</button> -->
+                    <!-- <img class="d-none" [src]="entryDetails.image" #img> -->
+                    <a href="javascript:void(0);" class="btn-green m-3" target="_self" (click)="downloadUrl(entryDetails.image)">Download</a>
+
+                    <form class="form-floating">
+                        <textarea *ngIf="acceptCheck == 0" class="form-control cust_bdr" placeholder="Leave a comment here" id="floatingTextarea" name="comment" [(ngModel)]="acptRjctCommnt" style="font-size: 14px;"></textarea>
+                        <div *ngIf="acceptCheck == 0" class="bottn_set">
+                            <button type="button" class="acp_btn" (click)="acceptContestEntry(2)">Accept</button>
+                            <button type="button" class="rej_btn" (click)="acceptContestEntry(1)">Reject</button>
+                        </div>
+
+                        <div *ngIf="acceptCheck == 2">
+                            <div class="row align-items-center">
+                                <div class="col-md-8">
+                                    <label>Select Winning Type</label>
+                                    <select class="an-form-control mb-3" name="winner" id="winner" [(ngModel)]="winnerType">
+                                        <option value="1">Winner</option>
+                                        <option value="2">1st Runner Up</option>
+                                        <option value="3">2nd Runner Up</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-4">
+                                    <button type="button" class="btn btn-green" (click)="addWinner()">Submiit</button>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div *ngIf="acceptCheck == 1" class="bottn_set">
+                            <button type="button" class="rej_btn">Rejected</button>
+                        </div>
+                    </form>
+                    <div class="form-floating">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- image PuP -->
+<div class="modal fade image-pop" id="image_pup" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <img src="../../../assets/images/logo.png" alt="" title="">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">X</button>
+            </div>
+            <div class="modal-body">
+                <div class="card form-login border-0">
+                    <div class="form-group mb-3 text-center">
+                        <img [src]="entryDetails.image" alt="" title="" class="img-fluid">
+                    </div>
+                    <!-- <div class="form-group mb-2">
+                        <button type="submit" class="btn-green w-100" data-bs-dismiss="modal" aria-label="Close">OK</button>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

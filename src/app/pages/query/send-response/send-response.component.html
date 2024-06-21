@@ -1,0 +1,16 @@
+<h2 mat-dialog-title>Reply</h2>
+<div mat-dialog-content class="mat-typography">
+    <div class="row">
+        <div class="form-group col-md-12 mb-3">
+            <mat-form-field>
+                <mat-label>Reply Message</mat-label>
+                <textarea matInput required placeholder="Reply" [(ngModel)]="comment"></textarea>
+                <!-- <mat-error *ngIf="natureService.invalid">{{validateFormFields()}}</mat-error> -->
+            </mat-form-field>
+        </div>
+    </div>
+</div>
+<div mat-dialog-actions>
+    <button mat-dialog-close class="btn btn-gold m-3">Close</button>
+    <button mat-dialog-close class="btn btn-green m-3" (click)="sendReplay()">Send</button>
+</div>

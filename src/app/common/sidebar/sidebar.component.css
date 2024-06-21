@@ -1,0 +1,11 @@
+.active {
+    background-color: #638A27;
+}
+
+.an-sidebar-nav {
+    transition: all 5s ease-in-out;
+}
+
+.none {
+    display: none;
+}

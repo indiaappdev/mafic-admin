@@ -1,0 +1,57 @@
+<div class="an-content-body {{data.hideSidebarClass}}">
+    <div class="an-body-topbar wow fadeIn">
+        <div class="an-page-title">
+            <h2>Edit Policies</h2>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="an-single-component with-shadow">
+
+                <div class="an-component-body">
+                    <div class="an-helper-block p-0">
+                        <div class="shadow-class m-3">
+                            <h2 *ngIf="!data.editDisable" class="an-page-title mt-0" data-bs-toggle="collapse" href="#privacyPolicy" role="button" aria-expanded="false" aria-controls="whoarewe">
+                                Privacy Policy</h2>
+                            <h2 *ngIf="data.editDisable" class="an-page-title mt-0 cursor-pointer" (click)="data.denieAccess()">
+                                Privacy Policy</h2>
+                            <div *ngIf="!data.editDisable" class="an-scrollable-x collapse" id="privacyPolicy">
+                                <app-privacy-policy></app-privacy-policy>
+                            </div>
+                        </div>
+                        <div class="shadow-class m-3">
+                            <h2 *ngIf="!data.editDisable" class="an-page-title mt-0" data-bs-toggle="collapse" href="#termsAndCondition" role="button" aria-expanded="false" aria-controls="whatwearedoing">
+                                Terms And Condition</h2>
+                            <h2 *ngIf="data.editDisable" class="an-page-title mt-0 cursor-pointer" (click)="data.denieAccess()">
+                                Terms And Condition</h2>
+                            <div *ngIf="!data.editDisable" class="an-scrollable-x collapse mb-3" id="termsAndCondition">
+                                <app-terms-conditions></app-terms-conditions>
+                            </div>
+                        </div>
+                        <div class="shadow-class m-3">
+                            <h2 *ngIf="!data.editDisable" class="an-page-title mt-0" data-bs-toggle="collapse" href="#consentOfData" role="button" aria-expanded="false" aria-controls="whyartists">
+                                Consent of Data</h2>
+                            <h2 *ngIf="data.editDisable" class="an-page-title mt-0 cursor-pointer" (click)="data.denieAccess()">
+                                Consent of Data</h2>
+                            <div *ngIf="!data.editDisable" class="an-scrollable-x collapse" id="consentOfData">
+                                <app-consent-of-data></app-consent-of-data>
+                            </div>
+                        </div>
+                        <div class="shadow-class m-3">
+                            <h2 *ngIf="!data.editDisable" class="an-page-title mt-0" data-bs-toggle="collapse" href="#disclaimer" role="button" aria-expanded="false" aria-controls="insidethemafic">
+                                Disclaimer</h2>
+                            <h2 *ngIf="data.editDisable" class="an-page-title mt-0 cursor-pointer" (click)="data.denieAccess()">
+                                Disclaimer</h2>
+                            <div *ngIf="!data.editDisable" class="an-scrollable-x collapse" id="disclaimer">
+                                <app-disclaimer></app-disclaimer>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Refunds and Cancellation -->

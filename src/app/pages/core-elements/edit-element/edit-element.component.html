@@ -1,0 +1,30 @@
+<form class="form" name="addUserForm" [formGroup]="addUserForm">
+    <div class="row">
+        <div class="form-group col-md-12 mb-3">
+            <mat-form-field style="width: 100%;">
+                <mat-label>Element Title</mat-label>
+                <input matInput required placeholder="Enter Element Title" [formControl]="text">
+                <mat-error *ngIf="text.invalid">{{validateFormFields()}}</mat-error>
+            </mat-form-field>
+        </div>
+
+        <div class="form-group col-md-12 mb-3">
+            <mat-form-field style="width: 100%;">
+                <mat-label>Element Text</mat-label>
+                <textarea matInput required placeholder="Enter Element Text" [formControl]="text1"></textarea>
+                <mat-error *ngIf="text1.invalid">{{validateFormFields()}}</mat-error>
+            </mat-form-field>
+        </div>
+
+        <div class="form-group col-md-12 mb-3">
+            <div>Image Upload: </div>
+            <input type="file" placeholder="Enter Image" (change)="bannerImage($event)" #fileInput>
+            <img [src]="uploadImageUrl" *ngIf="fileAccept" class="mt-2" id="blah" style="height: 200px;" alt="Image">
+        </div>
+
+        <div class="form-group col-md-12 flex mt-4">
+            <button mat-raised-button color="primary" (click)="editElementFunc()">Save</button>
+            <span style="margin-left: 10px;"><button mat-dialog-close mat-raised-button>Cancel</button></span>
+        </div>
+    </div>
+</form>

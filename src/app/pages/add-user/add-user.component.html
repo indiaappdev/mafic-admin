@@ -1,0 +1,164 @@
+<div class="an-content-body {{data.hideSidebarClass}}">
+    <div class="an-body-topbar wow fadeIn">
+        <div class="an-page-title">
+            <h2>Add User</h2>
+        </div>
+    </div>
+
+    <div class="an-single-component with-shadow p-5">
+        <div class="form-group col-md-6 mb-3">
+            <mat-form-field>
+                <mat-label>Role of the user</mat-label>
+                <mat-select required [(ngModel)]="role">
+                    <mat-option *ngFor="let role of roleData" [value]="role.id">{{role.roles}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <!-- <form class="form" *ngIf="role == 'student'" name="addUserForm" [formGroup]="addUserForm">
+            <div class="row">
+                <div class="form-group col-md-6 mb-3">
+                    <mat-form-field>
+                        <mat-label>First Name</mat-label>
+                        <input matInput required placeholder="First name" [formControl]="firstName">
+                        <mat-error *ngIf="firstName.invalid">{{validateFormFields()}}</mat-error>
+                    </mat-form-field>
+                </div>
+
+                <div class="form-group col-md-6 mb-3">
+                    <mat-form-field>
+                        <mat-label>Last Name</mat-label>
+                        <input matInput required placeholder="Last name" [formControl]="lastName">
+                        <mat-error *ngIf="lastName.invalid">{{validateFormFields()}}</mat-error>
+                    </mat-form-field>
+                </div>
+
+                <div class="form-group col-md-6 mb-3">
+                    <mat-form-field>
+                        <mat-label>Email ID</mat-label>
+                        <input matInput required placeholder="Enter Email ID" [formControl]="emailID">
+                        <mat-error *ngIf="emailID.invalid">{{validateFormFields()}}</mat-error>
+                    </mat-form-field>
+                </div>
+
+                <div class="form-group col-md-2 mb-3">
+                    <mat-form-field>
+                        <mat-label>Country Code</mat-label>
+                        <mat-select required [formControl]="countryCode">
+                            <mat-select-trigger>
+                                {{ countryCode.value }}
+                            </mat-select-trigger>
+                            <mat-option *ngFor="let opt of countries" [value]="opt.code">{{opt.code}} - {{opt.name}}</mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="countryCode.invalid">{{validateFormFields()}}</mat-error>
+                    </mat-form-field>
+                </div>
+
+                <div class="form-group col-md-4 mb-3">
+                    <mat-form-field>
+                        <mat-label>Mobile Number</mat-label>
+                        <input matInput placeholder="Enter Mobile Number" [formControl]="phoneNumber">
+                    </mat-form-field>
+                </div>
+
+                <div class="form-group col-md-12 flex">
+                    <button class="btn btn-gold m-3" [routerLink]="['/user']">Cancel</button>
+                    <button class="btn btn-green m-3" [disabled]="addUserForm.invalid" (click)="addUserToDb()">Save</button>
+                </div>
+            </div>
+        </form> -->
+
+        <form class="form" name="addUserForm" [formGroup]="addUserFormJury">
+            <div class="row">
+                <div class="form-group col-md-6 mb-3">
+                    <mat-form-field>
+                        <mat-label>First Name</mat-label>
+                        <input matInput required placeholder="First name" [formControl]="firstNameJury">
+                        <mat-error *ngIf="firstNameJury.invalid">{{validateFormFields()}}</mat-error>
+                    </mat-form-field>
+                </div>
+
+                <div class="form-group col-md-6 mb-3">
+                    <mat-form-field>
+                        <mat-label>Last Name</mat-label>
+                        <input matInput required placeholder="Last name" [formControl]="lastNameJury">
+                        <mat-error *ngIf="lastNameJury.invalid">{{validateFormFields()}}</mat-error>
+                    </mat-form-field>
+                </div>
+
+                <div class="form-group col-md-6 mb-3">
+                    <mat-form-field>
+                        <mat-label>Email ID</mat-label>
+                        <input matInput required placeholder="Enter Email ID" [formControl]="emailIDJury">
+                        <mat-error *ngIf="emailIDJury.invalid">{{validateFormFields()}}</mat-error>
+                    </mat-form-field>
+                </div>
+
+                <div class="form-group col-md-2 mb-3">
+                    <mat-form-field>
+                        <mat-label>Country Code</mat-label>
+                        <mat-select required [formControl]="countryCodeJury">
+                            <mat-select-trigger>
+                                {{ countryCodeJury.value }}
+                            </mat-select-trigger>
+                            <mat-option *ngFor="let opt of countries" [value]="opt.code">{{opt.code}} - {{opt.name}}</mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="countryCodeJury.invalid">{{validateFormFields()}}</mat-error>
+                    </mat-form-field>
+                </div>
+
+
+                <div class="form-group col-md-4 mb-3">
+                    <mat-form-field>
+                        <mat-label>Mobile Number</mat-label>
+                        <input matInput placeholder="Enter Mobile Number" [formControl]="phoneNumberJury">
+                        <mat-error *ngIf="phoneNumberJury.invalid">{{phoneNumberValidator()}}</mat-error>
+                    </mat-form-field>
+                </div>
+
+                <div class="form-group col-md-6 mb-3">
+                    <mat-form-field>
+                        <mat-label>Type of Arts?</mat-label>
+                        <mat-select required (selectionChange)="onChangeType($event)" [formControl]="typeOfArtJury">
+                            <mat-option selected value="painting">Painting</mat-option>
+                            <mat-option value="photography">Photography</mat-option>
+                            <mat-option value="cutlery">Cutlery</mat-option>
+                            <mat-option value="crockery">Crockery</mat-option>
+                            <mat-option value="jewelry">Jewelry</mat-option>
+                            <mat-option value="fashion">Fashion</mat-option>
+                            <mat-option value="home_decor">Home Décor</mat-option>
+                            <mat-option value="home_furnishing">Home Furnishing</mat-option>
+                            <mat-option value="other">Other</mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="typeOfArtJury.invalid && typeOfArtJury.touched">{{validateFormFields()}}</mat-error>
+                    </mat-form-field>
+                </div>
+
+                <div class="form-group col-md-6 mb-3" *ngIf="regTypeArtOther">
+                    <mat-form-field>
+                        <mat-label>Enter type of ART</mat-label>
+                        <input matInput placeholder="Enter type of ART here" [formControl]="typeOfArtTextJury">
+                    </mat-form-field>
+                </div>
+
+                <div class="form-group col-md-6 mb-3">
+                    <mat-form-field>
+                        <mat-label>Experience in years</mat-label>
+                        <mat-select required [formControl]="experienceJury">
+                            <mat-option value="0-5">0-5</mat-option>
+                            <mat-option value="6-10">6-10</mat-option>
+                            <mat-option value="16-20">16-20</mat-option>
+                            <mat-option value="21-25">21-25</mat-option>
+                            <mat-option value="25+">25+</mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="experienceJury.invalid && experienceJury.touched">{{validateFormFields()}}</mat-error>
+                    </mat-form-field>
+                </div>
+
+                <div class="form-group col-md-12 flex">
+                    <button class="btn btn-gold m-3" [routerLink]="['/user']">Cancel</button>
+                    <button class="btn btn-green m-3" [disabled]="addUserFormJury.invalid" (click)="addUserToDb()">Save</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

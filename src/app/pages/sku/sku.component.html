@@ -1,0 +1,128 @@
+<div class="an-content-body {{datas.hideSidebarClass}}">
+    <div class="an-body-topbar wow fadeIn">
+        <div class="an-page-title">
+            <h2>SKU List</h2>
+        </div>
+    </div>
+
+    <div class="data-table-header" style="margin-bottom: 30px;">
+        <a *ngIf="!datas.writeDisable" class="btn btn-green" [routerLink]="['/sku/add-sku']">ADD SKU</a>
+        <a class="btn btn-green" *ngIf="datas.writeDisable" (click)="datas.denieAccess()">ADD SKU</a>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="an-single-component with-shadow">
+                <div class="an-component-header">
+                    <h6>SKU List</h6>
+                </div>
+                <div class="an-component-body">
+                    <div class="an-helper-block p-0">
+                        <div class="an-scrollable-x">
+                            <table mat-table *ngIf="dataSource" [dataSource]="dataSource" matSort class="mat-elevation-z8">
+
+                                <!-- User ID Column -->
+                                <ng-container matColumnDef="id" class="p-2">
+                                    <th mat-header-cell *matHeaderCellDef> ID </th>
+                                    <td mat-cell *matCellDef="let element; let i = index;"> {{i+1}} </td>
+                                </ng-container>
+
+                                <!-- Name Column -->
+                                <ng-container matColumnDef="name" class="p-2">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> NAME </th>
+                                    <td mat-cell *matCellDef="let element"> {{element.name | titlecase}} </td>
+                                </ng-container>
+
+                                <!-- Type Column -->
+                                <ng-container matColumnDef="description" class="p-2">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> DESCRIPTION </th>
+                                    <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+                                </ng-container>
+
+                                <ng-container matColumnDef="image" class="p-2">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> IMAGE </th>
+                                    <td mat-cell *matCellDef="let element"> <span class="msg-tag bg-danger px-5 cursor-pointer" (click)="openImage(element.image)">Preview</span> </td>
+                                </ng-container>
+
+                                <ng-container matColumnDef="price" class="p-2">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> PRICE </th>
+                                    <td mat-cell *matCellDef="let element"> {{element.price}} </td>
+                                </ng-container>
+
+                                <ng-container matColumnDef="discount" class="p-2">
+                                    <th mat-header-cell *matHeaderCellDef> DISCOUNT </th>
+                                    <td mat-cell *matCellDef="let element"> {{element.discount}} </td>
+                                </ng-container>
+
+                                <ng-container matColumnDef="sac_gst_code" class="p-2">
+                                    <th mat-header-cell *matHeaderCellDef> SAC/GST Code </th>
+                                    <td mat-cell *matCellDef="let element"> {{element.sac_gst_code}} </td>
+                                </ng-container>
+
+                                <ng-container matColumnDef="gst" class="p-2">
+                                    <th mat-header-cell *matHeaderCellDef> GST % </th>
+                                    <td mat-cell *matCellDef="let element"> {{element.gst}} </td>
+                                </ng-container>
+
+                                <!-- Action Column -->
+                                <ng-container matColumnDef="active">
+                                    <th mat-header-cell *matHeaderCellDef> STATUS </th>
+                                    <td mat-cell *matCellDef="let element"><span class="msg-tag bg-danger px-5" *ngIf="element.active != '1'">Inactive</span><span class="msg-tag bg-success px-5" *ngIf="element.active == '1'">Active</span></td>
+                                </ng-container>
+
+                                <!-- Action Column -->
+                                <ng-container matColumnDef="action">
+                                    <th mat-header-cell *matHeaderCellDef> ACTION </th>
+                                    <td mat-cell *matCellDef="let element">
+                                        <div class="d-flex">
+                                            <span *ngIf="!datas.editDisable" class="cursor-pointer p-0" [routerLink]="['/sku/edit-sku/',element.id]"><i class="fas fa-edit"></i></span>
+                                            <span *ngIf="datas.editDisable" class="cursor-pointer p-0" (click)="datas.denieAccess()"><i class="fas fa-edit"></i></span>
+                                            <span *ngIf="!datas.deleteDisable" class="cursor-pointer p-0 ms-3" (click)="openDeleteDialog(element.id)"><i class="fas fa-trash text-danger"></i></span>
+                                            <span *ngIf="datas.deleteDisable" class="cursor-pointer p-0 ms-3" (click)="datas.denieAccess()"><i class="fas fa-trash text-danger"></i></span>
+                                        </div>
+                                    </td>
+                                </ng-container>
+
+                                <!-- Action Column -->
+                                <ng-container matColumnDef="invoice">
+                                    <th mat-header-cell *matHeaderCellDef> INVOICE </th>
+                                    <td mat-cell *matCellDef="let element">
+                                        <div class="d-flex">
+                                            <span class="msg-tag bg-success px-5 cursor-pointer">Generate</span>
+                                            <!-- <span *ngIf="!datas.editDisable" class="msg-tag bg-success px-5 cursor-pointer" [routerLink]="['/sku/invoice-sku/',element.id]">Generate</span>
+                                            <span *ngIf="datas.editDisable" class="msg-tag bg-success px-5 cursor-pointer" (click)="datas.denieAccess()">Generate</span> -->
+                                        </div>
+                                    </td>
+                                </ng-container>
+
+                                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+                            </table>
+                            <mat-paginator [length]="100" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]" class="mat-elevation-z1">
+                            </mat-paginator>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- image PuP -->
+<div class="modal fade image-pop" id="image_pup_sku" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="card form-login border-0">
+                    <div class="form-group mb-3 text-center">
+                        <img [src]="image" alt="SKU" title="SKU" class="img-fluid">
+                    </div>
+                    <div class="form-group mb-2">
+                        <button type="submit" class="btn-green w-100" data-bs-dismiss="modal" aria-label="Close">OK</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

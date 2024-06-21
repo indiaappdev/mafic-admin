@@ -1,0 +1,154 @@
+.loadBG {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    height: 100vh;
+    width: 100vw;
+    background-color: #38383859;
+    z-index: 10000000;
+}
+
+.loadingGif {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.7);
+    transition: opacity 500ms;
+    z-index: 10000000;
+    display: none;
+}
+
+.popup {
+    margin: 65px auto;
+    padding: 15px;
+    background: #fff;
+    border-radius: 5px;
+    width: 20%;
+    position: relative;
+    transition: all 5s ease-in-out;
+}
+
+.popupC {
+    margin: 65px auto;
+    padding: 15px;
+    background: #fff;
+    border-radius: 5px;
+    width: 27%;
+    position: relative;
+    transition: all 5s ease-in-out;
+}
+
+.popup h2 {
+    margin-top: 0;
+    color: #333;
+    font-weight: 500;
+}
+
+.popup .close {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    transition: all 200ms;
+    font-size: 30px;
+    font-weight: bold;
+    text-decoration: none;
+    color: #333;
+    cursor: pointer;
+}
+
+.popup .close:hover {
+    color: #06D85F;
+}
+
+.popup .content {
+    max-height: 30%;
+    overflow: auto;
+}
+
+@media screen and (max-width: 700px) {
+    .popup {
+        width: 70%;
+    }
+}
+
+.tick {
+    position: absolute;
+    top: -29px;
+    z-index: 9999;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    right: 0;
+}
+
+.tick i {
+    font-size: 60px;
+    background: #FFF;
+    border-radius: 50%;
+}
+
+.sucsess_cust i {
+    color: #72c340;
+}
+
+.error_cust i {
+    color: #fe0202;
+}
+
+.pop_text {
+    font-size: 18px;
+    padding: 10px 0;
+}
+
+.pup_msg {
+    font-size: 34px;
+    padding: 30px 0 0;
+    text-align: center !important;
+}
+
+.pup_msg {
+    font-size: 34px;
+    padding: 25px 0 20px;
+    text-align: center !important;
+}
+
+.pop-button {
+    padding: 10px 0;
+    text-align: center;
+    text-transform: uppercase;
+    color: #FFF;
+    font-weight: 600;
+    border: transparent;
+    background: #72c340;
+    border-radius: 4px;
+}
+
+.pop-button-ok {
+    background: #ef3535;
+    margin: 5px;
+}
+
+.pop-button-no {
+    background: #72c340;
+    margin: 5px;
+}
+
+.font-20 {
+    font-size: 25px;
+}
+
+.cut_pup {
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+}

@@ -1,0 +1,14 @@
+.survey-name p,
+.survey-description p {
+    font-size: 20px;
+}
+
+.survey-name p span,
+.survey-description p span {
+    font-weight: 600;
+    font-size: 20px;
+}
+
+.font-16 {
+    font-size: 14px;
+}

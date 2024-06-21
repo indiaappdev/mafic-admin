@@ -1,0 +1,78 @@
+<div class="an-content-body {{data.hideSidebarClass}}">
+    <div class="an-body-topbar wow fadeIn">
+        <div class="an-page-title">
+            <h2>Add Survey questions</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="an-single-component with-shadow">
+            <div class="an-component-header">
+                <h6>Survey Questions for {{surveyDetails.name}}</h6>
+            </div>
+            <div class="an-component-body">
+                <div class="an-helper-block">
+
+                    <div class="form-group">
+                        <div class="row" *ngFor="let questionData of quetionDetails;  let i = index;">
+                            <div class="col-md-12">
+                                <div class="shadow-class mb-4">
+                                    <div class="row align-items-center">
+                                        <h3 class="mb-3 question-heading">Question No. {{i+1}}</h3>
+                                        <div class="form-group col-md-8 mb-3">
+                                            <label>Enter Question</label>
+                                            <input type="text" class="an-form-control mb-3" placeholder="Enter Question here" name="question" [(ngModel)]="questionData.question" style="font-size:16px;" />
+                                        </div>
+                                        <div class="form-group col-md-4 mb-3">
+                                            <label>Option Type</label>
+                                            <select class="an-form-control mb-3 cursor-pointer" style="font-size:16px;" (ngModelChange)="changeType($event,i)" [(ngModel)]="questionData.type">
+                                                    <option value="radio">Single selectable (Radio Button)</option>
+                                                    <option value="checkbox">Multiple selectable (Check Box)</option>
+                                                    <option value="textBox">Text Area</option>
+                                                    <option value="btn-check">Single button type (Radio Button)</option>
+                                                  </select>
+                                            <!-- <mat-error *ngIf="experienceJury.invalid && experienceJury.touched">{{validateFormFields()}}</mat-error> -->
+                                        </div>
+                                        <div class="form-group col-md-5 mb-3" *ngFor="let item of [].constructor(optionCount[i]); let j = index">
+                                            <label *ngIf="questionData.type != 'textBox'">Enter option {{j+1}}</label>
+                                            <input *ngIf="questionData.type != 'textBox'" type="text" class="an-form-control mb-3" placeholder="Enter option here" name="option" [(ngModel)]="questionData.answer[j]" style="font-size:16px;" />
+
+                                        </div>
+                                        <div class="form-group col-md-2 mb-3" *ngIf="questionData.type != 'textBox'">
+                                            <span class="add-button small-btn" (click)="addOption(i)">
+                                                <i class="fas fa-plus" title="Add question"></i>
+                                            </span>
+                                            <span class="add-button small-btn ms-3" (click)="deleteOption(i)">
+                                                <i class="fas fa-trash" style="color: red;"></i>
+                                            </span>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-12 mt-3 mb-2 text-center">
+                                <p>
+                                    <span class="add-button" (click)="addQuetion()">
+                                        <i class="fas fa-plus" alt="Add question"></i>
+                                    </span>
+                                    <span class="add-button ms-3" (click)="removeQuetion()">
+                                        <i class="fas fa-trash" style="color: red;"></i>
+                                    </span>
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group col-md-12 mt-3 mb-2 text-center">
+                                <button class="btn btn-gold m-3" [routerLink]="['/survey']">Cancel</button>
+                                <button type="button" class="btn-green" (click)="submitSurvey()">Submit</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

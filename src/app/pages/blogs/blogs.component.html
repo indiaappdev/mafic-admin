@@ -1,0 +1,87 @@
+<div class="an-content-body">
+    <div class="an-body-topbar wow fadeIn">
+        <div class="an-page-title">
+            <h2>Blogs List</h2>
+        </div>
+    </div>
+
+    <div class="data-table-header" style="margin-bottom: 30px;">
+        <form class="an-form" action="#" style="width: 100%;">
+            <div class="table-search-inline">
+                <div class="an-search-field">
+                    <input class="an-form-control" type="text" placeholder="Search...">
+                    <button class="an-btn an-btn-icon" type="submit"><i class="fas fa-search"></i></button>
+                </div>
+
+                <!-- <div class="an-default-select-wrapper me-3">
+                    <ng-selectize [config]="configs" [options]="data"></ng-selectize>
+                </div> -->
+            </div>
+        </form>
+        <a [routerLink]="['/cms/blogs/add-blogs']" class="btn btn-green">ADD BLOGS</a>
+        <!-- <a class="btn btn-brown">ADD<span style="padding-left: 6px;;"></span>SURVEY</a> -->
+        <!-- <button mat-raised-button [routerLink]="['/blogs/add-blogs']" color="primary" style="padding: 1px 50px; border-radius: 0px;"><a style="text-decoration: none; color: white;">ADD BLOGS</a></button> -->
+        <!-- <a [routerLink]="['/add-user/']" class="btn btn-brown">ADD USER</a> -->
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="an-single-component with-shadow">
+
+                <div class="an-component-body">
+                    <div class="an-helper-block p-0">
+                        <div class="an-scrollable-x">
+
+                            <table mat-table *ngIf="dataSource" [dataSource]="dataSource" class="mat-elevation-z8">
+
+                                <ng-container matColumnDef="id" class="p-2">
+                                    <th mat-header-cell *matHeaderCellDef> ID </th>
+                                    <td mat-cell *matCellDef="let element;let i = index;"> {{i+1}} </td>
+                                </ng-container>
+
+                                <ng-container matColumnDef="title" class="p-2">
+                                    <th mat-header-cell *matHeaderCellDef> TITLE </th>
+                                    <td mat-cell *matCellDef="let element"> {{element.title}} </td>
+                                </ng-container>
+
+                                <ng-container matColumnDef="description" class="p-2">
+                                    <th mat-header-cell *matHeaderCellDef> DESCRIPTION </th>
+                                    <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+                                </ng-container>
+
+
+                                <ng-container matColumnDef="image" class="p-2">
+                                    <th mat-header-cell *matHeaderCellDef> IMAGE </th>
+                                    <td mat-cell *matCellDef="let element">
+                                        <mat-chip-list aria-label="Fish selection">
+
+                                            <mat-chip color="primary" selected (click)="imageOpen(element.image)">View</mat-chip>
+                                        </mat-chip-list>
+                                    </td>
+                                </ng-container>
+
+                                <ng-container matColumnDef="action">
+                                    <th mat-header-cell *matHeaderCellDef> ACTION </th>
+                                    <td mat-cell *matCellDef="let element">
+                                        <div class="d-flex">
+                                            <button type="button" class="btn btn-transparent p-0" (click)="openEditDialog(element)"><i class="fas fa-edit" style="color: green;"></i></button>
+                                            <button type="button" class="btn btn-transparent p-0 ms-4" (click)="openDeleteDialog(element)"><i class="fas fa-trash" style="color: red;"></i></button>
+                                        </div>
+                                    </td>
+                                </ng-container>
+
+
+
+                                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+                                <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Select page of data elements">
+                                </mat-paginator>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

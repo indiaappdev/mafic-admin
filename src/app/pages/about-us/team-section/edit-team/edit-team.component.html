@@ -1,0 +1,46 @@
+<form class="form" name="addUserForm" [formGroup]="addTeamForm">
+    <div class="row">
+        <div class="form-group col-md-12 mb-3">
+            <mat-form-field style="width: 100%;">
+                <mat-label>Team Member Name</mat-label>
+                <input matInput required placeholder="Team Member Name" [formControl]="name">
+                <mat-error *ngIf="name.invalid">{{validateFormFields()}}</mat-error>
+            </mat-form-field>
+        </div>
+
+        <div class="form-group col-md-12 mb-3">
+            <mat-form-field style="width: 100%;">
+                <mat-label>Team Member Profession</mat-label>
+                <input matInput required placeholder="Enter Team Member Profession" [formControl]="profession">
+                <mat-error *ngIf="profession.invalid">{{validateFormFields()}}</mat-error>
+            </mat-form-field>
+        </div>
+
+        <div class="form-group col-md-12 mb-3">
+            <mat-form-field style="width: 100%;">
+                <mat-label>Team Member Experience</mat-label>
+                <input matInput required placeholder="Enter Team Member Experience" [formControl]="experience">
+                <mat-error *ngIf="experience.invalid">{{validateFormFields()}}</mat-error>
+            </mat-form-field>
+        </div>
+
+        <div class="form-group col-md-12 mb-3">
+            <mat-form-field style="width: 100%;">
+                <mat-label>About Team Member</mat-label>
+                <textarea matInput required placeholder="Enter About Team Member" [formControl]="about"></textarea>
+                <mat-error *ngIf="about.invalid">{{validateFormFields()}}</mat-error>
+            </mat-form-field>
+        </div>
+
+        <div class="form-group col-md-12 mb-3">
+            <div>Image Upload: </div>
+            <input type="file" placeholder="Enter Image" (change)="bannerImage($event)" #fileInput>
+            <img [src]="uploadImageUrl" *ngIf="fileAccept" class="mt-2" id="blah" style="height: 200px;" alt="Image">
+        </div>
+
+        <div class="form-group col-md-12 flex mt-4">
+            <button mat-raised-button mat-dialog-close color="primary" (click)="editTeamFunc()">Save</button>
+            <span style="margin-left: 10px;"><button mat-dialog-close mat-raised-button>Cancel</button></span>
+        </div>
+    </div>
+</form>

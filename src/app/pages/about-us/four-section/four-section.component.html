@@ -1,0 +1,58 @@
+<form class="form" name="addUserForm" [formGroup]="thirdForm">
+    <div class="row">
+
+        <div class="form-group col-md-12 mb-3">
+            <mat-form-field>
+                <mat-label>Heading</mat-label>
+                <textarea matInput required placeholder="Enter Heading" [formControl]="header" name="text"></textarea>
+                <mat-error *ngIf="header.invalid">{{validateFormFields()}}</mat-error>
+            </mat-form-field>
+        </div>
+
+        <div class="form-group col-md-12 mb-3">
+            <mat-form-field>
+                <mat-label>Content</mat-label>
+                <input matInput required placeholder="Content" [formControl]="content" name="text">
+                <mat-error *ngIf="content.invalid">{{validateFormFields()}}</mat-error>
+            </mat-form-field>
+        </div>
+
+        <div class="form-group col-md-12 mb-3">
+            <mat-form-field>
+                <mat-label>First Point</mat-label>
+                <textarea matInput required placeholder="First Point" [formControl]="point1" name="mobileNo"></textarea>
+                <mat-error *ngIf="point1.invalid">{{validateFormFields()}}</mat-error>
+            </mat-form-field>
+        </div>
+
+        <div class="form-group col-md-12 mb-3">
+            <mat-form-field>
+                <mat-label>Second Point</mat-label>
+                <textarea matInput required placeholder="Second Point" [formControl]="point2" name="text"></textarea>
+                <mat-error *ngIf="point2.invalid">{{validateFormFields()}}</mat-error>
+            </mat-form-field>
+        </div>
+
+        <div class="form-group col-md-12 mb-3">
+            <mat-form-field>
+                <mat-label>Third point</mat-label>
+                <textarea matInput required placeholder="Third Point" [formControl]="point3" name="mobileNo"></textarea>
+                <mat-error *ngIf="point3.invalid">{{validateFormFields()}}</mat-error>
+            </mat-form-field>
+        </div>
+
+        <div class="form-group col-md-6 mb-3">
+            <img class="img-fluid" [src]="imageUrl" alt="image">
+        </div>
+
+        <div class="form-group col-md-6 mb-3">
+            <div>Change Image: </div>
+            <input type="file" placeholder="Enter Image" (change)="bannerImage($event)" #fileInput>
+            <img [src]="uploadImageUrl" *ngIf="fileAccept" class="img-fluid mt-2" id="blah" alt="Image">
+        </div>
+
+        <div class="form-group col-md-12 flex mt-4">
+            <button class="btn btn-green mb-3" (click)="editFourthSection()" [disabled]="thirdForm.invalid">Update</button>
+        </div>
+    </div>
+</form>

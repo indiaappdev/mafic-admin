@@ -1,0 +1,14 @@
+.an-content-body {
+    padding: 30px;
+    width: calc(100vw - 290px);
+}
+
+mat-form-field,
+table {
+    width: 100%;
+}
+
+
+/* th.mat-header-cell {
+    text-align: center !important;
+} */

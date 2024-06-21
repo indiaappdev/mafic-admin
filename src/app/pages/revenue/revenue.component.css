@@ -1,0 +1,201 @@
+.an-content-body {
+    padding: 30px;
+    width: 100%;
+}
+
+@media (max-width: 992px) {
+    .an-content-body {
+        padding-right: 80px;
+    }
+}
+
+@media (max-width: 768px) {
+    .an-content-body {
+        padding-right: 30px;
+    }
+}
+
+.an-content-body.no-padding {
+    padding: 0;
+}
+
+@media (max-width: 480px) {
+    .an-content-body {
+        padding: 20px 20px;
+    }
+}
+
+.text-uppercase,
+.initialism,
+.an-btn.uppercase,
+.an-file-upload-container .uppercase.btn.btn-primary.btn-file,
+.an-file-upload-container .ranges li.btn.btn-primary.btn-file,
+.ranges .an-file-upload-container li.btn.btn-primary.btn-file,
+.an-file-upload-container .range_inputs button.btn.btn-primary.btn-file,
+.range_inputs .an-file-upload-container button.btn.btn-primary.btn-file,
+.ranges li,
+.range_inputs button,
+.uppercase.an-control-btn,
+.ranges li.an-control-btn,
+.range_inputs button.an-control-btn,
+.sa-confirm-button-container .uppercase.confirm,
+.sa-confirm-button-container .ranges li.confirm,
+.ranges .sa-confirm-button-container li.confirm,
+.sa-confirm-button-container .range_inputs button.confirm,
+.range_inputs .sa-confirm-button-container button.confirm,
+.sa-button-container .uppercase.cancel,
+.sa-button-container .ranges li.cancel,
+.ranges .sa-button-container li.cancel,
+.sa-button-container .range_inputs button.cancel,
+.range_inputs .sa-button-container button.cancel,
+.an-logo-heading a,
+.an-info-single .info-time,
+.an-nav-item>a,
+.an-body-topbar .an-page-title h2,
+.an-panel-main-info-single h2,
+.an-panel-main-info-single h2 .info-identifier,
+.an-component-header h6,
+.an-user-lists .list-title h6,
+.an-user-lists .list-user-single .list-date,
+.activity-signle .activity-body .time,
+.stats-single p,
+.customer-support .list-user-single .list-name a span,
+.an-chart-content .an-chart-details div h3 span,
+.an-chart-details-content .detail-single h6,
+.an-progressbar-content .ancircleprogressbar .value span,
+.an-user-single .profile-details h4,
+.an-inbox-color-list h5,
+.modal .modal-title,
+.an-profile-details .an-profile-section h5,
+.an-inner-page-title h1,
+.an-title-xs,
+.an-footer h4,
+.an-pricing-table-single .price-header .plan-name,
+.an-page-consturction .an-construction-content h1 {
+    text-transform: uppercase;
+}
+
+.an-body-topbar {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: flex-end;
+    margin-bottom: 30px;
+}
+
+@media (max-width: 768px) {
+    .an-body-topbar {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+.an-body-topbar .an-page-title {
+    position: relative;
+}
+
+.an-body-topbar .an-page-title h2 {
+    font-weight: 700;
+    font-size: 24px;
+    margin: 0;
+}
+
+@media (max-width: 480px) {
+    .an-body-topbar .an-page-title h2 {
+        font-size: 18px;
+    }
+}
+
+.an-body-topbar .an-page-title p {
+    margin-bottom: 0;
+}
+
+.an-body-topbar .an-page-title p a {
+    color: #3F1D0B;
+    margin-left: 10px;
+}
+
+.an-body-topbar .an-page-title p a i {
+    padding-right: 5px;
+}
+
+.an-body-topbar .an-page-title p a:hover {
+    color: #e62659;
+}
+
+.an-body-topbar .an-page-title h2 {
+    font-weight: 600;
+    font-size: 20px;
+    color: #3f1d0b;
+    margin-bottom: 10px;
+}
+
+.btn-print {
+    color: #3F1D0B;
+    font-weight: 500;
+    font-size: 15px;
+}
+
+.btn {
+    outline: none !important;
+}
+
+.btn-brown,
+.btn-brown:hover,
+.btn-brown:focus {
+    color: #fff;
+    background-color: #3f1d0b;
+    border-color: #3f1d0b;
+    outline: none !important;
+    padding: 8px 45px;
+}
+
+.btn-white,
+.btn-white:hover,
+.btn-white:focus {
+    color: #565656;
+    background-color: #fff;
+    border: 1px solid #e1e1e1;
+    outline: none !important;
+    padding: 8px 45px;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.rounder-md {
+    border-radius: 0.5em !important;
+}
+
+.revenew-card {
+    border: 1px solid #E1E1E1;
+    border-radius: 20px;
+    padding: 25px;
+    margin-bottom: 30px;
+    transition: all 0.3s ease;
+}
+
+.revenew-card:hover {
+    background: #FDF9D9;
+    border-color: #FDF9D9;
+}
+
+.revenew-card h3 {
+    font-weight: 700;
+    color: #3F1D0B;
+    font-size: 38px;
+    margin: 0 0 20px;
+}
+
+.revenew-card p {
+    font-weight: 500;
+    color: #3F1D0B;
+    font-size: 18px;
+    margin-bottom: 35px;
+}
+
+.revenew-card h6 {
+    font-weight: 500;
+    color: #288B47;
+    font-size: 20px;
+    margin-bottom: 0;
+}

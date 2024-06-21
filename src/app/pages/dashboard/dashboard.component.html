@@ -1,0 +1,218 @@
+<div class="an-content-body {{data.hideSidebarClass}}">
+    <!-- end AN-BREADCRUMB -->
+
+    <div class="an-body-topbar wow fadeIn">
+        <div class="an-page-title">
+            <h2>Dashboard</h2>
+            <p>Welcome back, <strong>Admin</strong></p>
+        </div>
+
+        <div class="an-daterange-picker">
+            <div id="reportrange" class="pull-right">
+                <input type="text" placeholder="Select date range" ngxDaterangepickerMd [(ngModel)]="selectedDate" class="form-control" />
+                <i class="far fa-calendar ms-2"></i>
+            </div>
+        </div>
+        <!-- end AN-DATERANGE-PICKER -->
+    </div>
+    <!-- end AN-BODY-TOPBAR -->
+
+    <div class="an-panel-main-info">
+        <div class="row">
+            <div class="col-md-4 col-sm-6">
+                <a [routerLink]="['/user/']">
+                    <div class="an-panel-main-info-single color-cyan with-shadow wow fadeIn" data-wow-delay=".1s">
+                        <h2>{{userDetails.response.allUserData.length}}<span class="info-identifier">Total USER</span></h2>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-4 col-sm-6">
+                <a [routerLink]="['/contest/']">
+                    <div class="an-panel-main-info-single blue with-shadow wow fadeIn" data-wow-delay=".2s">
+                        <h2>{{eventsDetails.response.length}}<span class="info-identifier">Total Contest</span></h2>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-4 col-sm-6">
+                <a>
+                    <div class="an-panel-main-info-single green_new with-shadow wow fadeIn" data-wow-delay=".3s">
+                        <h2>{{JuryDetails.response.totalJury}}<span class="info-identifier">Total Jury</span></h2>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-4 col-sm-6">
+                <a>
+                    <div class="an-panel-main-info-single color_blue_new with-shadow wow fadeIn" data-wow-delay=".3s">
+                        <h2>126<span class="info-identifier">Total Mentors</span></h2>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-4 col-sm-6">
+                <a>
+                    <div class="an-panel-main-info-single color_blue_new_sd with-shadow wow fadeIn" data-wow-delay=".3s">
+                        <h2>Rs. 23600<span class="info-identifier">Total Revenue</span></h2>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-4 col-sm-6">
+                <a>
+                    <div class="an-panel-main-info-single color_blue_new_drk with-shadow wow fadeIn" data-wow-delay=".3s">
+                        <h2>Rs. 3658<span class="info-identifier">Total Amount of GST </span></h2>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="an-single-component with-shadow">
+        <div class="an-component-header">
+            <h6>Revenue</h6>
+        </div>
+        <div class="an-component-body">
+            <div class="an-chart-content">
+                <!-- <canvas class="barChartTwo"></canvas> -->
+                <canvas id="myChart" width="800" height="400"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <!-- <div class="col-md-6">
+            <div class="an-single-component with-shadow">
+                <div class="an-component-header">
+                    <h6>User Spam Status</h6>
+                </div>
+                <div class="an-component-body">
+                    <div class="an-user-lists customer-support">
+                        <div class="an-lists-body an-customScrollbar">
+                            <div class="list-user-single closed">
+                                <div class="list-name">
+                                    <span class="image" style="background: url('assets/img/users/user8.jpeg') center center no-repeat;
+                                                  background-size: cover;">
+                                    </span>
+                                    <a href="#">Alex Jordan <span>3 hours ago</span></a>
+                                    <div class="list-state">
+                                        <span class="msg-tag read">26</span>
+                                    </div>
+                                </div>
+                                <p class="comment">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt.</p>
+                            </div>
+                            <div class="list-user-single pending">
+                                <div class="list-name">
+                                    <span class="image" style="background: url('assets/img/users/user10.jpeg') center center no-repeat;
+                                                  background-size: cover;">
+                                    </span>
+                                    <a href="#">Jonathan <span>5 hours ago</span></a>
+                                    <div class="list-state">
+                                        <span class="msg-tag read">19</span>
+                                    </div>
+                                </div>
+                                <p class="comment">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt.</p>
+
+                            </div>
+                            <div class="list-user-single pending-long">
+                                <div class="list-name">
+                                    <span class="image" style="background: url('assets/img/users/user9.jpeg') center center no-repeat;
+                                                  background-size: cover;">
+                                    </span>
+                                    <a href="#">Justin baby <span>2 days ago</span></a>
+                                    <div class="list-state">
+                                        <span class="msg-tag read">52</span>
+                                    </div>
+                                </div>
+                                <p class="comment">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt.</p>
+
+                            </div>
+                            <div class="list-user-single pending">
+                                <div class="list-name">
+                                    <span class="image" style="background: url('assets/img/users/user10.jpeg') center center no-repeat;
+                                                  background-size: cover;">
+                                    </span>
+                                    <a href="#">Jonathan <span>5 hours ago</span></a>
+                                    <div class="list-state">
+                                        <span class="msg-tag read">26</span>
+                                    </div>
+                                </div>
+                                <p class="comment">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt.</p>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+
+        <div class="col-md-6">
+            <div class="an-single-component with-shadow">
+                <div class="an-component-header">
+                    <h6>FEEDS</h6>
+                </div>
+                <div class="an-component-body">
+                    <div class="an-user-lists customer-support">
+                        <div class="an-lists-body an-customScrollbar">
+                            <div class="list-user-single pending">
+                                <div class="list-name">
+                                    <a href="#">Jonathan <span>5 hours ago</span></a>
+                                </div>
+                                <p class="comment">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt.</p>
+
+                            </div>
+
+                            <div class="list-user-single pending-long">
+                                <div class="list-name">
+                                    <a href="#">Justin baby <span>2 days ago</span></a>
+                                </div>
+                                <p class="comment">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt.</p>
+
+                            </div>
+
+                            <div class="list-user-single pending">
+                                <div class="list-name">
+                                    <a href="#">Jonathan <span>5 hours ago</span></a>
+                                </div>
+                                <p class="comment">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt.</p>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="an-single-component with-shadow">
+                <div class="an-component-header">
+                    <h6>Contest Spam Status</h6>
+                </div>
+                <div class="an-component-body">
+                    <div class="an-user-lists customer-support">
+                        <div class="an-lists-body an-customScrollbar">
+                            <div class="list-user-single closed" *ngFor="let item of eventSpamData">
+                                <div class="list-name">
+                                    <span class="image" style="background: url('{{item.image}}') center center no-repeat;
+                                                  background-size: cover;">
+                                    </span>
+                                    <a>{{item.artName}}</a>
+                                </div>
+                                <p class="comment">{{item.descriptionHeader}}</p>
+                            </div>
+                        </div>
+                        <!-- end .AN-LISTS-BODY -->
+                    </div>
+                </div>
+                <!-- end .AN-COMPONENT-BODY -->
+            </div>
+            <!-- end .AN-SINGLE-COMPONENT messages -->
+        </div>
+
+
+
+
+
+    </div>
+
+    <div class="col-md-12">
+        <div class="copy-right">COPYRIGHT 2020 © . ALL RIGHTS RESERVED</div>
+    </div>

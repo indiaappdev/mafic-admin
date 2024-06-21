@@ -1,0 +1,33 @@
+<router-outlet></router-outlet>
+<!-- <div class="container">
+    <div class="row">
+        <div class="col-sm-6">
+            <survey></survey>
+        </div>
+    </div>
+</div> -->
+
+<div [classList]="data.loadingClass">
+    <img src="../assets/images/loading.gif" class="loadingGif">
+</div>
+
+<div id="popup" [classList]="data.popupClass">
+    <div class="popup text-center alart_cust">
+        <div *ngIf="data.popupState" class="tick sucsess_cust"><i class="fas fa-check-circle"></i></div>
+        <div *ngIf="!data.popupState" class="tick error_cust"><i class="fas fa-times-circle"></i></div>
+        <h2 *ngIf="data.popupState" class="text-start pup_msg">Success</h2>
+        <h2 *ngIf="!data.popupState" class="text-start pup_msg">Error</h2>
+        <div class="content pop_text mb-3">{{data.popupText}}</div>
+        <button class="w-100 pop-button" (click)="data.fireClose()">OK</button>
+    </div>
+</div>
+
+<div id="popup" [classList]="data.confirmCLass">
+    <div class="popupC text-center alart_cust">
+        <h2 class="text-start pup_msg font-20 m-0">Are you sure want to logout</h2>
+        <div style="display: flex;">
+            <button class="w-100 pop-button pop-button-ok" (click)="data.signOutAll()">OK</button>
+            <button class="w-100 pop-button pop-button-no" (click)="data.fireClose()">NO</button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,74 @@
+<div class="loginBg container-fluid">
+    <div class="row">
+
+
+        <div class="col-lg-6 pl-4">
+            <div class="logo_panel mt-5">
+                <img src="../../assets/images/logo.png" alt="Logo">
+            </div>
+
+            <div class="login_form mt-4">
+                <h3 class="mb-3">Admin Login</h3>
+                <p class="mb-3">Welcome back, please login to your account.</p>
+                <div class="row mt-5">
+                    <form class="col-md-8">
+                        <div class="form-group mb-4">
+                            <input type="text" class="form-control" placeholder="Username" name="first" [(ngModel)]="userName">
+                        </div>
+                        <div class="form-group mb-4">
+                            <input type="password" class="form-control" placeholder="Password" name="last" [(ngModel)]="passWord">
+                        </div>
+                        <div class="row mb-4">
+                            <div class="col-6">
+                                <div class="checkbox-green">
+                                    <!-- <input type="checkbox" id="remenber_me"> -->
+                                    <mat-checkbox required name="remember" [(ngModel)]="remember" color="primary" class=" example-margin">Remember Me</mat-checkbox>
+                                    <!-- <label for="remenber_me" class="font-sm">Remember me</label> -->
+                                </div>
+                            </div>
+                            <div class="col-6 text-sm-right">
+                                <a class="reset-pass text-sm-right cursor-pointer" data-bs-toggle="modal" data-bs-target="#forgot_pup">Forgot Password?</a>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn_login mb-5" (click)="logCheck()">Login</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-6 d-none d-lg-block pl-0 pr-5">
+            <div class="login-banner">
+                <img src="../../assets/images/login_rignt.png" alt="Banner">
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Forgot PuP -->
+<div class="modal fade forgot-pup header-pop" id="forgot_pup" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <img src="../../../assets/images/logo.png" alt="" title="">
+                <h5 class="modal-title" id="exampleModalLabel">Password Assistance</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">X</button>
+            </div>
+            <div class="modal-body">
+                <div class="card login_form border-0">
+                    <div class="form-group mb-3">
+                        <p class="forgot-head">Enter the E-mail address associated with your Mafic account.</p>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <!-- <input type="password" class="form-control" placeholder="Password" required> -->
+                        <input type="text" class="form-control" placeholder="EmaiId" name="last" [(ngModel)]="emailId">
+                    </div>
+
+                    <div class="form-group mb-2">
+                        <button type="submit" class="btn-green w-100" (click)="forgotPaswd()">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

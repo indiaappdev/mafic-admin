@@ -1,0 +1,59 @@
+<div class="an-content-body {{data.hideSidebarClass}}">
+    <!-- end AN-BREADCRUMB -->
+
+    <div class="an-body-topbar wow fadeIn">
+        <div class="an-page-title">
+            <h2>Survey Analysis</h2>
+        </div>
+    </div>
+    <!-- end AN-BODY-TOPBAR -->
+    <div class="row">
+        <div class="col-md-12 survey-name mb-2">
+            <p>Survey Name: <span>{{survey_name}}</span></p>
+        </div>
+        <div class="col-md-12 survey-description mb-3">
+            <p>Survey Description: <span>{{survey_description}}</span></p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12" *ngFor="let item of surveyQtnDetails; let i = index">
+            <div class="an-single-component single-survy with-shadow">
+                <div class="an-component-header">
+                    <h6>{{i+1}}.&nbsp;{{item.question}}</h6>
+                </div>
+                <div class="an-component-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="progress m-2" *ngFor="let option of item.options; let o = index">
+                                <div class="progress-bar p-2 progress-bar-striped" style="width:{{option.percentage}}%;background-color:{{data.getRandomColor()}}"></div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="progress bg-transparent m-2" *ngFor="let option of item.options; let o = index">
+                                        <p class="font-16">{{option.percentage | number: '1.0-0'}}%</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-9">
+                                    <div class="progress bg-transparent m-2" *ngFor="let option of item.options; let o = index">
+                                        <p class="font-16">{{option.option}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- <div class="col-md-3">
+                            <canvas id="can{{i}}vas"></canvas>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+            <!-- end .AN-SINGLE-COMPONENT messages -->
+        </div>
+    </div>
+
+    <div class="col-md-12">
+        <div class="copy-right">COPYRIGHT 2020 © . ALL RIGHTS RESERVED</div>
+    </div>
+
+</div>

@@ -1,0 +1,56 @@
+<div class="an-sidebar-nav js-sidebar-toggle-with-click {{data.sideBar}}">
+    <div class="an-sidebar-nav">
+        <ul class="an-main-nav">
+            <li class="an-nav-item cursor-pointer" *ngFor="let routes of accesData" [routerLink]="[routes.moduleName]" routerLinkActive="active">
+                <a class="" *ngIf="routes.moduleName != 'cms'">
+                    <i class="fas fa-home" *ngIf="routes.moduleName == 'dashboard' && routes.readAccess == '1'"></i>
+                    <i class="fas fa-users" *ngIf="routes.moduleName == 'user' && routes.readAccess == '1'"></i>
+                    <i class="fab fa-elementor" *ngIf="routes.moduleName == 'events' && routes.readAccess == '1'"></i>
+                    <i class="fas fa-ticket-alt" *ngIf="routes.moduleName == 'contest' && routes.readAccess == '1'"></i>
+                    <i class="fas fa-chart-bar" *ngIf="routes.moduleName == 'survey' && routes.readAccess == '1'"></i>
+                    <i class="fas fa-user-tag" *ngIf="routes.moduleName == 'roles' && routes.readAccess == '1'"></i>
+                    <i class="fas fa-ticket-alt" *ngIf="routes.moduleName == 'sku' && routes.readAccess == '1'"></i>
+                    <i class="fas fa-comment-alt" *ngIf="routes.moduleName == 'query' && routes.readAccess == '1'"></i>
+                    <span class="nav-title" *ngIf="routes.moduleName !== 'sku'">{{routes.moduleName}}</span>
+                    <span class="nav-title" *ngIf="routes.moduleName == 'sku'">SKU</span>
+                </a>
+            </li>
+            <li class="an-nav-item cursor-pointer" *ngIf="cmsData.moduleName == 'cms' && cmsData.readAccess == '1'">
+                <a class="js-show-child-nav" routerLinkActive="active" (click)="collapse()">
+                    <i class="fas fa-database"></i>
+                    <span class="nav-title">CMS
+                         <span class="an-arrow-nav"><i *ngIf="!data.collapse" class="fas fa-chevron-circle-up"></i><i *ngIf="data.collapse" class="fas fa-chevron-circle-down"></i></span>
+                    </span>
+                </a>
+
+                <ul class="an-child-nav js-open-nav" *ngIf="data.collapse && cmsData.moduleName == 'cms' && cmsData.readAccess == '1'">
+                    <li [routerLink]="['/cms/banner']" routerLinkActive="active"><a><i class="far fa-angle-double-right"></i>Home</a></li>
+                    <li [routerLink]="['/cms/about-us']" routerLinkActive="active"><a><i class="far fa-angle-double-right"></i>About US</a></li>
+                    <li [routerLink]="['/cms/contact-us']" routerLinkActive="active"><a><i class="far fa-angle-double-right"></i>Contact US</a></li>
+                    <li [routerLink]="['/cms/news-letter']" routerLinkActive="active"><a><i class="far fa-angle-double-right"></i>News Letter</a></li>
+                    <li [routerLink]="['/cms/footer-content']" routerLinkActive="active"><a><i class="far fa-angle-double-right"></i>Footer</a></li>
+                    <li [routerLink]="['/cms/meta-data']" routerLinkActive="active"><a><i class="far fa-angle-double-right"></i>Meta Data</a></li>
+                    <li [routerLink]="['/cms/privacy']" routerLinkActive="active"><a><i class="far fa-angle-double-right"></i>Policies</a></li>
+                    <li [routerLink]="['/cms/head-details']" routerLinkActive="active"><a><i class="far fa-angle-double-right"></i>Header Details</a></li>
+                    <li [routerLink]="['/cms/banner-image']" routerLinkActive="active"><a><i class="far fa-angle-double-right"></i>Banner Image</a></li>
+                    <li [routerLink]="['/cms/logo']" routerLinkActive="active"><a><i class="far fa-angle-double-right"></i>Logo</a></li>
+                </ul>
+            </li>
+            <!-- <li class="an-nav-item" [routerLink]="['/query/']" routerLinkActive="active">
+                <a class="cursor-pointer">
+                    <i class="fas fa-comment-alt"></i>
+                    <span class="nav-title">Query</span>
+                </a>
+            </li> -->
+            <li class="an-nav-item">
+                <a class="cursor-pointer" (click)="data.signOutCheck()">
+                    <i class="fas fa-question-circle"></i>
+                    <span class="nav-title">Logout</span>
+                </a>
+            </li>
+        </ul>
+        <!-- end .AN-MAIN-NAV -->
+    </div>
+    <!-- end .AN-SIDEBAR-NAV -->
+</div>
+<!-- end .AN-SIDEBAR-NAV -->

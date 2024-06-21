@@ -1,0 +1,120 @@
+<div class="an-content-body {{datas.hideSidebarClass}}">
+    <div class="an-body-topbar wow fadeIn">
+        <div class="an-page-title">
+            <h2>Contest List</h2>
+        </div>
+    </div>
+
+    <div class="data-table-header" style="margin-bottom: 30px;">
+        <form class="an-form" action="#" style="width: 100%;">
+            <div class="table-search-inline">
+                <div class="an-search-field">
+                    <input class="an-form-control" type="text" placeholder="Search..." name="search" [(ngModel)]="searchValue">
+                    <button class="an-btn an-btn-icon" type="submit" (click)="searchKey()"><i class="fas fa-search"></i></button>
+                </div>
+                <div class="an-default-select-wrapper me-3">
+                    <ng-selectize [config]="configs" [options]="data" [formControl]="sorter"></ng-selectize>
+                </div>
+            </div>
+        </form>
+        <a *ngIf="!datas.writeDisable" class="btn btn-green" [routerLink]="['/contest/add-contest/']">ADD CONTEST</a>
+        <a class="btn btn-green" *ngIf="datas.writeDisable" (click)="datas.denieAccess()">ADD CONTEST</a>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <p class="p-0" *ngIf="filterCount != '' && filterCount == '1'">{{filterCount}} Record Found</p>
+            <p class="p-0" *ngIf="filterCount != '' && filterCount != '1'">{{filterCount}} Records Found</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="an-single-component with-shadow">
+                <div class="an-component-header">
+                    <h6>Contest List</h6>
+                </div>
+                <div class="an-component-body">
+                    <div class="an-helper-block p-0">
+                        <div class="an-scrollable-x">
+                            <table mat-table *ngIf="dataSource" [dataSource]="dataSource" matSort class="mat-elevation-z8">
+
+                                <!-- User ID Column -->
+                                <ng-container matColumnDef="id" class="p-2">
+                                    <th mat-header-cell *matHeaderCellDef> ID </th>
+                                    <td mat-cell *matCellDef="let element; let i = index;"> {{i+1}} </td>
+                                </ng-container>
+
+                                <!-- Name Column -->
+                                <ng-container matColumnDef="name" class="p-2">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> NAME </th>
+                                    <td mat-cell *matCellDef="let element" (click)="ContestDetailsOpen(element)" style="cursor: pointer; color: rgb(36, 36, 121);"> {{element.name | titlecase}} </td>
+                                </ng-container>
+
+                                <!-- Type Column -->
+                                <ng-container matColumnDef="type" class="p-2">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> TYPE </th>
+                                    <td mat-cell *matCellDef="let element"> {{element.type | titlecase}} </td>
+                                </ng-container>
+
+                                <ng-container matColumnDef="category" class="p-2">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> CATEGORY </th>
+                                    <td mat-cell *matCellDef="let element"> {{element.category | titlecase}} </td>
+                                </ng-container>
+
+                                <ng-container matColumnDef="startDate" class="p-2">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> START DATE </th>
+                                    <td mat-cell *matCellDef="let element"> {{element.startDate| date:'MM/dd/yyyy'}} </td>
+                                </ng-container>
+
+                                <ng-container matColumnDef="endDate" class="p-2">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> END DATE </th>
+                                    <td mat-cell *matCellDef="let element"> {{element.endDate| date:'MM/dd/yyyy'}} </td>
+                                </ng-container>
+
+                                <ng-container matColumnDef="entries" class="p-2">
+                                    <th mat-header-cell *matHeaderCellDef> ENTRIES </th>
+                                    <td mat-cell *matCellDef="let element">
+                                        <span *ngIf="!datas.editDisable" class="msg-tag bg-success cursor-pointer px-5" [routerLink]="['/contest/entries/',element.id]">Manage</span>
+                                        <span *ngIf="datas.editDisable" class="msg-tag bg-success cursor-pointer px-5" (click)="datas.denieAccess()">Manage</span>
+                                    </td>
+                                </ng-container>
+
+                                <!-- Action Column -->
+                                <ng-container matColumnDef="action">
+                                    <th mat-header-cell *matHeaderCellDef> ACTION </th>
+                                    <td mat-cell *matCellDef="let element">
+                                        <div class="d-flex">
+                                            <span *ngIf="!datas.editDisable" class="cursor-pointer p-0" [routerLink]="['/contest/edit-contest/',element.id]"><i class="fas fa-edit"></i></span>
+                                            <span *ngIf="datas.editDisable" class="cursor-pointer p-0" (click)="datas.denieAccess()"><i class="fas fa-edit"></i></span>
+                                            <span *ngIf="!datas.deleteDisable" class="cursor-pointer p-0 ms-3" (click)="openDeleteDialog(element.id)"><i class="fas fa-trash text-danger"></i></span>
+                                            <span *ngIf="datas.deleteDisable" class="cursor-pointer p-0 ms-3" (click)="datas.denieAccess()"><i class="fas fa-trash text-danger"></i></span>
+                                        </div>
+                                    </td>
+                                </ng-container>
+
+                                <!-- Action Column -->
+                                <ng-container matColumnDef="assign">
+                                    <th mat-header-cell *matHeaderCellDef> ASSIGN JURY </th>
+                                    <td mat-cell *matCellDef="let element">
+                                        <div class="d-flex">
+                                            <span *ngIf="element.isAssignJury == 0 && element.roundCount < 1" class="msg-tag bg-success cursor-pointer px-5">No Rounds</span>
+                                            <span *ngIf="element.isAssignJury == 0 && element.roundCount > 0 && !datas.writeDisable" class="msg-tag bg-success cursor-pointer px-5" [routerLink]="['/contest/assign-jury',element.id,element.roundCount]">Assign</span>
+                                            <span *ngIf="element.isAssignJury == 0 && element.roundCount > 0 && datas.writeDisable" class="msg-tag bg-success cursor-pointer px-5" (click)="datas.denieAccess()">Assign</span>
+                                            <span *ngIf="element.isAssignJury == 1 && !datas.editDisable" class="msg-tag bg-warning cursor-pointer px-5" [routerLink]="['/contest/assign-jury',element.id,element.roundCount]">Change</span>
+                                            <span *ngIf="element.isAssignJury == 1 && datas.editDisable" (click)="datas.denieAccess()" class="msg-tag bg-warning cursor-pointer px-5">Change</span>
+                                        </div>
+                                    </td>
+                                </ng-container>
+
+                                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+                            </table>
+                            <mat-paginator [length]="100" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]" class="mat-elevation-z1">
+                            </mat-paginator>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

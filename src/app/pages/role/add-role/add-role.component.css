@@ -1,0 +1,39 @@
+
+/* .mat-header-cell{
+    padding-left: 120px;
+}
+.mat-cell{
+    padding-left: 120px;
+} */
+.mat-header-cell{
+    padding: 0px 60px;
+}
+.mat-cell{
+    padding: 0px 60px;
+}
+
+.mat-dialog-close{
+    float: right;
+}
+
+/* .mat-cell {
+    font-size: 14px;
+    min-height: 48px;
+    text-align: center;
+    border-right: 1px solid rgb(215 208 208);
+}
+.mat-header-cell {
+    font-size: 14px;
+    min-height: 48px;
+    text-align: center;
+    border-right: 1px solid rgb(215 208 208);
+} */
+
+.abc {
+    font-size: 14px;
+    min-height: 48px;
+    text-align: center;
+    border-right: 1px solid rgb(215 208 208);
+}
+
+

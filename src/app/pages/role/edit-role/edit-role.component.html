@@ -1,0 +1,18 @@
+<h2 mat-dialog-title>Edit Role</h2>
+
+<form>
+    <div class="row">
+        <div class="form-group col-md-12 mb-3">
+            <mat-form-field style="width: 100%;">
+                <mat-label>Name</mat-label>
+                <input matInput required placeholder="Name" name="name" [(ngModel)]="data.role">
+                <!-- <mat-error *ngIf="editFirstName.invalid"></mat-error> -->
+            </mat-form-field>
+        </div>
+
+        <div mat-dialog-actions>
+            <button mat-dialog-close class="btn btn-gold m-3">Cancel</button>
+            <button mat-dialog-close class="btn btn-green m-3" (click)="doEditForm()">Edit</button>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,101 @@
+<form class="form" name="addUserForm" [formGroup]="firstForm">
+    <div class="row">
+
+        <div class="form-group col-md-12 mb-3">
+            <mat-form-field>
+                <mat-label>Heading</mat-label>
+                <textarea matInput required placeholder="Heading" [formControl]="header" name="mobileNo"></textarea>
+                <mat-error *ngIf="header.invalid">{{validateFormFields()}}</mat-error>
+            </mat-form-field>
+        </div>
+
+        <div class="form-group col-md-12 mb-3">
+            <mat-form-field>
+                <mat-label>First Paragraph</mat-label>
+                <textarea matInput required placeholder="First Paragraph" [formControl]="pText1" name="mobileNo"></textarea>
+                <mat-error *ngIf="pText1.invalid">{{validateFormFields()}}</mat-error>
+            </mat-form-field>
+        </div>
+        <div class="form-group col-md-12 mb-3">
+            <mat-form-field>
+                <mat-label>Green Text</mat-label>
+                <textarea matInput required placeholder="Second Paragraph" [formControl]="pText2" name="mobileNo"></textarea>
+                <mat-error *ngIf="pText2.invalid">{{validateFormFields()}}</mat-error>
+            </mat-form-field>
+        </div>
+
+        <div class="form-group col-md-4 mb-3">
+            <img class="img-fluid" [src]="imageUrl1" alt="image">
+        </div>
+
+        <div class="form-group col-md-6 mb-3">
+            <div>Change Image: </div>
+            <input type="file" placeholder="Enter Image" (change)="bannerImage($event,0)" #fileInput>
+            <img [src]="uploadImageUrl[0]" *ngIf="fileAccept[0]" class="img-fluid mt-2" id="blah" alt="Image">
+        </div>
+
+        <div class="form-group col-md-4 mb-3">
+            <img class="img-fluid" [src]="imageUrl2" alt="image">
+        </div>
+
+        <div class="form-group col-md-6 mb-3">
+            <div>Change Image: </div>
+            <input type="file" placeholder="Enter Image" (change)="bannerImage($event,1)" #fileInput>
+            <img [src]="uploadImageUrl[1]" *ngIf="fileAccept[1]" class="img-fluid mt-2" id="blah" alt="Image">
+        </div>
+
+        <div class="form-group col-md-4 mb-3">
+            <img class="img-fluid" [src]="imageUrl3" alt="image">
+        </div>
+
+        <div class="form-group col-md-6 mb-3">
+            <div>Change Image: </div>
+            <input type="file" placeholder="Enter Image" (change)="bannerImage($event,2)" #fileInput>
+            <img [src]="uploadImageUrl[2]" *ngIf="fileAccept[2]" class="img-fluid mt-2" id="blah" alt="Image">
+        </div>
+
+        <div class="form-group col-md-4 mb-3">
+            <img class="img-fluid" [src]="imageUrl4" alt="image">
+        </div>
+
+        <div class="form-group col-md-6 mb-3">
+            <div>Change Image: </div>
+            <input type="file" placeholder="Enter Image" (change)="bannerImage($event,3)" #fileInput>
+            <img [src]="uploadImageUrl[3]" *ngIf="fileAccept[3]" class="img-fluid mt-2" id="blah" alt="Image">
+        </div>
+
+        <div class="form-group col-md-4 mb-3">
+            <img class="img-fluid" [src]="imageUrl5" alt="image">
+        </div>
+
+        <div class="form-group col-md-6 mb-3">
+            <div>Change Image: </div>
+            <input type="file" placeholder="Enter Image" (change)="bannerImage($event,4)" #fileInput>
+            <img [src]="uploadImageUrl[4]" *ngIf="fileAccept[4]" class="img-fluid mt-2" id="blah" alt="Image">
+        </div>
+
+        <div class="form-group col-md-4 mb-3">
+            <img class="img-fluid" [src]="imageUrl6" alt="image">
+        </div>
+
+        <div class="form-group col-md-6 mb-3">
+            <div>Change Image: </div>
+            <input type="file" placeholder="Enter Image" (change)="bannerImage($event,5)" #fileInput>
+            <img [src]="uploadImageUrl[5]" *ngIf="fileAccept[5]" class="img-fluid mt-2" id="blah" alt="Image">
+        </div>
+
+        <div class="form-group col-md-4 mb-3">
+            <img class="img-fluid" [src]="imageUrl7" alt="image">
+        </div>
+
+        <div class="form-group col-md-6 mb-3">
+            <div>Change Image: </div>
+            <input type="file" placeholder="Enter Image" (change)="bannerImage($event,6)" #fileInput>
+            <img [src]="uploadImageUrl[6]" *ngIf="fileAccept[6]" class="img-fluid mt-2" id="blah" alt="Image">
+        </div>
+
+        <div class="form-group col-md-12 flex mt-4">
+            <button class="btn btn-green mb-3" (click)="editLastSection()">Update</button>
+        </div>
+    </div>
+</form>

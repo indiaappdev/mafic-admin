@@ -1,0 +1,250 @@
+body {
+    font-family: 'Exo 2', sans-serif;
+    font-size: 14px;
+    line-height: 1.42857;
+    color: #333333;
+    background-color: #f9f9f9;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+body.an-boxed-layout {
+    background-color: #1c2236;
+}
+
+body.an-boxed-layout .main-wrapper {
+    width: 1200px;
+    margin: 0 auto;
+    background-color: #f9f9f9;
+}
+
+.an-content-body {
+    padding: 30px;
+    width: calc(100vw - 290px);
+}
+
+@media (max-width: 992px) {
+    .an-content-body {
+        padding-right: 80px;
+    }
+}
+
+@media (max-width: 768px) {
+    .an-content-body {
+        padding-right: 30px;
+    }
+}
+
+.an-content-body.no-padding {
+    padding: 0;
+}
+
+@media (max-width: 480px) {
+    .an-content-body {
+        padding: 20px 20px;
+    }
+}
+
+.an-body-topbar {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: flex-end;
+    margin-bottom: 30px;
+}
+
+@media (max-width: 768px) {
+    .an-body-topbar {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+.an-body-topbar .an-page-title {
+    position: relative;
+}
+
+.an-body-topbar .an-page-title h2 {
+    font-weight: 700;
+    font-size: 24px;
+    margin: 0;
+}
+
+@media (max-width: 480px) {
+    .an-body-topbar .an-page-title h2 {
+        font-size: 18px;
+    }
+}
+
+.an-body-topbar .an-page-title p {
+    margin-bottom: 0;
+}
+
+.an-body-topbar .an-page-title p a {
+    color: #3F1D0B;
+    margin-left: 10px;
+}
+
+.an-body-topbar .an-page-title p a i {
+    padding-right: 5px;
+}
+
+.an-body-topbar .an-page-title p a:hover {
+    color: #e62659;
+}
+
+.data-table-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.btn {
+    outline: none !important;
+}
+
+.btn-brown,
+.btn-brown:hover,
+.btn-brown:focus {
+    color: #fff;
+    background-color: #3f1d0b;
+    border-color: #3f1d0b;
+    outline: none !important;
+    padding: 8px 45px;
+    white-space: nowrap;
+}
+
+.btn-white,
+.btn-white:hover,
+.btn-white:focus {
+    color: #565656;
+    background-color: #fff;
+    border: 1px solid #e1e1e1;
+    outline: none !important;
+    padding: 8px 45px;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.an-profile-details .an-profile-section .user-information {
+    padding-left: 30px;
+}
+
+.an-profile-details .an-profile-section h5 {
+    color: #ffffff;
+    padding-bottom: 10px;
+}
+
+.an-profile-details .an-profile-section .info-single {
+    display: block;
+    padding-bottom: 15px;
+}
+
+.an-profile-details .an-profile-section .info-single p {
+    margin: 0;
+    color: #333;
+}
+
+.an-profile-details .an-profile-section .info-single p.light {
+    opacity: .6;
+}
+
+.an-user-settings {
+    position: relative;
+    width: 100%;
+}
+
+.an-user-settings input {
+    margin-bottom: 20px;
+}
+
+.an-file-upload-container {
+    position: relative;
+    margin-bottom: 40px;
+}
+
+.an-login-container {
+    position: relative;
+    width: 100%;
+    padding: 20px;
+}
+
+.an-login-container .an-social-login {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.an-login-container .an-social-login label {
+    display: block;
+}
+
+.an-login-container .an-social-login .an-social-icon {
+    margin-left: 0;
+}
+
+.an-login-container .back-to-home {
+    text-align: center;
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.an-login-container .sign-up-link {
+    margin-bottom: 0;
+    color: #999;
+}
+
+.an-login-container .sign-up-link a {
+    color: #3F1D0B;
+}
+
+.an-login-container .sign-up-link a:hover {
+    text-decoration: underline;
+}
+
+.an-login-container .an-component-body {
+    padding: 20px;
+}
+
+.an-login-container .remembered-section {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.an-login-container .remembered-section.no-flex {
+    justify-content: flex-start;
+}
+
+.an-login-container .remembered-section a {
+    color: #3F1D0B;
+}
+
+.an-login-container .remembered-section a:hover {
+    text-decoration: underline;
+}
+
+.an-login-container button {
+    margin-top: 20px;
+}
+
+.an-inner-page-title {
+    position: relative;
+    padding: 40px 0;
+    z-index: 10;
+}
+
+.an-inner-page-title h1 {
+    color: #ffffff;
+}
+
+.an-title-xs {
+    margin-top: 0;
+    padding-bottom: 15px;
+}
+
+.user-img {
+    display: block;
+    border-radius: 50%;
+}

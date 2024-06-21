@@ -1,0 +1,208 @@
+<div class="an-content-body {{datas.hideSidebarClass}}">
+    <div class="an-body-topbar wow fadeIn">
+        <div class="an-page-title">
+            <h2>Entries Details</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="an-single-component with-shadow">
+                <div class="an-component-header">
+                    <ul class="nav nav-tabs">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="entryList-tab" href="#entryList" data-bs-toggle="tab" role="entryList" aria-controls="entryList" aria-selected="true">
+                                <h6>Entries List</h6>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="entryList2-tab" href="#entryList2" data-bs-toggle="tab" role="entryList2" aria-controls="entryList2" aria-selected="false">
+                                <h6>Entries Assigned</h6>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="entryList3-tab" href="#entryList3" data-bs-toggle="tab" role="entryList3" aria-controls="entryList3" aria-selected="false">
+                                <h6>Entries Accept/Reject</h6>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="an-component-body">
+                    <div class="an-helper-block p-0 tab-content">
+                        <div class="an-scrollable-x" role="tabpanel" class="tab-pane active" id="entryList" aria-labelledby="entryList-tab">
+
+                            <table mat-table *ngIf="dataSource" [dataSource]="dataSource" matSort class="mat-elevation-z8">
+
+                                <!-- User ID Column -->
+                                <ng-container matColumnDef="id" class="p-2">
+                                    <th mat-header-cell *matHeaderCellDef> ID </th>
+                                    <td mat-cell *matCellDef="let element; let i = index;"> {{i+1}} </td>
+                                </ng-container>
+
+                                <!-- Name Column -->
+                                <ng-container matColumnDef="firstName" class="p-2">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> NAME </th>
+                                    <td mat-cell *matCellDef="let element"> {{element.firstName}} </td>
+                                </ng-container>
+
+                                <!-- Email Column -->
+                                <ng-container matColumnDef="emailId" class="p-2">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> EMAIL </th>
+                                    <td mat-cell *matCellDef="let element"> {{element.emailId}} </td>
+                                </ng-container>
+
+                                <!-- Mobile Column -->
+                                <ng-container matColumnDef="mobileNo" class="p-2">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> MOBILE </th>
+                                    <td mat-cell *matCellDef="let element"> {{element.mobileNo}} </td>
+                                </ng-container>
+
+                                <!-- Manage Column -->
+                                <ng-container matColumnDef="image" class="p-2">
+                                    <th mat-header-cell *matHeaderCellDef> MANAGE </th>
+                                    <td mat-cell *matCellDef="let element">
+                                        <mat-chip-list aria-label="Fish selection">
+                                            <!-- <mat-chip color="primary" selected (click)="imageOpen(element.image)">Preview</mat-chip> -->
+                                            <mat-chip color="primary" class="cursor-pointer" selected [routerLink]="['/contest/contest-details',contestId,element.UserId]">View</mat-chip>
+                                        </mat-chip-list>
+                                    </td>
+
+                                </ng-container>
+
+                                <!-- Delete Column -->
+                                <ng-container matColumnDef="delete" class="p-2">
+                                    <th mat-header-cell *matHeaderCellDef> DELETE </th>
+                                    <td mat-cell *matCellDef="let element">
+                                        <div class="d-flex">
+                                            <span class="cursor-pointer p-0 ms-3" (click)="openDeleteDialog(element.eventId,element.UserId,element.identifier)"><i class="fas fa-trash text-danger"></i></span>
+                                        </div>
+                                    </td>
+                                </ng-container>
+
+                                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+                            </table>
+                            <mat-paginator [length]="100" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]" class="mat-elevation-z1">
+                            </mat-paginator>
+                        </div>
+                        <div class="an-scrollable-x" role="tabpanel" class="tab-pane" id="entryList2" aria-labelledby="entryList2-tab">
+                            <table mat-table *ngIf="dataSourceTab2" [dataSource]="dataSourceTab2" matSort class="mat-elevation-z8">
+
+                                <!-- User ID Column -->
+                                <ng-container matColumnDef="name" class="p-2">
+                                    <th mat-header-cell *matHeaderCellDef> CONTEST NAME </th>
+                                    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+                                </ng-container>
+
+                                <!-- Name Column -->
+                                <ng-container matColumnDef="artName" class="p-2">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> ART NAME </th>
+                                    <td mat-cell *matCellDef="let element"> {{element.artName}} </td>
+                                </ng-container>
+
+                                <!-- Email Column -->
+                                <ng-container matColumnDef="roundOneAssign" class="p-2">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> ROUND ONE </th>
+                                    <td mat-cell *matCellDef="let element">
+                                        <span *ngIf="!element.roundOneStartDate || element.roundOneStartDate == ''">NA</span>
+                                        <span *ngIf="element.roundOneStartDate && element.roundOneClass == 'yts'" title="Yet to start" class="yts">{{element.roundOneAssign}}</span>
+                                        <span *ngIf="element.roundOneStartDate && element.roundOneClass == 'completed'" title="Completed" class="completed">{{element.roundOneAssign}}</span>
+                                        <span *ngIf="element.roundOneStartDate && element.roundOneClass == 'onGoing'" title="On Going" class="onGoing">{{element.roundOneAssign}}</span>
+                                    </td>
+                                </ng-container>
+
+                                <!-- Mobile Column -->
+                                <ng-container matColumnDef="roundTwoAssign" class="p-2">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> ROUND TWO </th>
+                                    <td mat-cell *matCellDef="let element">
+                                        <span *ngIf="!element.roundTwoStartDate || element.roundTwoStartDate == ''">NA</span>
+                                        <span *ngIf="element.roundTwoStartDate && element.roundTwoClass == 'yts'" title="Yet to start" class="yts">{{element.roundTwoAssign}}</span>
+                                        <span *ngIf="element.roundTwoStartDate && element.roundTwoClass == 'completed'" title="Completed" class="completed">{{element.roundTwoAssign}}</span>
+                                        <span *ngIf="element.roundTwoStartDate && element.roundTwoClass == 'onGoing'" title="On Going" class="onGoing">{{element.roundTwoAssign}}</span>
+
+                                    </td>
+                                </ng-container>
+
+                                <!-- Manage Column -->
+                                <ng-container matColumnDef="roundThreeAssign" class="p-2">
+                                    <th mat-header-cell *matHeaderCellDef> ROUND THREE </th>
+                                    <td mat-cell *matCellDef="let element">
+                                        <span *ngIf="!element.roundThreeStartDate || element.roundThreeStartDate == ''">NA</span>
+                                        <span *ngIf="element.roundThreeStartDate && element.roundThreeClass == 'yts'" title="Yet to start" class="yts">{{element.roundThreeAssign}}</span>
+                                        <span *ngIf="element.roundThreeStartDate && element.roundThreeClass == 'completed'" title="Completed" class="completed">{{element.roundThreeAssign}}</span>
+                                        <span *ngIf="element.roundThreeStartDate && element.roundThreeClass == 'onGoing'" title="On Going" class="onGoing">{{element.roundThreeAssign}}</span>
+                                    </td>
+                                </ng-container>
+
+                                <tr mat-header-row *matHeaderRowDef="displayedColumnsTab2"></tr>
+                                <tr mat-row *matRowDef="let row; columns: displayedColumnsTab2;"></tr>
+
+                            </table>
+                            <mat-paginator [length]="100" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]" class="mat-elevation-z1">
+                            </mat-paginator>
+
+                        </div>
+                        <div class="an-scrollable-x" role="tabpanel" class="tab-pane" id="entryList3" aria-labelledby="entryList3-tab">
+
+                            <table mat-table *ngIf="dataSourceTab3" [dataSource]="dataSourceTab3" matSort class="mat-elevation-z8">
+
+                                <!-- User ID Column -->
+                                <ng-container matColumnDef="name" class="p-2">
+                                    <th mat-header-cell *matHeaderCellDef> CONTEST NAME </th>
+                                    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+                                </ng-container>
+
+                                <!-- Name Column -->
+                                <ng-container matColumnDef="artName" class="p-2">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> ART NAME </th>
+                                    <td mat-cell *matCellDef="let element"> {{element.artName}} </td>
+                                </ng-container>
+
+                                <!-- Email Column -->
+                                <ng-container matColumnDef="acceptOne" class="round">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> ROUND ONE </th>
+                                    <td mat-cell *matCellDef="let element">
+                                        <span *ngIf="!element.roundOneStartDate || element.roundOneStartDate == ''">NA</span>
+                                        <span *ngIf="element.roundOneStartDate && element.isRejected == 0" title="Pending" class="pending">Pending</span>
+                                        <span *ngIf="element.roundOneStartDate && element.isRejected == 1 || element.isRejected == 2 || element.isRejected == 3" title="Accepted" class="accept">Accepted</span>
+                                        <span *ngIf="element.roundOneStartDate && element.isRejected == 4" title="Rejected" class="reject">Rejected</span>
+
+                                    </td>
+                                </ng-container>
+
+                                <!-- Mobile Column -->
+                                <ng-container matColumnDef="acceptTwo" class="round">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> ROUND TWO </th>
+                                    <td mat-cell *matCellDef="let element">
+                                        <span *ngIf="!element.roundTwoStartDate || element.roundTwoStartDate == ''">NA</span>
+                                        <span *ngIf="element.roundTwoStartDate && (element.isRejected == 0 || element.isRejected == 1)" title="Pending" class="pending">Pending</span>
+                                        <span *ngIf="element.roundTwoStartDate && element.isRejected == 2 || element.isRejected == 3" title="Accepted" class="accept">Accepted</span>
+                                        <span *ngIf="element.roundTwoStartDate && element.isRejected == 4" title="Rejected" class="reject">Rejected</span>
+                                    </td>
+                                </ng-container>
+
+                                <!-- Manage Column -->
+                                <ng-container matColumnDef="acceptThree" class="round">
+                                    <th mat-header-cell *matHeaderCellDef> ROUND THREE </th>
+                                    <td mat-cell *matCellDef="let element">
+                                        <span *ngIf="!element.roundThreeStartDate || element.roundOneStartDate == ''">NA</span>
+                                        <span *ngIf="element.roundThreeStartDate && (element.isRejected == 0 || element.isRejected == 1 || element.isRejected == 2)" title="Pending" class="pending">Pending</span>
+                                        <span *ngIf="element.roundThreeStartDate && element.isRejected == 3" title="Accepted" class="accept">Accepted</span>
+                                        <span *ngIf="element.roundThreeStartDate && element.isRejected == 4" title="Rejected" class="reject">Rejected</span>
+                                    </td>
+                                </ng-container>
+
+                                <tr mat-header-row *matHeaderRowDef="displayedColumnsTab3"></tr>
+                                <tr mat-row *matRowDef="let row; columns: displayedColumnsTab3;"></tr>
+
+                            </table>
+                            <mat-paginator [length]="100" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]" class="mat-elevation-z1">
+                            </mat-paginator>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

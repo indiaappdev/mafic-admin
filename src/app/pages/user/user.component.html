@@ -1,0 +1,123 @@
+<div class="an-content-body {{datas.hideSidebarClass}}">
+    <div class="an-body-topbar wow fadeIn">
+        <div class="an-page-title">
+            <h2>User List</h2>
+        </div>
+    </div>
+
+    <div class="data-table-header" style="margin-bottom: 30px;">
+        <form class="an-form" action="#" style="width: 100%;">
+            <div class="table-search-inline">
+                <div class="an-search-field">
+                    <input class="an-form-control" type="text" placeholder="Search..." name="search" [(ngModel)]="searchValue">
+                    <button class="an-btn an-btn-icon" type="submit" (click)="searchKey()"><i class="fas fa-search"></i></button>
+                </div>
+
+                <!-- <div class="an-default-select-wrapper me-3">
+                    <ng-selectize [config]="configs" [options]="data"></ng-selectize>
+                </div> -->
+            </div>
+        </form>
+        <a *ngIf="!datas.writeDisable" [routerLink]="['/user/add-user']" class="btn btn-green">ADD USER</a>
+        <a *ngIf="datas.writeDisable" (click)="datas.denieAccess()" class="btn btn-green">ADD USER</a>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="an-single-component with-shadow">
+                <!-- <div class="an-component-header">
+                    <h6>user LIST</h6>
+                </div> -->
+                <div class="an-component-body">
+                    <div class="an-helper-block p-0">
+                        <div class="an-scrollable-x">
+                            <table mat-table *ngIf="dataSource" [dataSource]="dataSource" matSort class="mat-elevation-z8">
+
+                                <!-- User ID Column -->
+                                <ng-container matColumnDef="slno">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> SL No. </th>
+                                    <td mat-cell *matCellDef="let element; let i = index;"> {{i+1}} </td>
+                                </ng-container>
+
+                                <!-- ID Column -->
+                                <ng-container matColumnDef="identifier">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> MAF-ID </th>
+                                    <td mat-cell *matCellDef="let element" class="capitalize"> {{element.identifier}} </td>
+                                </ng-container>
+
+                                <!-- Name Column -->
+                                <ng-container matColumnDef="firstName">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> USER NAME </th>
+                                    <td mat-cell *matCellDef="let element" class="capitalize"> {{element.firstName}} </td>
+                                </ng-container>
+
+                                <!-- Role Column -->
+                                <ng-container matColumnDef="roles">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> ROLE </th>
+                                    <td mat-cell *matCellDef="let element"> {{element.roles}} </td>
+                                </ng-container>
+
+                                <!-- interestCat Column -->
+                                <ng-container matColumnDef="interestCat">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> TYPE OF ART </th>
+                                    <td mat-cell *matCellDef="let element"> {{element.interestCat}} </td>
+                                </ng-container>
+
+                                <!-- date Column -->
+                                <ng-container matColumnDef="createdDate">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> CREATED DATE </th>
+                                    <td mat-cell *matCellDef="let element"> {{element.createdDate | date:'shortDate'}} </td>
+                                </ng-container>
+
+                                <!-- Number Column -->
+                                <ng-container matColumnDef="countryCode">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> CODE </th>
+                                    <td mat-cell *matCellDef="let element"> {{element.countryCode}} </td>
+                                </ng-container>
+
+                                <!-- Number Column -->
+                                <ng-container matColumnDef="mobileNo">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> PHONE NUMBER </th>
+                                    <td mat-cell *matCellDef="let element"> {{element.mobileNo}} </td>
+                                </ng-container>
+
+                                <!-- Email Column -->
+                                <ng-container matColumnDef="emailId">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> EMAIL ID </th>
+                                    <td mat-cell *matCellDef="let element"> {{element.emailId}} </td>
+                                </ng-container>
+
+                                <!-- State Column -->
+                                <ng-container matColumnDef="isActive">
+                                    <th mat-header-cell *matHeaderCellDef> STATE </th>
+                                    <!-- <td mat-cell><span class="msg-tag bg-success px-5">Active</span></td> -->
+                                    <td mat-cell *matCellDef="let element"><span class="msg-tag bg-danger px-5" *ngIf="element.isActive != '1'">Inactive</span><span class="msg-tag bg-success px-5" *ngIf="element.isActive == '1'">Active</span></td>
+
+                                </ng-container>
+
+                                <!-- Action Column -->
+                                <ng-container matColumnDef="lastName">
+                                    <th mat-header-cell *matHeaderCellDef> ACTION </th>
+                                    <td mat-cell *matCellDef="let element">
+                                        <div class="d-flex">
+                                            <span *ngIf="!datas.editDisable" class="cursor-pointer p-0" (click)="openEditDialog(element)"><i class="fas fa-edit"></i></span>
+                                            <span *ngIf="datas.editDisable" class="cursor-pointer p-0" (click)="datas.denieAccess()"><i class="fas fa-edit"></i></span>
+                                            <span *ngIf="!datas.deleteDisable" class="cursor-pointer p-0 ms-3" (click)="openDeleteDialog(element)"><i class="fas fa-trash text-danger"></i></span>
+                                            <span *ngIf="datas.deleteDisable" class="cursor-pointer p-0 ms-3" (click)="datas.denieAccess()"><i class="fas fa-trash text-danger"></i></span>
+                                        </div>
+                                    </td>
+                                </ng-container>
+
+                                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                            </table>
+                            <mat-paginator [length]="100" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]" class="mat-elevation-z1">
+                            </mat-paginator>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

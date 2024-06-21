@@ -1,0 +1,29 @@
+<div class="an-content-body {{data.hideSidebarClass}}">
+    <div class="an-body-topbar wow fadeIn">
+        <div class="an-page-title">
+            <h2>Edit Logo</h2>
+        </div>
+    </div>
+
+    <div class="an-single-component with-shadow p-5">
+        <form class="form" name="addUserForm">
+            <div class="row">
+
+                <div class="form-group col-md-4 mb-3">
+                    <img class="img-fluid" [src]="imageUrl" alt="image">
+                </div>
+
+                <div class="form-group col-md-6 mb-3">
+                    <div>Change Image: </div>
+                    <input type="file" placeholder="Enter Image" (change)="bannerImage($event)" #fileInput>
+                    <img [src]="uploadImageUrl" *ngIf="fileAccept" class="img-fluid mt-2" id="blah" alt="Image">
+                </div>
+
+                <div class="form-group col-md-12 flex mt-3">
+                    <button *ngIf="!data.editDisable" class="btn btn-green" (click)="editLogo()">Update</button>
+                    <button *ngIf="data.editDisable" class="btn btn-green" (click)="data.denieAccess()">Update</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

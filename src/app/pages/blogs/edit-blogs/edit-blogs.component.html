@@ -1,0 +1,43 @@
+<div class="an-content-body">
+    <div class="an-body-topbar wow fadeIn">
+        <div class="an-page-title">
+            <h4>Edit Blogs</h4>
+        </div>
+    </div>
+
+    <div class="an-single-component with-shadow p-5">
+        <form class="form" name="addUserForm" [formGroup]="addUserForm">
+            <div class="row">
+                <div class="form-group col-md-6 mb-3">
+                    <mat-form-field style="width: 100%;">
+                        <mat-label>Title</mat-label>
+                        <input matInput required placeholder="Enter title" [formControl]="title"  [(ngModel)]="dataB.title" name="title">
+                        <mat-error *ngIf="title.invalid">{{validateFormFields()}}</mat-error>
+                    </mat-form-field>
+                </div>
+
+                <div class="form-group col-md-6 mb-3">
+                    <mat-form-field style="width: 100%;">
+                        <mat-label>Description</mat-label>
+                        <textarea matInput required placeholder="Enter description" [formControl]="description"  [(ngModel)]="dataB.description" name="description"></textarea>
+                        <mat-error *ngIf="description.invalid">{{validateFormFields()}}</mat-error>
+                    </mat-form-field>
+                </div>
+
+                <div class="form-group col-md-12 mb-3">
+                    <div>Images Upload: </div>
+                    <input type="file" placeholder="Enter Image" (change)="blogsImage($event)" #fileInput>
+                </div>
+
+                <br><br>
+
+                <div class="form-group col-md-12 flex mt-4">
+                    
+                    <button mat-raised-button color="primary" (click)="editBlogs()">Save</button>
+                    
+                    <span style="margin-left: 10px;"><button mat-dialog-close mat-raised-button>Cancel</button></span>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

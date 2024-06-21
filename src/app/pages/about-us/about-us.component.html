@@ -1,0 +1,73 @@
+<div class="an-content-body {{data.hideSidebarClass}}">
+    <div class="an-body-topbar wow fadeIn">
+        <div class="an-page-title">
+            <h2>About-us page</h2>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="an-single-component with-shadow">
+
+                <div class="an-component-body">
+                    <div class="an-helper-block p-0">
+                        <div class="shadow-class m-3">
+                            <h2 *ngIf="!data.editDisable" class="an-page-title mt-0" data-bs-toggle="collapse" href="#whoarewe" role="button" aria-expanded="false" aria-controls="whoarewe">
+                                First Section</h2>
+                            <h2 *ngIf="data.editDisable" class="an-page-title mt-0 cursor-pointer" (click)="data.denieAccess()">
+                                First Section</h2>
+                            <div *ngIf="!data.editDisable" class="an-scrollable-x collapse" id="whoarewe">
+                                <app-first-section></app-first-section>
+                            </div>
+                        </div>
+                        <div class="shadow-class m-3">
+                            <h2 *ngIf="!data.editDisable" class="an-page-title mt-0" data-bs-toggle="collapse" href="#whatwearedoing" role="button" aria-expanded="false" aria-controls="whatwearedoing">
+                                Second Section</h2>
+                            <h2 *ngIf="data.editDisable" class="an-page-title mt-0 cursor-pointer" (click)="data.denieAccess()">
+                                Second Section</h2>
+                            <div *ngIf="!data.editDisable" class="an-scrollable-x collapse mb-3" id="whatwearedoing">
+                                <app-second-section></app-second-section>
+                            </div>
+                        </div>
+                        <div class="shadow-class m-3">
+                            <h2 *ngIf="!data.editDisable" class="an-page-title mt-0" data-bs-toggle="collapse" href="#whyartists" role="button" aria-expanded="false" aria-controls="whyartists">
+                                Third Section</h2>
+                            <h2 *ngIf="data.editDisable" class="an-page-title mt-0 cursor-pointer" (click)="data.denieAccess()">
+                                Third Section</h2>
+                            <div *ngIf="!data.editDisable" class="an-scrollable-x collapse" id="whyartists">
+                                <app-third-section></app-third-section>
+                            </div>
+                        </div>
+                        <div class="shadow-class m-3">
+                            <h2 *ngIf="!data.editDisable" class="an-page-title mt-0" data-bs-toggle="collapse" href="#insidethemafic" role="button" aria-expanded="false" aria-controls="insidethemafic">
+                                Fourth Section</h2>
+                            <h2 *ngIf="data.editDisable" class="an-page-title mt-0 cursor-pointer" (click)="data.denieAccess()">
+                                Fourth Section</h2>
+                            <div *ngIf="!data.editDisable" class="an-scrollable-x collapse" id="insidethemafic">
+                                <app-four-section></app-four-section>
+                            </div>
+                        </div>
+                        <div class="shadow-class m-3">
+                            <h2 *ngIf="!data.editDisable" class="an-page-title mt-0" data-bs-toggle="collapse" href="#features" role="button" aria-expanded="false" aria-controls="features">
+                                Fifth Section</h2>
+                            <h2 *ngIf="data.editDisable" class="an-page-title mt-0 cursor-pointer" (click)="data.denieAccess()">
+                                Fifth Section</h2>
+                            <div *ngIf="!data.editDisable" class="an-scrollable-x collapse" id="features">
+                                <app-fifth-section></app-fifth-section>
+                            </div>
+                        </div>
+                        <div class="shadow-class m-3">
+                            <h2 *ngIf="!data.editDisable" class="an-page-title mt-0" data-bs-toggle="collapse" href="#ourTeam" role="button" aria-expanded="false" aria-controls="ourTeam">
+                                Our Team</h2>
+                            <h2 *ngIf="data.editDisable" class="an-page-title mt-0 cursor-pointer" (click)="data.denieAccess()">
+                                Our Team</h2>
+                            <div *ngIf="!data.editDisable" class="an-scrollable-x collapse" id="ourTeam">
+                                <app-team-section></app-team-section>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

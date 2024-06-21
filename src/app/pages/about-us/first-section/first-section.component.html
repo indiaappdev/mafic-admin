@@ -1,0 +1,34 @@
+<form class="form" name="addUserForm" [formGroup]="firstForm">
+    <div class="row">
+
+        <div class="form-group col-md-12 mb-3">
+            <mat-form-field>
+                <mat-label>Title</mat-label>
+                <input matInput required placeholder="Enter Title" [formControl]="title" name="mobileNo">
+                <mat-error *ngIf="title.invalid">{{validateFormFields()}}</mat-error>
+            </mat-form-field>
+        </div>
+
+        <div class="form-group col-md-12 mb-3">
+            <mat-form-field>
+                <mat-label>First Paragraph</mat-label>
+                <textarea matInput required placeholder="First Paragraph" [formControl]="pText1" name="mobileNo"></textarea>
+                <mat-error *ngIf="pText1.invalid">{{validateFormFields()}}</mat-error>
+            </mat-form-field>
+        </div>
+
+        <div class="form-group col-md-6 mb-3">
+            <img class="img-fluid" [src]="imageUrl" alt="image">
+        </div>
+
+        <div class="form-group col-md-6 mb-3">
+            <div>Change Image: </div>
+            <input type="file" placeholder="Enter Image" (change)="bannerImage($event)" #fileInput>
+            <img [src]="uploadImageUrl" *ngIf="fileAccept" class="img-fluid mt-2" id="blah" alt="Image">
+        </div>
+
+        <div class="form-group col-md-12 flex mt-4">
+            <button class="btn btn-green mb-3" (click)="editFirstSection()" [disabled]="firstForm.invalid">Update</button>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,53 @@
+<div class="an-content-body {{data.hideSidebarClass}}">
+    <div class="an-body-topbar wow fadeIn">
+        <div class="an-page-title">
+            <h2>Assign Jury</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="an-single-component with-shadow">
+                <div class="an-component-header">
+                    <h6>Contest Name</h6>
+                </div>
+                <div class="an-component-body p-3">
+                    <form class="form" name="addUserForm" [formGroup]="assignJuryForm">
+                        <div class="row">
+                            <div class="form-group col-md-4" *ngIf="roundCount == 1">
+                                <mat-form-field>
+                                    <mat-label>Round One</mat-label>
+                                    <mat-select [formControl]="roundOne">
+                                        <mat-option selected *ngFor="let item of roundOneData" [value]="item.identifier">{{item.firstName}} {{item.lastName}}</mat-option>
+                                    </mat-select>
+                                    <!-- <mat-error *ngIf="roundOne.invalid && roundOne.touched">{{validateFormFields()}}</mat-error> -->
+                                </mat-form-field>
+                            </div>
+                            <div class="form-group col-md-4" *ngIf="roundCount == 2">
+                                <mat-form-field>
+                                    <mat-label>Round Two</mat-label>
+                                    <mat-select [formControl]="roundTwo">
+                                        <mat-option selected *ngFor="let item of roundTwoData" [value]="item.identifier">{{item.firstName}} {{item.lastName}}</mat-option>
+                                    </mat-select>
+                                    <!-- <mat-error *ngIf="roundTwo.invalid && roundTwo.touched">{{validateFormFields()}}</mat-error> -->
+                                </mat-form-field>
+                            </div>
+                            <div class="form-group col-md-4" *ngIf="roundCount == 3">
+                                <mat-form-field>
+                                    <mat-label>Round Three</mat-label>
+                                    <mat-select [formControl]="roundThree">
+                                        <mat-option selected *ngFor="let item of roundThreeData" [value]="item.identifier">{{item.firstName}} {{item.lastName}}</mat-option>
+                                    </mat-select>
+                                    <!-- <mat-error *ngIf="roundThree.invalid && roundThree.touched">{{validateFormFields()}}</mat-error> -->
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-12">
+                                <button class="btn btn-gold m-3" [routerLink]="['/contest']">Cancel</button>
+                                <button class="btn btn-green m-3" (click)="assignJury()" [disabled]="assignJuryForm.invalid">Assign</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

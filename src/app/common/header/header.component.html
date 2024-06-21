@@ -1,0 +1,159 @@
+<header class="an-header wow fadeInDown">
+    <div class="an-topbar-left-part">
+        <h3 class="an-logo-heading">
+            <a class="an-logo-link" href="dashboard.html"><img src="../../../assets/images/logo.png" width="85" height="auto"></a>
+        </h3>
+        <button class="an-btn an-btn-icon toggle-button js-toggle-sidebar" (click)="data.showHideSide()">
+            <i class="fas fa-bars" style="font-size: 22px;"></i>
+        </button>
+        <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button> -->
+
+
+        <form class="an-form" action="#">
+            <div class="an-search-field topbar">
+                <input class="an-form-control rounded-pill" type="text" placeholder="Search..." name="search" [(ngModel)]="searchVal">
+                <button class="an-btn an-btn-icon" type="submit" (click)="globalSearch()">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+        </form>
+    </div>
+    <!-- end .AN-TOPBAR-LEFT-PART -->
+
+    <div class="an-topbar-right-part">
+        <!-- <div class="an-notifications">
+            <div class="btn-group an-notifications-dropown notifications dropdown">
+                <button type="button" class="an-btn an-btn-icon dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="notify">
+                    <i class="ion-ios-bell-outline"></i>
+                    <i class="far fa-bell"></i>
+                    <span class="notification-count">3</span>
+                </button>
+
+                <div class="dropdown-menu" aria-labelledby="notify">
+                    <p class="an-info-count">Notifications <span>3</span></p>
+                    <div class="an-info-content notifications-info notifications-content">
+                        <div class="an-info-single unread">
+                            <a href="#">
+                                <span class="icon-container important">
+                                    <i class="icon-setting"></i>
+                                </span>
+                                <div class="info-content">
+                                    <h5 class="user-name">Settings updated</h5>
+                                    <p class="content"><i class="icon-clock"></i> 30 min ago</p>
+                                </div>
+                            </a>
+                        </div>
+
+                        <div class="an-info-single unread">
+                            <a href="#">
+                                <span class="icon-container success">
+                                    <i class="icon-cart"></i>
+                                </span>
+                                <div class="info-content">
+                                    <h5 class="user-name">5 Orders placed</h5>
+                                    <p class="content"><i class="icon-clock"></i> 1 hour ago</p>
+                                </div>
+                            </a>
+                        </div>
+
+                        <div class="an-info-single unread">
+                            <a href="#">
+                                <span class="icon-container nutral">
+                                    <i class="icon-chat-o"></i>
+                                </span>
+                                <div class="info-content">
+                                    <h5 class="user-name">3 New messages </h5>
+                                    <p class="content"><i class="icon-clock"></i> 1 hour ago</p>
+                                </div>
+                            </a>
+                        </div>
+
+                        <div class="an-info-single">
+                            <a href="#">
+                                <span class="icon-container warning">
+                                    <i class="icon-alerm"></i>
+                                </span>
+                                <div class="info-content">
+                                    <h5 class="user-name">This is warning notification</h5>
+                                    <p class="content"><i class="icon-clock"></i> 1 hour ago</p>
+                                </div>
+                            </a>
+                        </div>
+
+                        <div class="an-info-single">
+                            <a href="#">
+                                <span class="icon-container danger"><i class="icon-danger"></i></span>
+                                <div class="info-content">
+                                    <h5 class="user-name">Server loaded by 98% please recover soon</h5>
+                                    <p class="content"><i class="icon-clock"></i> 1 hour ago</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="an-info-show-all-btn">
+                        <a class="an-btn an-btn-transparent fluid rounded uppercase small-font" href="#">Show all</a>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+        <!-- end .AN-NOTIFICATION -->
+        <div class="an-profile-settings">
+            <div class="btn-group an-notifications-dropown  profile">
+                <button type="button" class="an-btn an-btn-icon notificationTog dropdown-toggle me-3" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="profileDrop">
+                    <span class="an-profile-img" style="background-image: url('../../../assets/images/blank-profile-picture.png')"></span>
+                    <span class="an-user-name">Admin</span>
+                    <span class="an-arrow-nav small"><i class="fas fa-chevron-circle-up"></i></span>
+                </button>
+                <div class="dropdown-menu" aria-labelledby="profileDrop">
+                    <p class="an-info-count">Profile Settings</p>
+                    <ul class="an-profile-list">
+                        <!-- <li><a [routerLink]="['/profile']" routerLinkActive="router-link-active"><i class="far fa-user"></i>My profile</a></li> -->
+                        <!-- <li><a><i class="far fa-user"></i>My profile</a></li> -->
+                        <li><a class="cursor-pointer" data-bs-toggle="modal" data-bs-target="#chngPass_pup"><i class="far fa-user"></i>Change Password</a></li>
+                        <!-- <li><a><i class="far fa-envelope"></i>My inbox</a></li> -->
+                        <!-- <li><a><i class="far fa-calendar-alt"></i>Calendar</a></li> -->
+                        <li role="separator" class="divider"></li>
+                        <li class="cursor-pointer"><a (click)="data.signOutCheck()"><i class="fas fa-sign-out-alt cursor-pointer"></i>Log out</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- end .AN-PROFILE-SETTINGS -->
+    </div>
+</header>
+
+
+<!-- Forgot PuP -->
+<div class="modal fade forgot-pup header-pop" id="chngPass_pup" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <img src="../../../assets/images/logo.png" alt="" title="">
+                <h5 class="modal-title" id="exampleModalLabel">Change Password</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">X</button>
+            </div>
+            <div class="modal-body">
+                <div class="card login_form border-0">
+
+                    <div class="form-group mb-3">
+                        <input type="text" class="form-control" placeholder="Old Password*" name="old" [(ngModel)]="oldPass">
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <input type="text" class="form-control" placeholder="New Password*" name="new" [(ngModel)]="newPass">
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <input type="text" class="form-control" placeholder="Confirm Password*" name="cnfrm" [(ngModel)]="cnfrmPass">
+                    </div>
+
+                    <div class="form-group mb-2">
+                        <button type="submit" class="btn-green w-100" (click)="chngPswd()">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

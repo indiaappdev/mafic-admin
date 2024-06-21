@@ -1,0 +1,201 @@
+<div class="an-content-body {{data.hideSidebarClass}}">
+    <div class="an-body-topbar wow fadeIn">
+        <div class="an-page-title">
+            <h2>Edit Contest</h2>
+        </div>
+    </div>
+
+    <div class="an-single-component with-shadow p-5">
+        <form class="form" name="addContestForm" [formGroup]="addContestForm">
+            <div class="row">
+                <div class="form-group col-md-6 mb-3">
+                    <mat-form-field>
+                        <mat-label>Contest Name</mat-label>
+                        <input matInput required placeholder="Enter Contest Name" [formControl]="name">
+                        <mat-error *ngIf="name.invalid">{{validateFormFields()}}</mat-error>
+                    </mat-form-field>
+                </div>
+
+                <div class="form-group col-md-6 mb-3">
+                    <mat-form-field>
+                        <mat-label>Contest Theme</mat-label>
+                        <input matInput placeholder="Enter Theme" [formControl]="theme">
+                        <!-- <mat-error *ngIf="theme.invalid">{{validateFormFields()}}</mat-error> -->
+                    </mat-form-field>
+                </div>
+
+                <div class="form-group col-md-6 mb-3">
+                    <mat-form-field>
+                        <mat-label>Cost Type</mat-label>
+                        <mat-select required (selectionChange)="onChangeType($event)" [formControl]="type">
+                            <mat-option value="free">Free</mat-option>
+                            <mat-option value="paid">Paid</mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="type.invalid">{{validateFormFields()}}</mat-error>
+                    </mat-form-field>
+                </div>
+
+                <div class="form-group col-md-6 mb-3">
+                    <mat-form-field>
+                        <mat-label>City</mat-label>
+                        <input matInput placeholder="Enter City" [formControl]="city">
+                        <!-- <mat-error *ngIf="type.invalid">{{validateFormFields()}}</mat-error> -->
+                    </mat-form-field>
+                </div>
+
+                <div class="form-group col-md-6 mb-3">
+                    <mat-form-field>
+                        <mat-label>Contest Category</mat-label>
+                        <!-- <input matInput placeholder="Enter Category" [formControl]="category"> -->
+                        <mat-select placeholder="Select Category" [formControl]="category">
+                            <mat-option *ngFor="let cat of categoryData;" [value]="cat.category">{{cat.category}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+
+                <div class="form-group col-md-6 mb-3">
+                    <mat-form-field>
+                        <mat-label>Contest Entry Fee</mat-label>
+                        <input matInput required placeholder="Entry Fee" [formControl]="cost">
+                        <mat-error *ngIf="cost.invalid">{{validateFormFields()}}</mat-error>
+                    </mat-form-field>
+                </div>
+
+                <div class="form-group col-md-6 mb-3">
+                    <mat-form-field>
+                        <mat-label>Contest Start Date</mat-label>
+                        <input matInput placeholder="Enter Start Date" [matDatepicker]="picker" [formControl]="startDate">
+                        <!-- <mat-error *ngIf="startDate.invalid">{{validateFormFields()}}</mat-error> -->
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                    </mat-form-field>
+                </div>
+
+                <div class="form-group col-md-6 mb-3">
+                    <mat-form-field>
+                        <mat-label>Contest End Date</mat-label>
+                        <input matInput placeholder="Enter End Date" [matDatepicker]="picker1" [formControl]="endDate">
+                        <!-- <mat-error *ngIf="endDate.invalid">{{validateFormFields()}}</mat-error> -->
+                        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                        <mat-datepicker #picker1></mat-datepicker>
+                    </mat-form-field>
+                </div>
+
+                <div class="form-group col-md-6 mb-3">
+                    <mat-form-field>
+                        <mat-label>Round One Start Date</mat-label>
+                        <input matInput placeholder="Enter Start Date" [matDatepicker]="picker2" [formControl]="roundOneSDate">
+                        <!-- <mat-error *ngIf="roundOneSDate.invalid">{{validateFormFields()}}</mat-error> -->
+                        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                        <mat-datepicker #picker2></mat-datepicker>
+                    </mat-form-field>
+                </div>
+
+                <div class="form-group col-md-6 mb-3">
+                    <mat-form-field>
+                        <mat-label>Round One End Date</mat-label>
+                        <input matInput placeholder="Enter End Date" [matDatepicker]="picker3" [formControl]="roundOneEDate">
+                        <!-- <mat-error *ngIf="roundOneEDate.invalid">{{validateFormFields()}}</mat-error> -->
+                        <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+                        <mat-datepicker #picker3></mat-datepicker>
+                    </mat-form-field>
+                </div>
+
+                <div class="form-group col-md-6 mb-3">
+                    <mat-form-field>
+                        <mat-label>Round Two Start Date</mat-label>
+                        <input matInput placeholder="Enter Start Date" [matDatepicker]="picker4" [formControl]="roundTwoSDate">
+                        <!-- <mat-error *ngIf="roundTwoSDate.invalid">{{validateFormFields()}}</mat-error> -->
+                        <mat-datepicker-toggle matSuffix [for]="picker4"></mat-datepicker-toggle>
+                        <mat-datepicker #picker4></mat-datepicker>
+                    </mat-form-field>
+                </div>
+
+                <div class="form-group col-md-6 mb-3">
+                    <mat-form-field>
+                        <mat-label>Round Two End Date</mat-label>
+                        <input matInput placeholder="Enter End Date" [matDatepicker]="picker5" [formControl]="roundTwoEDate">
+                        <!-- <mat-error *ngIf="roundTwoEDate.invalid">{{validateFormFields()}}</mat-error> -->
+                        <mat-datepicker-toggle matSuffix [for]="picker5"></mat-datepicker-toggle>
+                        <mat-datepicker #picker5></mat-datepicker>
+                    </mat-form-field>
+                </div>
+
+                <div class="form-group col-md-6 mb-3">
+                    <mat-form-field>
+                        <mat-label>Round Three Start Date</mat-label>
+                        <input matInput placeholder="Enter Start Date" [matDatepicker]="picker6" [formControl]="roundThreeSDate">
+                        <!-- <mat-error *ngIf="roundThreeSDate.invalid">{{validateFormFields()}}</mat-error> -->
+                        <mat-datepicker-toggle matSuffix [for]="picker6"></mat-datepicker-toggle>
+                        <mat-datepicker #picker6></mat-datepicker>
+                    </mat-form-field>
+                </div>
+
+                <div class="form-group col-md-6 mb-3">
+                    <mat-form-field>
+                        <mat-label>Round Three End Date</mat-label>
+                        <input matInput placeholder="Enter End Date" [matDatepicker]="picker7" [formControl]="roundThreeEDate">
+                        <!-- <mat-error *ngIf="roundThreeEDate.invalid">{{validateFormFields()}}</mat-error> -->
+                        <mat-datepicker-toggle matSuffix [for]="picker7"></mat-datepicker-toggle>
+                        <mat-datepicker #picker7></mat-datepicker>
+                    </mat-form-field>
+                </div>
+
+                <div class="form-group col-md-4 mb-3">
+                    <mat-form-field>
+                        <mat-label>Winner</mat-label>
+                        <input matInput placeholder="Entry Fee" [formControl]="winner">
+                        <!-- <mat-error *ngIf="winner.invalid">{{validateFormFields()}}</mat-error> -->
+                    </mat-form-field>
+                </div>
+
+                <div class="form-group col-md-4 mb-3">
+                    <mat-form-field>
+                        <mat-label>First Runner up</mat-label>
+                        <input matInput placeholder="Entry Fee" [formControl]="firstRunner">
+                        <!-- <mat-error *ngIf="firstRunner.invalid">{{validateFormFields()}}</mat-error> -->
+                    </mat-form-field>
+                </div>
+
+                <div class="form-group col-md-4 mb-3">
+                    <mat-form-field>
+                        <mat-label>Second Runner up</mat-label>
+                        <input matInput placeholder="Entry Fee" [formControl]="secondRunner">
+                        <!-- <mat-error *ngIf="secondRunner.invalid">{{validateFormFields()}}</mat-error> -->
+                    </mat-form-field>
+                </div>
+
+                <div class="form-group col-md-12 mb-3">
+                    <mat-form-field>
+                        <mat-label>Description Header</mat-label>
+                        <textarea matInput placeholder="Enter Description Header" [formControl]="descriptionHeader"></textarea>
+                        <!-- <mat-error *ngIf="descriptionHeader.invalid">{{validateFormFields()}}</mat-error> -->
+                    </mat-form-field>
+                </div>
+
+                <div class="form-group col-md-12 mb-3">
+                    <mat-form-field>
+                        <mat-label>Description</mat-label>
+                        <textarea matInput placeholder="Enter Description" [formControl]="description"></textarea>
+                        <!-- <mat-error *ngIf="description.invalid">{{validateFormFields()}}</mat-error> -->
+                    </mat-form-field>
+                </div>
+
+                <div class="form-group col-md-6 mb-3">
+                    <img [src]="imgUrl" class="img-fluid mt-2" id="blah" alt="Image">
+                </div>
+
+                <div class="form-group col-md-6 mb-3">
+                    <div>Change Image: </div>
+                    <input type="file" placeholder="Enter Image" (change)="bannerImage($event)" #fileInput>
+                    <img [src]="uploadImageUrl" *ngIf="fileAccept" class="img-fluid mt-2" id="blah" alt="Image">
+                </div>
+
+                <div class="form-group col-md-12 flex">
+                    <button class="btn btn-gold m-3" [routerLink]="['/contest']">Cancel</button>
+                    <button class="btn btn-green m-3" [disabled]="addContestForm.invalid" (click)="editContest()">Save</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

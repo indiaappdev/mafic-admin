@@ -1,0 +1,50 @@
+.an-content-body {
+    padding: 30px;
+    width: calc(100vw - 290px);
+}
+
+.mat-row .yts {
+    background-color: #c3ae18;
+    color: white;
+    padding: 5px;
+    border-radius: 2px;
+}
+
+.mat-row .completed {
+    background-color: #4c4ce1;
+    color: white;
+    padding: 5px;
+    border-radius: 2px;
+}
+
+.mat-row .onGoing {
+    background-color: #98ca4b;
+    color: white;
+    padding: 5px;
+    border-radius: 2px;
+}
+
+.mat-row .pending {
+    background-color: #c3ae18;
+    color: white;
+    padding: 5px;
+    border-radius: 2px;
+}
+
+.mat-row .reject {
+    background-color: #F21414;
+    color: white;
+    padding: 5px;
+    border-radius: 2px;
+}
+
+.mat-row .accept {
+    background-color: #8BC540;
+    color: white;
+    padding: 5px;
+    border-radius: 2px;
+}
+
+mat-form-field {
+    width: 100%;
+}

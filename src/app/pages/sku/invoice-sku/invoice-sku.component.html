@@ -1,0 +1,141 @@
+<div class="an-content-body {{data.hideSidebarClass}}">
+    <div class="an-body-topbar wow fadeIn">
+        <div class="an-page-title">
+            <h2>INVOICE SKU</h2>
+        </div>
+    </div>
+
+    <div class="an-single-component with-shadow p-5">
+        <form class="form" name="adressForm" autocomplete="off" [formGroup]="adressForm">
+            <div class="row">
+                <div class="col-md-6 form-group mb-3">
+                    <div class="row">
+                        <div class="col-md-12 form-group mb-3">
+                            <p class="forgot-head">Billing Details</p>
+                        </div>
+                        <div class="col-md-12 form-group mb-3">
+                            <mat-form-field>
+                                <mat-label>Adress Line 1</mat-label>
+                                <input matInput required placeholder="Enter Adress line 1" [formControl]="billAdressOne">
+                                <mat-error *ngIf="billAdressOne.invalid">{{validateFormFields()}}</mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-12 form-group mb-3">
+                            <mat-form-field>
+                                <mat-label>Adress Line 2</mat-label>
+                                <input matInput required placeholder="Enter Adress line 1" [formControl]="billAdressTwo">
+                                <mat-error *ngIf="billAdressTwo.invalid">{{validateFormFields()}}</mat-error>
+                            </mat-form-field>
+                        </div>
+
+                        <div class="col-md-6 form-group mb-3">
+                            <mat-form-field>
+                                <mat-label>City</mat-label>
+                                <input matInput required placeholder="Enter your city" [formControl]="billAdressCity">
+                                <mat-error *ngIf="billAdressCity.invalid">{{validateFormFields()}}</mat-error>
+                            </mat-form-field>
+                        </div>
+
+                        <div class="col-md-6 form-group mb-3">
+                            <mat-form-field>
+                                <mat-label>State</mat-label>
+                                <mat-select required [formControl]="billAdressState">
+                                    <mat-option *ngFor="let state of stateList" [value]="state.name">{{state.name}}</mat-option>
+                                </mat-select>
+                                <mat-error *ngIf="billAdressState.invalid">{{validateFormFields()}}</mat-error>
+                            </mat-form-field>
+                        </div>
+
+                        <div class="col-md-6 form-group mb-3">
+                            <mat-form-field>
+                                <mat-label>Pin code</mat-label>
+                                <input matInput required placeholder="Enter Pin code" [formControl]="billAdressPCode">
+                                <mat-error *ngIf="billAdressPCode.invalid">{{pinCodeValidator()}}</mat-error>
+                            </mat-form-field>
+                        </div>
+
+                        <div class="col-md-6 form-group mb-3">
+                            <mat-form-field>
+                                <mat-label>GST number</mat-label>
+                                <input matInput placeholder="Enter your GST number" [formControl]="userGST">
+                            </mat-form-field>
+                        </div>
+
+                        <div class="col-md-6 form-group mb-3">
+                            <mat-form-field>
+                                <mat-label>Select User</mat-label>
+                                <!-- <input matInput placeholder="Enter your GST number" [formControl]="userGST"> -->
+                                <mat-select [formControl]="userId">
+                                    <mat-option *ngFor="let item of artistDetails" [value]="item.id">{{item.firstName}} {{item.lastName}} ({{item.identifier}})</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+
+                        <div class="col-md-6 form-group mb-3">
+                            <mat-form-field>
+                                <mat-label>Email ID</mat-label>
+                                <input matInput placeholder="Enter your GST number" [formControl]="gmail">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 form-group mb-3">
+                    <div class="row">
+                        <div class="col-md-12 form-group mb-3">
+                            <p class="forgot-head">Shipping Details</p>
+                            <p class="forgot-head">(
+                                <mat-checkbox (change)="addSameFields($event)"> <span class="forgot-head font-family">Same as billing details</span></mat-checkbox>)</p>
+                        </div>
+                        <div class="col-md-12 form-group mb-3">
+                            <mat-form-field>
+                                <mat-label>Adress Line 1</mat-label>
+                                <input matInput required placeholder="Enter Adress Line 1" [formControl]="shipAdressOne">
+                                <mat-error *ngIf="shipAdressOne.invalid">{{validateFormFields()}}</mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-12 form-group mb-3">
+                            <mat-form-field>
+                                <mat-label>Adress Line 2</mat-label>
+                                <input matInput required placeholder="Enter Adress Line 2" [formControl]="shipAdressTwo">
+                                <mat-error *ngIf="shipAdressTwo.invalid">{{validateFormFields()}}</mat-error>
+                            </mat-form-field>
+                        </div>
+
+                        <div class="col-md-6 form-group mb-3">
+                            <mat-form-field>
+                                <mat-label>City</mat-label>
+                                <input matInput required placeholder="Enter your city" [formControl]="shipAdressCity">
+                                <mat-error *ngIf="shipAdressCity.invalid">{{validateFormFields()}}</mat-error>
+                            </mat-form-field>
+                        </div>
+
+                        <div class="col-md-6 form-group mb-3">
+                            <mat-form-field>
+                                <mat-label>State</mat-label>
+                                <!-- <input matInput required placeholder="Enter your state" [formControl]="shipAdressState"> -->
+                                <mat-select required [formControl]="shipAdressState">
+                                    <mat-option *ngFor="let state of stateList" [value]="state.name">{{state.name}}</mat-option>
+                                </mat-select>
+                                <mat-error *ngIf="shipAdressState.invalid">{{validateFormFields()}}</mat-error>
+                            </mat-form-field>
+                        </div>
+
+                        <div class="col-md-6 form-group mb-3">
+                            <mat-form-field>
+                                <mat-label>Pin code</mat-label>
+                                <input matInput required placeholder="Enter Pin code" [formControl]="shipAdressPCode">
+                                <mat-error *ngIf="shipAdressPCode.invalid">{{pinCodeValidator()}}</mat-error>
+                            </mat-form-field>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="form-group mb-2">
+                    <button type="submit" class="btn btn-gold m-3" [routerLink]="['/sku']">Cancel</button>
+                    <button type="submit" [disabled]="adressForm.invalid" (click)="setAdress()" class="btn btn-green">Submit</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

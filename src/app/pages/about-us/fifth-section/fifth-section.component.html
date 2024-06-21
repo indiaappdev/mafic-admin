@@ -1,0 +1,77 @@
+<form class="form" name="addUserForm" [formGroup]="fifthForm">
+    <div class="row">
+
+        <div class="form-group col-md-12 mb-3">
+            <mat-form-field>
+                <mat-label>Heading</mat-label>
+                <input matInput required placeholder="Heading" [formControl]="header" name="text">
+                <mat-error *ngIf="header.invalid">{{validateFormFields()}}</mat-error>
+            </mat-form-field>
+        </div>
+
+        <div class="form-group col-md-12 mb-3">
+            <mat-form-field>
+                <mat-label>First Point</mat-label>
+                <input matInput required placeholder="First Point" [formControl]="point1" name="text">
+                <mat-error *ngIf="point1.invalid">{{validateFormFields()}}</mat-error>
+            </mat-form-field>
+        </div>
+
+        <div class="form-group col-md-12 mb-3">
+            <mat-form-field>
+                <mat-label>Second Point</mat-label>
+                <input matInput required placeholder="Second Point" [formControl]="point2" name="mobileNo">
+                <mat-error *ngIf="point2.invalid">{{validateFormFields()}}</mat-error>
+            </mat-form-field>
+        </div>
+
+        <div class="form-group col-md-12 mb-3">
+            <mat-form-field>
+                <mat-label>Third Point</mat-label>
+                <input matInput placeholder="Third Point" [formControl]="point3" name="text">
+            </mat-form-field>
+        </div>
+
+        <div class="form-group col-md-12 mb-3">
+            <mat-form-field>
+                <mat-label>Fourth point</mat-label>
+                <input matInput placeholder="Fourth Point" [formControl]="point4" name="mobileNo">
+            </mat-form-field>
+        </div>
+
+        <div class="form-group col-md-12 mb-3">
+            <mat-form-field>
+                <mat-label>Fifth point</mat-label>
+                <input matInput placeholder="Fifth point" [formControl]="point5" name="text">
+            </mat-form-field>
+        </div>
+
+        <div class="form-group col-md-12 mb-3">
+            <mat-form-field>
+                <mat-label>Sixth point</mat-label>
+                <input matInput placeholder="Sixth point" [formControl]="point6" name="mobileNo">
+            </mat-form-field>
+        </div>
+
+        <div class="form-group col-md-12 mb-3">
+            <mat-form-field>
+                <mat-label>Seventh point</mat-label>
+                <input matInput placeholder="Seventh point" [formControl]="point7" name="mobileNo">
+            </mat-form-field>
+        </div>
+
+        <div class="form-group col-md-6 mb-3">
+            <img class="img-fluid" [src]="imageUrl" alt="image">
+        </div>
+
+        <div class="form-group col-md-6 mb-3">
+            <div>Change Image: </div>
+            <input type="file" placeholder="Enter Image" (change)="bannerImage($event)" #fileInput>
+            <img [src]="uploadImageUrl" *ngIf="fileAccept" class="img-fluid mt-2" id="blah" alt="Image">
+        </div>
+
+        <div class="form-group col-md-12 flex mt-4">
+            <button class="btn btn-green mb-3" (click)="editFifthSection()" [disabled]="fifthForm.invalid">Update</button>
+        </div>
+    </div>
+</form>

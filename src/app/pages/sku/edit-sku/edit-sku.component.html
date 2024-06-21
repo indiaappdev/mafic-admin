@@ -1,0 +1,97 @@
+<div class="an-content-body {{data.hideSidebarClass}}">
+    <div class="an-body-topbar wow fadeIn">
+        <div class="an-page-title">
+            <h2>Edit SKU</h2>
+        </div>
+    </div>
+
+    <div class="an-single-component with-shadow p-5">
+        <form class="form" name="addContestForm" [formGroup]="addSKUForm">
+            <div class="row">
+                <div class="form-group col-md-6 mb-3">
+                    <mat-form-field>
+                        <mat-label>SKU Name</mat-label>
+                        <input matInput required placeholder="Enter SKU Name" [formControl]="name">
+                        <mat-error *ngIf="name.invalid">{{validateFormFields()}}</mat-error>
+                    </mat-form-field>
+                </div>
+
+                <div class="form-group col-md-6 mb-3">
+                    <mat-form-field>
+                        <mat-label>SKU Description</mat-label>
+                        <textarea matInput required placeholder="Enter SKU Description" [formControl]="description"></textarea>
+                        <mat-error *ngIf="description.invalid">{{validateFormFields()}}</mat-error>
+                    </mat-form-field>
+                </div>
+
+                <div class="form-group col-md-6 mb-3">
+                    <mat-form-field>
+                        <mat-label>SKU Price</mat-label>
+                        <input type="number" matInput required placeholder="Enter SKU Price" [formControl]="price">
+                        <mat-error *ngIf="price.invalid">{{validateFormFields()}}</mat-error>
+                    </mat-form-field>
+                </div>
+
+                <div class="form-group col-md-6 mb-3">
+                    <mat-form-field>
+                        <mat-label>SKU Discount %</mat-label>
+                        <input type="number" matInput placeholder="Enter SKU Discount %" [formControl]="discount">
+                    </mat-form-field>
+                </div>
+
+                <div class="form-group col-md-6 mb-3">
+                    <mat-form-field>
+                        <mat-label>SAC/GST Code</mat-label>
+                        <mat-select required placeholder="Select SAC/GST Code" (selectionChange)="setFormOnChange($event)" [formControl]="sac_gst">
+                            <mat-option *ngFor="let gst of GSTInfo; let i = index" [value]="i">{{gst.sac_gst_code}}</mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="sac_gst.invalid">{{validateFormFields()}}</mat-error>
+                    </mat-form-field>
+                </div>
+
+                <div class="form-group col-md-6 mb-3">
+                    <mat-form-field>
+                        <mat-label>Nature of service</mat-label>
+                        <input type="text" placeholder="Select Nature of service" matInput required [formControl]="natureService">
+                        <mat-error *ngIf="natureService.invalid">{{validateFormFields()}}</mat-error>
+                    </mat-form-field>
+                </div>
+
+                <div class="form-group col-md-6 mb-3">
+                    <mat-form-field>
+                        <mat-label>Short Description</mat-label>
+                        <input type="text" matInput required placeholder="Short_Description" [formControl]="shortDescription">
+                        <mat-error *ngIf="shortDescription.invalid">{{validateFormFields()}}</mat-error>
+                    </mat-form-field>
+                </div>
+
+                <div class="form-group col-md-6 mb-3">
+                    <mat-form-field>
+                        <mat-label>GST %</mat-label>
+                        <input type="text" matInput required placeholder="GST %" [formControl]="gstVal">
+                        <mat-error *ngIf="gstVal.invalid">{{validateFormFields()}}</mat-error>
+                    </mat-form-field>
+                </div>
+
+                <div class="form-group col-md-12 mb-3">
+                    <mat-checkbox class="example-margin" [formControl]="active">Activate / Deactivate</mat-checkbox>
+                </div>
+
+                <div class="form-group col-md-6 mb-3">
+                    <img [src]="skuDetails.image" class="img-fluid mt-2" id="blah" alt="Image">
+                </div>
+
+                <div class="form-group col-md-6 mb-3">
+                    <div>Image Upload*: </div>
+                    <input type="file" required placeholder="Enter Image" (change)="skuImage($event)" #fileInput>
+                    <img [src]="uploadImageUrl" *ngIf="fileAccept" class="img-fluid mt-2" id="blah" alt="Image">
+                </div>
+
+                <div class="form-group col-md-12 flex">
+                    <button class="btn btn-gold m-3" [routerLink]="['/sku']">Cancel</button>
+                    <button class="btn btn-green m-3" [disabled]="addSKUForm.invalid" (click)="addSku()">Save</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

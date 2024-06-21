@@ -1,0 +1,33 @@
+<div class="an-content-body {{data.hideSidebarClass}}">
+    <div class="an-body-topbar wow fadeIn">
+        <div class="an-page-title">
+            <h2>Edit Meta Data</h2>
+        </div>
+    </div>
+
+    <div class="an-single-component with-shadow p-5">
+        <form class="form" name="addUserForm" [formGroup]="metaForm">
+            <div class="row">
+
+                <div class="form-group col-md-12 mb-3">
+                    <mat-form-field style="width: 100%;">
+                        <mat-label>Meta Description</mat-label>
+                        <textarea matInput required placeholder="Enter Meta Description" [formControl]="pText1" name="text"></textarea>
+                        <mat-error *ngIf="pText1.invalid">{{validateFormFields()}}</mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="form-group col-md-12 mb-3">
+                    <mat-form-field style="width: 100%;">
+                        <mat-label>Meta Keywords</mat-label>
+                        <textarea matInput required placeholder="Enter Meta Keywords" [formControl]="pText2" name="text"></textarea>
+                        <mat-error *ngIf="pText2.invalid">{{validateFormFields()}}</mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="form-group col-md-12 flex mt-4">
+                    <button *ngIf="!data.editDisable" class="btn btn-green mb-3" [disabled]="metaForm.invalid" (click)="editMetaSection()">Update</button>
+                    <button *ngIf="data.editDisable" class="btn btn-green mb-3" (click)="data.denieAccess()">Update</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,74 @@
+<div class="an-content-body {{datas.hideSidebarClass}}">
+    <div class="an-body-topbar wow fadeIn">
+        <div class="an-page-title">
+            <h2>Query List</h2>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="an-single-component with-shadow">
+                <div class="an-component-header">
+                    <h6>Queries</h6>
+                </div>
+                <div class="an-component-body">
+                    <div class="an-helper-block p-0">
+                        <div class="an-scrollable-x">
+                            <table mat-table *ngIf="dataSource" [dataSource]="dataSource" matSort class="mat-elevation-z8">
+
+                                <!-- User ID Column -->
+                                <ng-container matColumnDef="id" class="p-2">
+                                    <th mat-header-cell *matHeaderCellDef> ID </th>
+                                    <td mat-cell *matCellDef="let element; let i = index;"> {{i+1}} </td>
+                                </ng-container>
+
+                                <!-- Name Column -->
+                                <ng-container matColumnDef="name" class="p-2">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> NAME </th>
+                                    <td mat-cell *matCellDef="let element"> {{element.firstName | titlecase}} {{element.lastName | titlecase}}</td>
+                                </ng-container>
+
+                                <!-- Type Column -->
+                                <ng-container matColumnDef="comments" class="p-2">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> MESSAGE </th>
+                                    <td mat-cell *matCellDef="let element"> {{element.comments | slice:0:50}} </td>
+                                </ng-container>
+
+                                <ng-container matColumnDef="phoneNumber" class="p-2">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> PHONE NUMBER </th>
+                                    <td mat-cell *matCellDef="let element"> {{element.phoneNumber}} </td>
+                                </ng-container>
+
+                                <ng-container matColumnDef="emailId" class="p-2">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> EMAIL ID </th>
+                                    <td mat-cell *matCellDef="let element"> {{element.emailId}} </td>
+                                </ng-container>
+
+                                <ng-container matColumnDef="view" class="p-2">
+                                    <th mat-header-cell *matHeaderCellDef> VIEW </th>
+                                    <td mat-cell *matCellDef="let element">
+                                        <span class="cursor-pointer msg-tag bg-success px-5" (click)="openViewDialog(element)">VIEW</span>
+                                    </td>
+                                </ng-container>
+
+                                <ng-container matColumnDef="replay" class="p-2">
+                                    <th mat-header-cell *matHeaderCellDef> REPLY </th>
+                                    <td mat-cell *matCellDef="let element">
+                                        <span class="cursor-pointer msg-tag bg-success px-5" (click)="openReplayDialog(element)">REPLY</span>
+                                    </td>
+                                </ng-container>
+
+                                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+                            </table>
+                            <mat-paginator [length]="100" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]" class="mat-elevation-z1">
+                            </mat-paginator>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
