@@ -7,10 +7,12 @@
                     <i class="fas fa-users" *ngIf="routes.moduleName == 'user' && routes.readAccess == '1'"></i>
                     <i class="fab fa-elementor" *ngIf="routes.moduleName == 'events' && routes.readAccess == '1'"></i>
                     <i class="fas fa-ticket-alt" *ngIf="routes.moduleName == 'contest' && routes.readAccess == '1'"></i>
+                    <i class="fas fa-ticket-alt" *ngIf="routes.moduleName == 'contest-jury' && routes.readAccess == '1'"></i>
                     <i class="fas fa-chart-bar" *ngIf="routes.moduleName == 'survey' && routes.readAccess == '1'"></i>
                     <i class="fas fa-user-tag" *ngIf="routes.moduleName == 'roles' && routes.readAccess == '1'"></i>
                     <i class="fas fa-ticket-alt" *ngIf="routes.moduleName == 'sku' && routes.readAccess == '1'"></i>
                     <i class="fas fa-comment-alt" *ngIf="routes.moduleName == 'query' && routes.readAccess == '1'"></i>
+                    <i class="fas fa-store" *ngIf="routes.moduleName == 'market' && routes.readAccess == '1'"></i>
                     <span class="nav-title" *ngIf="routes.moduleName !== 'sku'">{{routes.moduleName}}</span>
                     <span class="nav-title" *ngIf="routes.moduleName == 'sku'">SKU</span>
                 </a>

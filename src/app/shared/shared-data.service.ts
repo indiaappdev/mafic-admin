@@ -7,8 +7,10 @@ import { Router } from '@angular/router';
 export class SharedDataService {
 
   loginFlag :boolean = true;
-  apiDomainPath:string = 'https://demoonline.xyz/api/Mafic/';
-  apiDomainPathDash:string = 'https://demoonline.xyz/api/MaficDashboard/';
+  // apiDomainPath:string = 'https://demoonline.xyz/api/Mafic/';
+  // apiDomainPathDash:string = 'https://demoonline.xyz/api/MaficDashboard/';
+  apiDomainPath:string = 'https://api.themafic.com/api/Mafic/';
+  apiDomainPathDash:string = 'https://api.themafic.com/api/MaficDashboard/';
   loggedUserData:any;
   dummyProfilePic:string = '../../assets/images/blank-profile-picture.png'
   profileUrl:string = '';
@@ -34,6 +36,7 @@ export class SharedDataService {
 
   sideBar:string ='d-block';
   hideSidebarClass:string ='';
+  private _ProductCategoryList: any;
 
   constructor(private router:Router) { }
 
@@ -133,5 +136,11 @@ export class SharedDataService {
       color += letters[Math.floor(Math.random() * 16)];
     }
     return color;
+  }
+  set ProductCategoryList(newValue: any){
+    this. _ProductCategoryList = newValue
+  }
+  get ProductCategoryList(){
+    return this._ProductCategoryList ;
   }
 }

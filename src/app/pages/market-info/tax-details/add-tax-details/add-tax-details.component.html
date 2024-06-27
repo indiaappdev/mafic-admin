@@ -1,0 +1,82 @@
+<form novalidate name="addUserForm" class="form" (ngSubmit)="submitForm(addUserForm)" #addUserForm="ngForm">
+    <div class="row" >
+        
+        <div class="form-group col-md-6 mb-3">
+            <mat-form-field appearance="legacy" style="width: 100%;">
+                <mat-label>SAC/HSN *</mat-label>
+                <mat-select required [(value)]="formData.SACHSN" name="SACHSN" id="SACHSN">
+                    <mat-option *ngFor="let option of SACHSN" [value]="option">
+                        {{ option }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="form-group col-md-6 mb-3">
+            <mat-form-field appearance="legacy" style="width: 100%;">
+                <mat-label>SAC/HSN code *</mat-label>
+                <input matInput required [(ngModel)]="formData.SACHSNCODE" name="SACHSNCODE" id="SACHSNCODE" #SACHSNCODE="ngModel"
+                    aria-describedby="SACHSNCODE">
+            </mat-form-field>
+        </div>
+        <div class="form-group col-md-6 mb-3">
+            <mat-form-field appearance="legacy" style="width: 100%;">
+                <mat-label>Description of Goods *</mat-label>
+                <input matInput required [(ngModel)]="formData.Description" name="Description" id="Description"
+                    #Description="ngModel" aria-describedby="Description">
+            </mat-form-field>
+        </div>
+        
+        <div class="form-group col-md-6 mb-3">
+            <mat-form-field appearance="legacy" style="width: 100%;">
+                <mat-label>CGST *</mat-label>
+                <input matInput required [(ngModel)]="formData.CGST" name="CGST" id="CGST"
+                    #CGST="ngModel" aria-describedby="CGST">
+            </mat-form-field>
+        </div>
+        <div class="form-group col-md-6 mb-3">
+            <mat-form-field appearance="legacy" style="width: 100%;">
+                <mat-label>SGST/UTGST *</mat-label>
+                <input matInput required [(ngModel)]="formData.SGSTUTGST" name="SGSTUTGST" id="SGSTUTGST"
+                    #SGSTUTGST="ngModel" aria-describedby="SGSTUTGST">
+            </mat-form-field>
+        </div>
+        <div class="form-group col-md-6 mb-3">
+            <mat-form-field appearance="legacy" style="width: 100%;">
+                <mat-label>IGST *</mat-label>
+                <input matInput required [(ngModel)]="formData.IGST" name="IGST"
+                    id="IGST" #IGST="ngModel" aria-describedby="IGST">
+            </mat-form-field>
+        </div>
+        
+        <div class="form-group col-md-6 mb-3">
+            <mat-form-field appearance="legacy" style="width: 100%;">
+                <mat-label>Cess *</mat-label>
+                <input matInput required [(ngModel)]="formData.Cess" name="Cess" id="Cess"
+                    #Cess="ngModel" aria-describedby="Cess">
+            </mat-form-field>
+        </div>
+        <div class="form-group col-md-6 mb-3">
+            <mat-form-field appearance="legacy" style="width: 100%;">
+                <mat-label>TCS *</mat-label>
+                <input matInput required [(ngModel)]="formData.TCS" name="TCS" id="TCS"
+                    #TCS="ngModel" aria-describedby="TCS">
+            </mat-form-field>
+        </div>
+        
+        
+        
+        
+        
+
+
+
+        
+
+
+
+        <div class="form-group col-md-12 flex">
+            <button type="submit" class="btn btn-green m-3" [disabled]="addUserForm.invalid">Save</button>
+            <button type="button" class="btn btn-gold m-3" (click)="cancelForm()">Cancel</button>
+        </div>
+    </div>
+</form>

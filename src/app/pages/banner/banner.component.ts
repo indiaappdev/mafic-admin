@@ -79,6 +79,7 @@ export class BannerComponent implements OnInit {
   ngOnInit(): void {
     this.getTableData();
     this.datas.checkAccess('survey');
+    console.log(this.datas)
   }
 
   getTableData(){

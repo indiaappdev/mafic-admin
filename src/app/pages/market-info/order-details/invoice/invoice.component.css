@@ -1,0 +1,88 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+}
+.container {
+    max-width: 60dvw;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #000;
+}
+h1,h2, h3, h4, h5, h6 {
+    margin: 0;
+    color: #000;
+}
+.header, .footer {
+    text-align: center;
+}
+.header h2, .header h4 {
+    margin: 0;
+}
+.contact-info, .invoice-info, .address, .items, .totals, .notes {
+    margin-top: 20px;
+}
+.contact-info, .invoice-info {
+    display: flex;
+    justify-content: space-between;
+}
+.contact-info div, .invoice-info div {
+    width: 48%;
+}
+.address {
+    display: flex;
+    justify-content: space-between;
+}
+.address div {
+    width: 48%;
+}
+Company-details{
+    justify-content: left;
+}
+.items {
+    margin-top: 20px;
+    overflow-x: auto;
+}
+.items table {
+    width: 100%;
+    border-collapse: collapse;
+}
+tr{
+    width:5%;
+}
+.items table th, .items table td {
+    border: 1px solid #000;
+    padding: 8px;
+    text-align: left;
+}
+.totals {
+    margin-top: 20px;
+}
+.totals table {
+    width: 100%;
+    border-collapse: collapse;
+}
+.totals table th, .totals table td {
+    border: 1px solid #000;
+    padding: 8px;
+    text-align: left;
+   
+}
+.totals table td {
+    text-align: right;
+}
+.totals table td:last-child {
+    font-weight: bold;
+}
+.logo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap:70px;
+    padding:16px;
+}
+.logo img {
+    /* height: 30px;
+    width: 30px; */
+    padding: 16px;
+}

@@ -27,7 +27,7 @@ export class SidebarComponent implements OnInit {
         this.accesData.push(this.data.moduleAccess[index]);
       }
     }
-
+console.log(this.accesData)
   }
 
   collapse(){

@@ -116,6 +116,7 @@ import { InvoiceSkuComponent } from 'src/app/pages/sku/invoice-sku/invoice-sku.c
 import { QueryComponent } from 'src/app/pages/query/query.component';
 import { SendResponseComponent } from 'src/app/pages/query/send-response/send-response.component';
 import { ViewQueryComponent } from 'src/app/pages/query/view-query/view-query.component';
+import { MarketComponent } from 'src/app/pages/market/market.component';
 // const ErrorHandler = new GlobalErrorHandler();
 const matDialogRefStub = {};
 
@@ -297,7 +298,11 @@ const matDialogRefStub = {};
       { path: 'sku/edit-sku/:sId', component: EditSkuComponent },
       { path: 'sku/add-sku', component: AddSkuComponent },
       { path: 'sku/invoice-sku/:sId', component: InvoiceSkuComponent },
-      { path: 'query', component: QueryComponent }
+      { path: 'query', component: QueryComponent },
+      {
+    path:'market',
+    component:MarketComponent
+  }
 
     ]),
   ], 
