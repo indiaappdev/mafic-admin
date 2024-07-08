@@ -64,7 +64,7 @@ export class MarketComponent implements OnInit {
   displayedColumnsForProductDetails: string[] = ['ID', 'NAME', 'PRICE', 'QUANTITY', 'DISCOUNT', 'CATEGORY', 'BRAND WARRANTY', 'RETURN POLICY', 'IMAGE', 'ACTION'];
   displayedColumnsForTax: string[] = ['ID', 'SAC_HSN', 'SACHSN_Code', 'Description', 'CGST', 'SGST', 'IGST', 'ACTION'];
   displayedColumnsForPin: string[] = ['ID', 'PO NAME', 'PIN-Code', 'DISTRICT', 'CITY', 'STATE', 'DELIVERY CHARGE', 'ACTION'];
-  displayedColumnsForOrderDetails: string[] = ['ID', 'PRODUCT', 'NAME', 'PRICE', 'QUANTITY', 'DISCOUNT(%)', 'GST', 'TOTAL', 'DATE', 'STATUS', 'INVOICE', 'UPDATE'];
+  displayedColumnsForOrderDetails: string[] = ['ID', 'OrderId', 'PRODUCT', 'NAME', 'PRICE', 'QUANTITY', 'DISCOUNT(%)', 'GST', 'TOTAL', 'DATE', 'STATUS', 'INVOICE', 'UPDATE'];
 
   formDataforProductCategory = {
     text: '',
