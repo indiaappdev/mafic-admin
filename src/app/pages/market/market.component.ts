@@ -77,7 +77,8 @@ export class MarketComponent implements OnInit {
   isCollapsedProductDetils: boolean = true;
   isCollapsedTax:  boolean = true;
   isCollapsedPIN: boolean = true;
-
+  isCollapsedOrder: boolean = true;
+  isOrderDetailsExpanded: boolean = true;
   constructor(private http: HttpClient,
     public sharedDataService: SharedDataService,
     public datePipe: DatePipe,
@@ -120,6 +121,12 @@ export class MarketComponent implements OnInit {
   }
   toggleCollapsePIN() {
     this.isCollapsedPIN = !this.isCollapsedPIN;
+  }
+  toggleCollapseOrder() {
+    this.isCollapsedOrder = !this.isCollapsedOrder;
+  }
+  toggleOrderDetails() {
+    this.isOrderDetailsExpanded = !this.isOrderDetailsExpanded;
   }
 
   getDataforProductCategory() {

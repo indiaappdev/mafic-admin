@@ -299,96 +299,99 @@
             <!-- Order Details-->
             <div class="shadow-class m-3">
               <h2 *ngIf="!sharedDataService.editDisable" class="an-page-title mt-0" data-bs-toggle="collapse" href="#orderdetails"
-                role="button" aria-expanded="false" aria-controls="orderdetails">ORDER DETAILS </h2>
+                role="button" aria-expanded="false" aria-controls="orderdetails" (click)="toggleOrderDetails()">ORDER DETAILS </h2>
               <h2 *ngIf="sharedDataService.editDisable" class="an-page-title mt-0">ORDER DETAILS</h2>
-              <div *ngIf="!sharedDataService.editDisable" class="an-scrollable-x collapse" id="orderdetails">
+              <div [ngClass]="isOrderDetailsExpanded? 'display-block' : 'display-none'">
+                <div *ngIf="!sharedDataService.editDisable" class="an-scrollable-x collapse " id="orderdetails">
                 
-                <div class="an-component-body">
-                  <div class="an-helper-block p-0">
-                    <div class="an-scrollable-x">
-                      <table mat-table *ngIf="dataSourceForOrderDetails" [dataSource]="dataSourceForOrderDetails"
-                        class="mat-elevation-z8">
-
-                        <ng-container matColumnDef="ID" class="p-2">
-                          <th mat-header-cell *matHeaderCellDef> ID </th>
-                          <td mat-cell *matCellDef="let element; let i=index"> {{i+1}} </td>
-                        </ng-container>
-                        orderId
-                        <ng-container matColumnDef="OrderId" class="p-2">
-                          <th mat-header-cell *matHeaderCellDef> OrderId </th>
-                          <td mat-cell *matCellDef="let element; let i=index"> {{element.orderId}} </td>
-                        </ng-container>
-                        <ng-container matColumnDef="PRODUCT" class="p-2">
-                          <th mat-header-cell *matHeaderCellDef> PRODUCT </th>
-                          <td mat-cell *matCellDef="let element"> {{element.name}} </td>
-                        </ng-container>
-                        <ng-container matColumnDef="NAME" class="p-2">
-                          <th mat-header-cell *matHeaderCellDef> NAME </th>
-                          <td mat-cell *matCellDef="let element"> {{element.firstName}} {{element.lastName}}</td>
-                        </ng-container>
-                        <ng-container matColumnDef="PRICE" class="p-2">
-                          <th mat-header-cell *matHeaderCellDef> PRICE </th>
-                          <td mat-cell *matCellDef="let element"> {{element.unitPrice}} </td>
-                        </ng-container>
-                        <ng-container matColumnDef="QUANTITY" class="p-2">
-                          <th mat-header-cell *matHeaderCellDef> QUANTITY </th>
-                          <td mat-cell *matCellDef="let element"> {{element.qty}} </td>
-                        </ng-container>
-                        <ng-container matColumnDef="DISCOUNT(%)" class="p-2">
-                          <th mat-header-cell *matHeaderCellDef> DISCOUNT(%) </th>
-                          <td mat-cell *matCellDef="let element"> {{element.discountAmount}} </td>
-                        </ng-container>
-                        <ng-container matColumnDef="GST" class="p-2">
-                          <th mat-header-cell *matHeaderCellDef> GST</th>
-                          <td mat-cell *matCellDef="let element"> {{element.gstAmount}} </td>
-                        </ng-container>
-                        <ng-container matColumnDef="TOTAL" class="p-2">
-                          <th mat-header-cell *matHeaderCellDef> TOTAL </th>
-                          <td mat-cell *matCellDef="let element"> {{element.itemTotal}} </td>
-                        </ng-container>
-                        <ng-container matColumnDef="DATE" class="p-2">
-                          <th mat-header-cell *matHeaderCellDef> DATE </th>
-                          <td mat-cell *matCellDef="let element"> {{ datePipe.transform(element.createdDate, 'MMM dd, yyyy') }} </td>
-                        </ng-container>
-                        <ng-container matColumnDef="STATUS" class="p-2">
-                          <th mat-header-cell *matHeaderCellDef> STATUS </th>
-                          <td mat-cell *matCellDef="let element">
-                            <span class="canceled" *ngIf="element.delivery_status == 0">Canceled</span> 
-                            <span class="pending" *ngIf="element.delivery_status == 1">Pending</span>
-                            <span class="shipped" *ngIf="element.delivery_status == 2">Shiped</span>
-                            <span class="delivered" *ngIf="element.delivery_status == 3">Delivered</span>
-                          </td>
-                        </ng-container>
-                        <ng-container matColumnDef="INVOICE" class="p-2">
-                          <th mat-header-cell *matHeaderCellDef> INVOICE</th>
-                          <td mat-cell *matCellDef="let element" (click)="openPdf(element)"> <i _ngcontent-rxd-c217="" class="fas fa-download" style="color: green;"></i> </td>
-                        </ng-container>
-                        <ng-container matColumnDef="UPDATE">
-                          <th mat-header-cell *matHeaderCellDef> UPDATE </th>
-                          <td mat-cell *matCellDef="let element" (click)="editOrderStatus(element)">
-                            <div class="d-flex">
-                              <span class="cursor-pointer p-0"><i class="fas fa-edit" style="color: BLACK;"></i></span>
-                              
-                            </div>
-                          </td>
-                        </ng-container>
-
-                        <tr mat-header-row *matHeaderRowDef="displayedColumnsForOrderDetails"></tr>
-                        <tr mat-row *matRowDef="let row; columns: displayedColumnsForOrderDetails;"></tr>
-
-                      </table>
-                      
-                      <mat-paginator #paginatorForOrderDetails
-                      [length]="displayedColumnsForOrderDetails?.length"
-                      [pageSize]="10"
-                      [pageSizeOptions]="[5, 10, 25, 100]"
-                       class="mat-elevation-z1">
-                      </mat-paginator>
-                      
+                  <div class="an-component-body">
+                    <div class="an-helper-block p-0">
+                      <div class="an-scrollable-x">
+                        <table mat-table *ngIf="dataSourceForOrderDetails" [dataSource]="dataSourceForOrderDetails"
+                          class="mat-elevation-z8">
+  
+                          <ng-container matColumnDef="ID" class="p-2">
+                            <th mat-header-cell *matHeaderCellDef> ID </th>
+                            <td mat-cell *matCellDef="let element; let i=index"> {{i+1}} </td>
+                          </ng-container>
+                          orderId
+                          <ng-container matColumnDef="OrderId" class="p-2">
+                            <th mat-header-cell *matHeaderCellDef> OrderId </th>
+                            <td mat-cell *matCellDef="let element; let i=index"> {{element.orderId}} </td>
+                          </ng-container>
+                          <ng-container matColumnDef="PRODUCT" class="p-2">
+                            <th mat-header-cell *matHeaderCellDef> PRODUCT </th>
+                            <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+                          </ng-container>
+                          <ng-container matColumnDef="NAME" class="p-2">
+                            <th mat-header-cell *matHeaderCellDef> NAME </th>
+                            <td mat-cell *matCellDef="let element"> {{element.firstName}} {{element.lastName}}</td>
+                          </ng-container>
+                          <ng-container matColumnDef="PRICE" class="p-2">
+                            <th mat-header-cell *matHeaderCellDef> PRICE </th>
+                            <td mat-cell *matCellDef="let element"> {{element.unitPrice}} </td>
+                          </ng-container>
+                          <ng-container matColumnDef="QUANTITY" class="p-2">
+                            <th mat-header-cell *matHeaderCellDef> QUANTITY </th>
+                            <td mat-cell *matCellDef="let element"> {{element.qty}} </td>
+                          </ng-container>
+                          <ng-container matColumnDef="DISCOUNT(%)" class="p-2">
+                            <th mat-header-cell *matHeaderCellDef> DISCOUNT(%) </th>
+                            <td mat-cell *matCellDef="let element"> {{element.discountAmount}} </td>
+                          </ng-container>
+                          <ng-container matColumnDef="GST" class="p-2">
+                            <th mat-header-cell *matHeaderCellDef> GST</th>
+                            <td mat-cell *matCellDef="let element"> {{element.gstAmount}} </td>
+                          </ng-container>
+                          <ng-container matColumnDef="TOTAL" class="p-2">
+                            <th mat-header-cell *matHeaderCellDef> TOTAL </th>
+                            <td mat-cell *matCellDef="let element"> {{element.itemTotal}} </td>
+                          </ng-container>
+                          <ng-container matColumnDef="DATE" class="p-2">
+                            <th mat-header-cell *matHeaderCellDef> DATE </th>
+                            <td mat-cell *matCellDef="let element"> {{ datePipe.transform(element.createdDate, 'MMM dd, yyyy') }} </td>
+                          </ng-container>
+                          <ng-container matColumnDef="STATUS" class="p-2">
+                            <th mat-header-cell *matHeaderCellDef> STATUS </th>
+                            <td mat-cell *matCellDef="let element">
+                              <span class="canceled" *ngIf="element.delivery_status == 0">Canceled</span> 
+                              <span class="pending" *ngIf="element.delivery_status == 1">Pending</span>
+                              <span class="shipped" *ngIf="element.delivery_status == 2">Shiped</span>
+                              <span class="delivered" *ngIf="element.delivery_status == 3">Delivered</span>
+                            </td>
+                          </ng-container>
+                          <ng-container matColumnDef="INVOICE" class="p-2">
+                            <th mat-header-cell *matHeaderCellDef> INVOICE</th>
+                            <td mat-cell *matCellDef="let element" (click)="openPdf(element)"> <i _ngcontent-rxd-c217="" class="fas fa-download" style="color: green;"></i> </td>
+                          </ng-container>
+                          <ng-container matColumnDef="UPDATE">
+                            <th mat-header-cell *matHeaderCellDef> UPDATE </th>
+                            <td mat-cell *matCellDef="let element" (click)="editOrderStatus(element)">
+                              <div class="d-flex">
+                                <span class="cursor-pointer p-0"><i class="fas fa-edit" style="color: BLACK;"></i></span>
+                                
+                              </div>
+                            </td>
+                          </ng-container>
+  
+                          <tr mat-header-row *matHeaderRowDef="displayedColumnsForOrderDetails"></tr>
+                          <tr mat-row *matRowDef="let row; columns: displayedColumnsForOrderDetails;"></tr>
+  
+                        </table>
+                        
+                        <mat-paginator #paginatorForOrderDetails
+                        [length]="displayedColumnsForOrderDetails?.length"
+                        [pageSize]="10"
+                        [pageSizeOptions]="[5, 10, 25, 100]"
+                         class="mat-elevation-z1">
+                        </mat-paginator>
+                        
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
+              
             </div>
           </div>
         </div>
