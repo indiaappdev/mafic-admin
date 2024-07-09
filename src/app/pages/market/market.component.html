@@ -228,10 +228,10 @@
 
             <!-- PIN Section -->
             <div class="shadow-class m-3">
-              <h2 *ngIf="!sharedDataService.editDisable" class="an-page-title mt-0" data-bs-toggle="collapse" href="#pindata"
-                role="button" aria-expanded="false" aria-controls="pindata">PIN CODE DETAILS </h2>
+              <h2 *ngIf="!sharedDataService.editDisable" class="an-page-title mt-0" role="button" (click)="toggleCollapsePIN()">
+                PIN CODE DETAILS </h2>
               <h2 *ngIf="sharedDataService.editDisable" class="an-page-title mt-0">PIN CODE DETAILS</h2>
-              <div *ngIf="!sharedDataService.editDisable" class="an-scrollable-x collapse" id="pindata">
+              <div *ngIf="!isCollapsedPIN && !sharedDataService.editDisable" class="an-scrollable-x" id="pindata">
                 <div class="an-component-body">
                   <div class="an-helper-block p-0">
                     <div class="an-scrollable-x">
