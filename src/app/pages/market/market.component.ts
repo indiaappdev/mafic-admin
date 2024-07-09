@@ -73,6 +73,7 @@ export class MarketComponent implements OnInit {
   element: any;
   element1: any;
   showInvoice: boolean = false;
+  isCollapsed: boolean = true;
 
   constructor(private http: HttpClient,
     public sharedDataService: SharedDataService,
@@ -104,6 +105,10 @@ export class MarketComponent implements OnInit {
   //   };
   //   reader.readAsText(filePath);
   // }
+
+  toggleCollapse() {
+    this.isCollapsed = !this.isCollapsed;
+  }
 
   getDataforProductCategory() {
     this.sharedDataService.showLoader();
