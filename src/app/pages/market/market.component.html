@@ -157,10 +157,10 @@
 
             <!-- tax Data -->
             <div class="shadow-class m-3">
-              <h2 *ngIf="!sharedDataService.editDisable" class="an-page-title mt-0" data-bs-toggle="collapse" href="#taxdata"
-                role="button" aria-expanded="false" aria-controls="taxdata">TAX DETAILS </h2>
+              <h2 *ngIf="!sharedDataService.editDisable" class="an-page-title mt-0" role="button" (click)="toggleCollapseTax()">
+                TAX DETAILS </h2>
               <h2 *ngIf="sharedDataService.editDisable" class="an-page-title mt-0">TAX DETAILS</h2>
-              <div *ngIf="!sharedDataService.editDisable" class="an-scrollable-x collapse" id="taxdata">
+              <div *ngIf="!isCollapsedTax && !sharedDataService.editDisable" class="an-scrollable-x" id="taxdata">
 
                 <a class="btn btn-green mb-2" (click)="addTaxDetails()">ADD TAX DATA</a>
                 <div class="an-component-body">
