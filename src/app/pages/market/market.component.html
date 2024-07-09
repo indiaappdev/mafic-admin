@@ -76,10 +76,11 @@
 
             <!-- PRODUCT Details -->
             <div class="shadow-class m-3">
-              <h2 *ngIf="!sharedDataService.editDisable" class="an-page-title mt-0" data-bs-toggle="collapse" href="#productDetails"
-                role="button" aria-expanded="false" aria-controls="productDetails">PRODUCT DETAILS </h2>
+              <h2 *ngIf="!sharedDataService.editDisable" class="an-page-title mt-0" (click)="toggleCollapseProductDetils()" role="button">
+                PRODUCT DETAILS 
+              </h2>
               <h2 *ngIf="sharedDataService.editDisable" class="an-page-title mt-0">PRODUCT DETAILS</h2>
-              <div *ngIf="!sharedDataService.editDisable" class="an-scrollable-x collapse" id="productDetails">
+              <div *ngIf="!isCollapsedProductDetils && !sharedDataService.editDisable" class="an-scrollable-x" id="productDetails">
 
                 <a class="btn btn-green mb-2" (click)="addProductDetails()">ADD DETAILS</a>
                 <div class="an-component-body">

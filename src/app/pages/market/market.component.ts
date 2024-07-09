@@ -74,6 +74,7 @@ export class MarketComponent implements OnInit {
   element1: any;
   showInvoice: boolean = false;
   isCollapsed: boolean = true;
+  isCollapsedProductDetils: boolean = true;
 
   constructor(private http: HttpClient,
     public sharedDataService: SharedDataService,
@@ -108,6 +109,9 @@ export class MarketComponent implements OnInit {
 
   toggleCollapse() {
     this.isCollapsed = !this.isCollapsed;
+  }
+  toggleCollapseProductDetils() {
+    this.isCollapsedProductDetils = !this.isCollapsedProductDetils;
   }
 
   getDataforProductCategory() {
