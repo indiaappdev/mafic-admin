@@ -74,81 +74,84 @@
             <!-- PRODUCT Details -->
             <div class="shadow-class m-3">
               <h2 *ngIf="!sharedDataService.editDisable" class="an-page-title mt-0" data-bs-toggle="collapse" href="#productDetails"
-                role="button" aria-expanded="false" aria-controls="productDetails">PRODUCT DETAILS </h2>
+                role="button" aria-expanded="false" aria-controls="productDetails" (click)="toggleCollapseProductDetils()">PRODUCT DETAILS </h2>
               <h2 *ngIf="sharedDataService.editDisable" class="an-page-title mt-0">PRODUCT DETAILS</h2>
-              <div *ngIf="!sharedDataService.editDisable" class="an-scrollable-x collapse" id="productDetails">
+              <div [ngClass]="isCollapsedProductDetils? 'display-block' : 'display-none'">
+                <div *ngIf="!sharedDataService.editDisable" class="an-scrollable-x collapse" id="productDetails">
 
-                <a class="btn btn-green mb-2" (click)="addProductDetails()">ADD DETAILS</a>
-                <div class="an-component-body">
-                  <div class="an-helper-block p-0">
-                    <div class="an-scrollable-x">
-                      <table mat-table *ngIf="dataSourceForProductDetails" [dataSource]="dataSourceForProductDetails"
-                        class="mat-elevation-z8">
-
-                        <ng-container matColumnDef="ID" class="p-2">
-                          <th mat-header-cell *matHeaderCellDef> ID </th>
-                          <td mat-cell *matCellDef="let element; let i=index"> {{i+1}} </td>
-                        </ng-container>
-
-                        <ng-container matColumnDef="NAME" class="p-2">
-                          <th mat-header-cell *matHeaderCellDef> NAME </th>
-                          <td mat-cell *matCellDef="let element"> {{element.name}} </td>
-                        </ng-container>
-                        <ng-container matColumnDef="PRICE" class="p-2">
-                          <th mat-header-cell *matHeaderCellDef> PRICE </th>
-                          <td mat-cell *matCellDef="let element"> {{element.price}} </td>
-                        </ng-container>
-
-                         <ng-container matColumnDef="QUANTITY" class="p-2">
-                          <th mat-header-cell *matHeaderCellDef> QUANTITY </th>
-                          <td mat-cell *matCellDef="let element"> {{element.quantity}} </td>
-                        </ng-container>
-                        <ng-container matColumnDef="DISCOUNT" class="p-2">
-                          <th mat-header-cell *matHeaderCellDef> DISCOUNT </th>
-                          <td mat-cell *matCellDef="let element"> {{element.discount}} </td>
-                        </ng-container>
-                        <ng-container matColumnDef="CATEGORY" class="p-2">
-                          <th mat-header-cell *matHeaderCellDef> CATEGORY </th>
-                          <td mat-cell *matCellDef="let element"> {{element.category}} </td>
-                        </ng-container>
-                        <ng-container matColumnDef="BRAND WARRANTY" class="p-2">
-                          <th mat-header-cell *matHeaderCellDef> BRAND WARRANTY </th>
-                          <td mat-cell *matCellDef="let element"> {{element.brand_warranty}} </td>
-                        </ng-container>
-                        <ng-container matColumnDef="RETURN POLICY" class="p-2">
-                          <th mat-header-cell *matHeaderCellDef> RETURN POLICY </th>
-                          <td mat-cell *matCellDef="let element"> {{element.return_policy}} </td>
-                        </ng-container>
-                        <ng-container matColumnDef="IMAGE" class="p-2">
-                          <th mat-header-cell *matHeaderCellDef> IMAGE</th>
-                          <td mat-cell *matCellDef="let element">
-                            <span  class="msg-tag bg-success cursor-pointer px-5" (click)="viewProductDetails(element)">View</span>
-                          </td>
-                        </ng-container>
-                        <ng-container matColumnDef="ACTION">
-                          <th mat-header-cell *matHeaderCellDef> ACTION </th>
-                          <td mat-cell *matCellDef="let element">
-                            <div class="d-flex">
-                              <span class="cursor-pointer p-0" (click)="editPdocuctDetails(element)"><i class="fas fa-edit" style="color: green;"></i></span>
-                              <span class="cursor-pointer p-0 ms-3" (click)="deletePdocuctDetails(element)"><i class="fas fa-trash"
-                                  style="color: red;"></i></span>
-                            </div>
-                          </td>
-                        </ng-container>
-                        <tr mat-header-row *matHeaderRowDef="displayedColumnsForProductDetails"></tr>
-                        <tr mat-row *matRowDef="let row; columns: displayedColumnsForProductDetails;"></tr>
-                      </table>
-                     
-                      <mat-paginator #paginatorForProductDetails
-                      [length]="displayedColumnsForProductDetails?.length"
-                      [pageSize]="10"
-                      [pageSizeOptions]="[5, 10, 25, 100]"
-                       class="mat-elevation-z1">
-                      </mat-paginator>
-                     </div>
+                  <a class="btn btn-green mb-2" (click)="addProductDetails()">ADD DETAILS</a>
+                  <div class="an-component-body">
+                    <div class="an-helper-block p-0">
+                      <div class="an-scrollable-x">
+                        <table mat-table *ngIf="dataSourceForProductDetails" [dataSource]="dataSourceForProductDetails"
+                          class="mat-elevation-z8">
+  
+                          <ng-container matColumnDef="ID" class="p-2">
+                            <th mat-header-cell *matHeaderCellDef> ID </th>
+                            <td mat-cell *matCellDef="let element; let i=index"> {{i+1}} </td>
+                          </ng-container>
+  
+                          <ng-container matColumnDef="NAME" class="p-2">
+                            <th mat-header-cell *matHeaderCellDef> NAME </th>
+                            <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+                          </ng-container>
+                          <ng-container matColumnDef="PRICE" class="p-2">
+                            <th mat-header-cell *matHeaderCellDef> PRICE </th>
+                            <td mat-cell *matCellDef="let element"> {{element.price}} </td>
+                          </ng-container>
+  
+                           <ng-container matColumnDef="QUANTITY" class="p-2">
+                            <th mat-header-cell *matHeaderCellDef> QUANTITY </th>
+                            <td mat-cell *matCellDef="let element"> {{element.quantity}} </td>
+                          </ng-container>
+                          <ng-container matColumnDef="DISCOUNT" class="p-2">
+                            <th mat-header-cell *matHeaderCellDef> DISCOUNT </th>
+                            <td mat-cell *matCellDef="let element"> {{element.discount}} </td>
+                          </ng-container>
+                          <ng-container matColumnDef="CATEGORY" class="p-2">
+                            <th mat-header-cell *matHeaderCellDef> CATEGORY </th>
+                            <td mat-cell *matCellDef="let element"> {{element.category}} </td>
+                          </ng-container>
+                          <ng-container matColumnDef="BRAND WARRANTY" class="p-2">
+                            <th mat-header-cell *matHeaderCellDef> BRAND WARRANTY </th>
+                            <td mat-cell *matCellDef="let element"> {{element.brand_warranty}} </td>
+                          </ng-container>
+                          <ng-container matColumnDef="RETURN POLICY" class="p-2">
+                            <th mat-header-cell *matHeaderCellDef> RETURN POLICY </th>
+                            <td mat-cell *matCellDef="let element"> {{element.return_policy}} </td>
+                          </ng-container>
+                          <ng-container matColumnDef="IMAGE" class="p-2">
+                            <th mat-header-cell *matHeaderCellDef> IMAGE</th>
+                            <td mat-cell *matCellDef="let element">
+                              <span  class="msg-tag bg-success cursor-pointer px-5" (click)="viewProductDetails(element)">View</span>
+                            </td>
+                          </ng-container>
+                          <ng-container matColumnDef="ACTION">
+                            <th mat-header-cell *matHeaderCellDef> ACTION </th>
+                            <td mat-cell *matCellDef="let element">
+                              <div class="d-flex">
+                                <span class="cursor-pointer p-0" (click)="editPdocuctDetails(element)"><i class="fas fa-edit" style="color: green;"></i></span>
+                                <span class="cursor-pointer p-0 ms-3" (click)="deletePdocuctDetails(element)"><i class="fas fa-trash"
+                                    style="color: red;"></i></span>
+                              </div>
+                            </td>
+                          </ng-container>
+                          <tr mat-header-row *matHeaderRowDef="displayedColumnsForProductDetails"></tr>
+                          <tr mat-row *matRowDef="let row; columns: displayedColumnsForProductDetails;"></tr>
+                        </table>
+                       
+                        <mat-paginator #paginatorForProductDetails
+                        [length]="displayedColumnsForProductDetails?.length"
+                        [pageSize]="10"
+                        [pageSizeOptions]="[5, 10, 25, 100]"
+                         class="mat-elevation-z1">
+                        </mat-paginator>
+                       </div>
+                    </div>
                   </div>
                 </div>
               </div>
+              
             </div>
 
             <!-- tax Data -->
