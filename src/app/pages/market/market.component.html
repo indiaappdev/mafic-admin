@@ -15,60 +15,63 @@
             <!-- PRODUCT CATEGORY -->
             <div class="shadow-class m-3">
               <h2 *ngIf="!sharedDataService.editDisable" class="an-page-title mt-0" data-bs-toggle="collapse" href="#bannerEdit"
-                role="button" aria-expanded="false" aria-controls="bannerEdit">PRODUCT CATEGORY</h2>
+                role="button" aria-expanded="false" aria-controls="bannerEdit" (click)="toggleCollapse()">PRODUCT CATEGORY</h2>
               <h2 *ngIf="sharedDataService.editDisable" class="an-page-title mt-0">PRODUCT CATEGORY</h2>
-              <div *ngIf="!sharedDataService.editDisable" class="an-scrollable-x collapse" id="bannerEdit">
+              <div [ngClass]="isCollapsed? 'display-block' : 'display-none'">
+                <div *ngIf="!sharedDataService.editDisable" class="an-scrollable-x collapse" id="bannerEdit">
 
-                <a class="btn btn-green mb-2" (click)="addCategory()">ADD CATEGORY</a>
-                
-                <div class="an-component-body">
-                  <div class="an-helper-block p-0">
-                    <div class="an-scrollable-x">
-                      <table mat-table *ngIf="dataSourceForProductCategory" [dataSource]="dataSourceForProductCategory"
-                        class="mat-elevation-z8">
-
-                        <ng-container matColumnDef="ID" class="p-2">
-                          <th mat-header-cell *matHeaderCellDef> ID </th>
-                          <td mat-cell *matCellDef="let element; let i=index"> {{i+1}} </td>
-                        </ng-container>
-
-                        <ng-container matColumnDef="CATEGORY" class="p-2">
-                          <th mat-header-cell *matHeaderCellDef> CATEGORY </th>
-                          <td mat-cell *matCellDef="let element"> {{element.category}} </td>
-                        </ng-container>
-                        <ng-container matColumnDef="IMAGE" class="p-2">
-                          <th mat-header-cell *matHeaderCellDef> IMAGE </th>
-                          <td mat-cell *matCellDef="let element">
-                            <span  class="msg-tag bg-success cursor-pointer px-5" (click)="openViewImagePopup(element)">View</span>
-                          </td>
-                        </ng-container>                       
-                       <ng-container matColumnDef="ACTION">
-                          <th mat-header-cell *matHeaderCellDef> ACTION </th>
-                          <td mat-cell *matCellDef="let element">
-                            <div class="d-flex">
-                              <span class="cursor-pointer p-0" (click)="openEditPopup(element)"><i class="fas fa-edit" style="color: green;"></i></span>
-                              <span class="cursor-pointer p-0 ms-3"  (click)="openDelPopup(element)"><i class="fas fa-trash"
-                                  style="color: red;"></i></span>
-                            </div>
-                          </td>
-                        </ng-container>
-
-                        <tr mat-header-row *matHeaderRowDef="displayedColumnsForProductCategory"></tr>
-                        <tr mat-row *matRowDef="let row; columns: displayedColumnsForProductCategory;"></tr>
-
-                      </table>
-                      
-                      <mat-paginator #paginatorForProductCategory
-                      [length]="displayedColumnsForProductCategory?.length"
-                      [pageSize]="10"
-                      [pageSizeOptions]="[5, 10, 25, 100]"
-                       class="mat-elevation-z1">
-                      </mat-paginator>
-                      
+                  <a class="btn btn-green mb-2" (click)="addCategory()">ADD CATEGORY</a>
+                  
+                  <div class="an-component-body">
+                    <div class="an-helper-block p-0">
+                      <div class="an-scrollable-x">
+                        <table mat-table *ngIf="dataSourceForProductCategory" [dataSource]="dataSourceForProductCategory"
+                          class="mat-elevation-z8">
+  
+                          <ng-container matColumnDef="ID" class="p-2">
+                            <th mat-header-cell *matHeaderCellDef> ID </th>
+                            <td mat-cell *matCellDef="let element; let i=index"> {{i+1}} </td>
+                          </ng-container>
+  
+                          <ng-container matColumnDef="CATEGORY" class="p-2">
+                            <th mat-header-cell *matHeaderCellDef> CATEGORY </th>
+                            <td mat-cell *matCellDef="let element"> {{element.category}} </td>
+                          </ng-container>
+                          <ng-container matColumnDef="IMAGE" class="p-2">
+                            <th mat-header-cell *matHeaderCellDef> IMAGE </th>
+                            <td mat-cell *matCellDef="let element">
+                              <span  class="msg-tag bg-success cursor-pointer px-5" (click)="openViewImagePopup(element)">View</span>
+                            </td>
+                          </ng-container>                       
+                         <ng-container matColumnDef="ACTION">
+                            <th mat-header-cell *matHeaderCellDef> ACTION </th>
+                            <td mat-cell *matCellDef="let element">
+                              <div class="d-flex">
+                                <span class="cursor-pointer p-0" (click)="openEditPopup(element)"><i class="fas fa-edit" style="color: green;"></i></span>
+                                <span class="cursor-pointer p-0 ms-3"  (click)="openDelPopup(element)"><i class="fas fa-trash"
+                                    style="color: red;"></i></span>
+                              </div>
+                            </td>
+                          </ng-container>
+  
+                          <tr mat-header-row *matHeaderRowDef="displayedColumnsForProductCategory"></tr>
+                          <tr mat-row *matRowDef="let row; columns: displayedColumnsForProductCategory;"></tr>
+  
+                        </table>
+                        
+                        <mat-paginator #paginatorForProductCategory
+                        [length]="displayedColumnsForProductCategory?.length"
+                        [pageSize]="10"
+                        [pageSizeOptions]="[5, 10, 25, 100]"
+                         class="mat-elevation-z1">
+                        </mat-paginator>
+                        
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
+              
             </div>
 
             <!-- PRODUCT Details -->
@@ -319,7 +322,7 @@
                             <th mat-header-cell *matHeaderCellDef> ID </th>
                             <td mat-cell *matCellDef="let element; let i=index"> {{i+1}} </td>
                           </ng-container>
-                          orderId
+                          
                           <ng-container matColumnDef="OrderId" class="p-2">
                             <th mat-header-cell *matHeaderCellDef> OrderId </th>
                             <td mat-cell *matCellDef="let element; let i=index"> {{element.orderId}} </td>
