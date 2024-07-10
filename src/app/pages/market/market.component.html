@@ -225,71 +225,74 @@
             <!-- PIN Section -->
             <div class="shadow-class m-3">
               <h2 *ngIf="!sharedDataService.editDisable" class="an-page-title mt-0" data-bs-toggle="collapse" href="#pindata"
-                role="button" aria-expanded="false" aria-controls="pindata">PIN CODE DETAILS </h2>
+                role="button" aria-expanded="false" aria-controls="pindata" (click)="toggleCollapsePIN()">PIN CODE DETAILS </h2>
               <h2 *ngIf="sharedDataService.editDisable" class="an-page-title mt-0">PIN CODE DETAILS</h2>
-              <div *ngIf="!sharedDataService.editDisable" class="an-scrollable-x collapse" id="pindata">
-                <div class="an-component-body">
-                  <div class="an-helper-block p-0">
-                    <div class="an-scrollable-x">
-                      <table mat-table *ngIf="dataSourceForPin" [dataSource]="dataSourceForPin"
-                        class="mat-elevation-z8">
-
-                        <ng-container matColumnDef="ID" class="p-2">
-                          <th mat-header-cell *matHeaderCellDef> ID </th>
-                          <td mat-cell *matCellDef="let element; let i=index"> {{i+1}} </td>
-                        </ng-container>
-
-                        <ng-container matColumnDef="PO NAME" class="p-2">
-                          <th mat-header-cell *matHeaderCellDef> PO NAME </th>
-                          <td mat-cell *matCellDef="let element"> {{element.post_office_name}} </td>
-                        </ng-container>
-                        <ng-container matColumnDef="PIN-Code" class="p-2">
-                          <th mat-header-cell *matHeaderCellDef> PIN-Code </th>
-                          <td mat-cell *matCellDef="let element"> {{element.pincodes}} </td>
-                        </ng-container>
-                        <ng-container matColumnDef="DISTRICT" class="p-2">
-                          <th mat-header-cell *matHeaderCellDef> DISTRICT </th>
-                          <td mat-cell *matCellDef="let element"> {{element.district_name}} </td>
-                        </ng-container>
-                        <ng-container matColumnDef="CITY" class="p-2">
-                          <th mat-header-cell *matHeaderCellDef> CITY </th>
-                          <td mat-cell *matCellDef="let element"> {{element.city_name}} </td>
-                        </ng-container>
-                        <ng-container matColumnDef="STATE" class="p-2">
-                          <th mat-header-cell *matHeaderCellDef> STATE </th>
-                          <td mat-cell *matCellDef="let element"> {{element.state_name}} </td>
-                        </ng-container>
-                        <ng-container matColumnDef="DELIVERY CHARGE" class="p-2">
-                          <th mat-header-cell *matHeaderCellDef> DELIVERY CHARGE</th>
-                          <td mat-cell *matCellDef="let element"><i _ngcontent-rxd-c216="" class="fas fa-rupee-sign"></i> {{element.delivery_charge}} </td>
-                        </ng-container>
-                        <ng-container matColumnDef="ACTION">
-                          <th mat-header-cell *matHeaderCellDef> ACTION </th>
-                          <td mat-cell *matCellDef="let element">
-                            <div class="d-flex">
-                              <span class="cursor-pointer p-0" (click)="editCharges(element)"><i class="fas fa-edit" style="color: green;"></i></span>
-                              <!-- <span class="cursor-pointer p-0 ms-3"><i class="fas fa-trash"
-                                  style="color: red;"></i></span> -->
-                            </div>
-                          </td>
-                        </ng-container>
-
-                        <tr mat-header-row *matHeaderRowDef="displayedColumnsForPin"></tr>
-                        <tr mat-row *matRowDef="let row; columns: displayedColumnsForPin;"></tr>
-
-                      </table>
-                      
-                      <mat-paginator #paginatorForPin
-                      [length]="displayedColumnsForPin?.length"
-                      [pageSize]="10"
-                      [pageSizeOptions]="[5, 10, 25, 100]"
-                       class="mat-elevation-z1">
-                      </mat-paginator>
-                      
+              <div [ngClass]="isCollapsedPIN? 'display-block' : 'display-none'">
+                <div *ngIf="!sharedDataService.editDisable" class="an-scrollable-x collapse" id="pindata">
+                  <div class="an-component-body">
+                    <div class="an-helper-block p-0">
+                      <div class="an-scrollable-x">
+                        <table mat-table *ngIf="dataSourceForPin" [dataSource]="dataSourceForPin"
+                          class="mat-elevation-z8">
+  
+                          <ng-container matColumnDef="ID" class="p-2">
+                            <th mat-header-cell *matHeaderCellDef> ID </th>
+                            <td mat-cell *matCellDef="let element; let i=index"> {{i+1}} </td>
+                          </ng-container>
+  
+                          <ng-container matColumnDef="PO NAME" class="p-2">
+                            <th mat-header-cell *matHeaderCellDef> PO NAME </th>
+                            <td mat-cell *matCellDef="let element"> {{element.post_office_name}} </td>
+                          </ng-container>
+                          <ng-container matColumnDef="PIN-Code" class="p-2">
+                            <th mat-header-cell *matHeaderCellDef> PIN-Code </th>
+                            <td mat-cell *matCellDef="let element"> {{element.pincodes}} </td>
+                          </ng-container>
+                          <ng-container matColumnDef="DISTRICT" class="p-2">
+                            <th mat-header-cell *matHeaderCellDef> DISTRICT </th>
+                            <td mat-cell *matCellDef="let element"> {{element.district_name}} </td>
+                          </ng-container>
+                          <ng-container matColumnDef="CITY" class="p-2">
+                            <th mat-header-cell *matHeaderCellDef> CITY </th>
+                            <td mat-cell *matCellDef="let element"> {{element.city_name}} </td>
+                          </ng-container>
+                          <ng-container matColumnDef="STATE" class="p-2">
+                            <th mat-header-cell *matHeaderCellDef> STATE </th>
+                            <td mat-cell *matCellDef="let element"> {{element.state_name}} </td>
+                          </ng-container>
+                          <ng-container matColumnDef="DELIVERY CHARGE" class="p-2">
+                            <th mat-header-cell *matHeaderCellDef> DELIVERY CHARGE</th>
+                            <td mat-cell *matCellDef="let element"><i _ngcontent-rxd-c216="" class="fas fa-rupee-sign"></i> {{element.delivery_charge}} </td>
+                          </ng-container>
+                          <ng-container matColumnDef="ACTION">
+                            <th mat-header-cell *matHeaderCellDef> ACTION </th>
+                            <td mat-cell *matCellDef="let element">
+                              <div class="d-flex">
+                                <span class="cursor-pointer p-0" (click)="editCharges(element)"><i class="fas fa-edit" style="color: green;"></i></span>
+                                <!-- <span class="cursor-pointer p-0 ms-3"><i class="fas fa-trash"
+                                    style="color: red;"></i></span> -->
+                              </div>
+                            </td>
+                          </ng-container>
+  
+                          <tr mat-header-row *matHeaderRowDef="displayedColumnsForPin"></tr>
+                          <tr mat-row *matRowDef="let row; columns: displayedColumnsForPin;"></tr>
+  
+                        </table>
+                        
+                        <mat-paginator #paginatorForPin
+                        [length]="displayedColumnsForPin?.length"
+                        [pageSize]="10"
+                        [pageSizeOptions]="[5, 10, 25, 100]"
+                         class="mat-elevation-z1">
+                        </mat-paginator>
+                        
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
+              
             </div>
 
             <!-- Order Details-->
