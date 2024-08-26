@@ -120,6 +120,7 @@ export class EditBannerComponent implements OnInit {
         uploadData.append('text', this.text.value);
         uploadData.append('id', this.dataB.id);
       }
+      console.log()
       this.data.showLoader();
       this.http.post(''+this.data.apiDomainPathDash+'editBanner',uploadData) // Get user details
       .subscribe(data => {

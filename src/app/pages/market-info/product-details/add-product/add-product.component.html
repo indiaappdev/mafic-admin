@@ -1,0 +1,152 @@
+<form novalidate name="addUserForm" class="form" (ngSubmit)="submitForm(addUserForm)" #addUserForm="ngForm">
+    <div class="row" style="height:90dvh">
+        <div class="form-group col-md-6 mb-3">
+            <mat-form-field appearance="legacy" style="width: 100%;">
+                <mat-label>Product Name *</mat-label>
+                <input matInput required [(ngModel)]="formData.productName" name="productName" id="productName"
+                    #productName="ngModel" aria-describedby="productName">
+            </mat-form-field>
+        </div>
+        <div class="form-group col-md-6 mb-3">
+            <mat-form-field appearance="legacy" style="width: 100%;">
+                <mat-label>Art Name *</mat-label>
+                <input matInput required [(ngModel)]="formData.artName" name="artName" id="artName" #artName="ngModel"
+                    aria-describedby="artName">
+            </mat-form-field>
+        </div>
+        <div class="form-group col-md-6 mb-3">
+            <mat-form-field appearance="legacy" style="width: 100%;">
+                <mat-label>Artist Name *</mat-label>
+                <input matInput required [(ngModel)]="formData.artistName" name="artistName" id="artistName"
+                    #artistName="ngModel" aria-describedby="artistName">
+            </mat-form-field>
+        </div>
+        <div class="form-group col-md-6 mb-3">
+            <mat-form-field appearance="legacy" style="width: 100%;">
+                <mat-label>Product Category *</mat-label>
+                <mat-select [(value)]="formData.productCategory" name="productCategory" id="productCategory">
+                    <mat-option *ngFor="let category of ProductCategoryList" [value]="category.id">
+                        {{ category.category }}
+                    </mat-option>
+                </mat-select>
+
+            </mat-form-field>
+        </div>
+        <div class="form-group col-md-6 mb-3">
+            <mat-form-field appearance="legacy" style="width: 100%;">
+                <mat-label>Product Sub Category *</mat-label>
+                <input matInput required [(ngModel)]="formData.subCategory" name="subCategory" id="subCategory"
+                    #subCategory="ngModel" aria-describedby="subCategory">
+            </mat-form-field>
+        </div>
+        <div class="form-group col-md-6 mb-3">
+            <mat-form-field appearance="legacy" style="width: 100%;">
+                <mat-label>Product Price *</mat-label>
+                <input matInput required [(ngModel)]="formData.productPrice" name="productPrice" id="productPrice"
+                    #productPrice="ngModel" aria-describedby="productPrice">
+            </mat-form-field>
+        </div>
+        <div class="form-group col-md-6 mb-3">
+            <mat-form-field appearance="legacy" style="width: 100%;">
+                <mat-label>Product Discount *</mat-label>
+                <input matInput required [(ngModel)]="formData.productDiscount" name="productDiscount"
+                    id="productDiscount" #productDiscount="ngModel" aria-describedby="productDiscount">
+            </mat-form-field>
+        </div>
+        <div class="form-group col-md-6 mb-3">
+            <mat-form-field appearance="legacy" style="width: 100%;">
+                <mat-label>Product SAC/HSN Code *</mat-label>
+                <mat-select [(value)]="formData.productSACHSNCode" name="productSACHSNCode" id="productSACHSNCode">
+                    <mat-option *ngFor="let code of productSACHSNCode" [value]="code.SACHSN_Code">
+                        {{ code.SACHSN_Code }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="form-group col-md-6 mb-3">
+            <mat-form-field appearance="legacy" style="width: 100%;">
+                <mat-label>Product Quantity *</mat-label>
+                <input matInput required [(ngModel)]="formData.quantity" name="quantity" id="quantity"
+                    #quantity="ngModel" aria-describedby="quantity">
+            </mat-form-field>
+        </div>
+        <div class="form-group col-md-6 mb-3">
+            <mat-form-field appearance="legacy" style="width: 100%;">
+                <mat-label>Product SKU *</mat-label>
+                <input matInput required [(ngModel)]="formData.productSKU" name="productSKU" id="productSKU"
+                    #productSKU="ngModel" aria-describedby="productSKU">
+            </mat-form-field>
+        </div>
+        <div class="form-group col-md-6 mb-3">
+            <mat-form-field appearance="legacy" style="width: 100%;">
+                <mat-label>Product Size </mat-label>
+                <input matInput [(ngModel)]="formData.size" name="size" id="size" #size="ngModel"
+                    aria-describedby="size">
+            </mat-form-field>
+        </div>
+        <div class="form-group col-md-6 mb-3">
+            <mat-form-field appearance="legacy" style="width: 100%;">
+                <mat-label>Brand Warranty</mat-label>
+                <input matInput [(ngModel)]="formData.warranty" name="warranty" id="warranty" #warranty="ngModel"
+                    aria-describedby="warranty">
+            </mat-form-field>
+        </div>
+        <div class="form-group col-md-6 mb-3">
+            <mat-form-field appearance="legacy" style="width: 100%;">
+                <mat-label>Return Policy</mat-label>
+                <input matInput [(ngModel)]="formData.returnPolicy" name="returnPolicy" id="returnPolicy"
+                    #returnPolicy="ngModel" aria-describedby="returnPolicy">
+            </mat-form-field>
+        </div>
+        <div class="form-group col-md-6 mb-3">
+            <mat-form-field appearance="legacy" style="width: 100%;">
+                <mat-label>Delivery</mat-label>
+                <mat-select required [(value)]="formData.Delivery" name="Delivery" id="Delivery">
+                    <mat-option *ngFor="let option of deliveryOptions" [value]="option">
+                        {{ option }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="form-group col-md-12 mb-3">
+            <mat-form-field appearance="legacy" style="width: 100%;">
+                <mat-label>Description Header</mat-label>
+                <input matInput required [(ngModel)]="formData.descriptionHeader" name="descriptionHeader"
+                    id="descriptionHeader" #descriptionHeader="ngModel" aria-describedby="descriptionHeader">
+            </mat-form-field>
+        </div>
+        <div class="form-group col-md-12 mb-3">
+            <mat-form-field appearance="legacy" style="width: 100%;">
+                <mat-label>Description</mat-label>
+                <input matInput required [(ngModel)]="formData.Description" name="Description" id="Description"
+                    #Description="ngModel" aria-describedby="Description">
+            </mat-form-field>
+        </div>
+
+
+
+        <div class="row">
+            <div *ngFor="let fileInput of fileInputs; let i = index">
+                <div class="form-group col-md-5">
+                    <label for="imageUpload{{fileInput.id}}">Image Upload {{fileInput.id}}:</label>
+                    <input type="file" class="form-control-file" id="imageUpload{{fileInput.id}}" accept="image/*"
+                        (change)="previewImage($event, fileInput.id)">
+                    <img *ngIf="fileInput.previewSrc" [src]="fileInput.previewSrc" alt="Image Preview"
+                        class="img-thumbnail mt-2">
+                    <button type="button" class="btn btn-danger mt-2" (click)="removeFileInput(i)"
+                        *ngIf="fileInputs.length > 1">Remove</button>
+                </div>
+            </div>
+            <div class="form-group col-md-2">
+                <button type="button" class="btn btn-primary mt-2" (click)="addFileInput()">Add Another Image</button>
+            </div>
+        </div>
+
+
+
+        <div class="form-group col-md-12 flex">
+            <button type="submit" class="btn btn-green m-3" [disabled]="addUserForm.invalid">Save</button>
+            <button type="button" class="btn btn-gold m-3" (click)="cancelForm()">Cancel</button>
+        </div>
+    </div>
+</form>

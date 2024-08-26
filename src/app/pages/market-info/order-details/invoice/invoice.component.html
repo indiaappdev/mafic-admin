@@ -1,0 +1,131 @@
+<!-- src/app/invoice/invoice.component.html -->
+<div class="container">
+    <div class="logo">
+        <div class="row logo">
+            <div class="col-3">
+                <img class="img" src="../../../../assets/images/logo.png" alt="Company Logo">
+            </div>
+            
+            <div class="col-7 Company-details">
+                <h2>NATHANIEL EXIM-N-HANDICRAFTS PVT. LTD.</h2>
+                <h4>Registered office: F-317, IRWO Classic Apartment, Rail Vihar Sector -57, Gurgaon -122003, Haryana.</h4>
+                <h4>CIN – U74999HR2021PTC092428 | PAN - AAHCN3972A | TAN-RTKN07259A GST-06AAHCN3972A1ZN | LUT # AD060521001874E Dated:21-05-2021 IEC-AAHCN3972A</h4>
+                <h4>Email - info@anielexim.com | Mobile Number: +91 9821 006419</h4>
+            </div>
+        </div>
+    </div>
+    <div class="invoice-info">
+        <div>
+            <p>Invoice No. : {{invoiceNo}}</p>
+            <p>Invoice Date : {{invoiceDate}}</p>
+            <p>Due Date : {{dueDate}}</p>
+            <p>P.O.# : {{poNumber}}</p>
+        </div>
+        <div>
+            <p>Nature of Sale: {{natureOfSale}}</p>
+            <p>Sale against GST or LUT: {{saleAgainst}}</p>
+            <p>Place Of Supply: {{placeOfSupply}}</p>
+            <p>Channel: {{channel}}</p>
+            <p>Sub Channel: {{subChannel}}</p>
+            <p>Payment Mode: {{paymentMode}}</p>
+            <p>Subscription Plan: {{subscriptionPlan}}</p>
+            <p>Invoice Amount: {{invoiceAmount}}</p>
+            <p>Total Savings: {{totalSavings}}</p>
+            <p>Amount to be Collected: {{amountToBeCollected}}</p>
+        </div>
+    </div>
+    <div class="address">
+        <div>
+            <p><strong>Bill To</strong></p>
+            <p>{{billToName}}</p>
+            <p>{{billToAddressLine1}}</p>
+            <p>{{billToAddressLine2}}</p>
+            <p>{{billToCity}} {{billToState}} {{billToZip}}</p>
+        </div>
+        <div>
+            <p><strong>Ship To</strong></p>
+            <p>{{shipToName}}</p>
+            <p>{{shipToAddressLine1}}</p>
+            <p>{{shipToAddressLine2}}</p>
+            <p>{{shipToCity}} {{shipToState}} {{shipToZip}}</p>
+        </div>
+    </div>
+    <div class="items">
+        <table>
+            <tr>
+                <th>S.No.</th>
+                <th>Description</th>
+                <th>SAC/HSN Code</th>
+                <th>QTY</th>
+                <th>MOU</th>
+                <th>Unit Price</th>
+                <th>Gross Amount</th>
+                <th>Disc. %</th>
+                <th>Disc. Amount</th>
+                <th>GST %</th>
+                <th>GST Amount</th>
+                <th>CESS %</th>
+                <th>CESS Amount</th>
+                <th>TCS %</th>
+                <th>TCS Amount</th>
+                <th>Item Total</th>
+            </tr>
+            <tr *ngFor="let item of items; let i = index">
+                <td>{{i + 1}}</td>
+                <td>{{item.description}}</td>
+                <td>{{item.code}}</td>
+                <td>{{item.qty}}</td>
+                <td>{{item.mou}}</td>
+                <td>{{item.unitPrice}}</td>
+                <td>{{item.grossAmount}}</td>
+                <td>{{item.discPercent}}</td>
+                <td>{{item.discAmount}}</td>
+                <td>{{item.gstPercent}}</td>
+                <td>{{item.gstAmount}}</td>
+                <td>{{item.cessPercent}}</td>
+                <td>{{item.cessAmount}}</td>
+                <td>{{item.tcsPercent}}</td>
+                <td>{{item.tcsAmount}}</td>
+                <td>{{item.total}}</td>
+            </tr>
+        </table>
+    </div>
+    <div class="totals">
+        <table>
+            <tr>
+                <th>Description</th>
+                <th>Value</th>
+            </tr>
+            <tr>
+                <td>Total Gross Amount</td>
+                <td>{{totalGrossAmount}}</td>
+            </tr>
+            <tr>
+                <td>Total Discount</td>
+                <td>{{totalDiscount}}</td>
+            </tr>
+            <tr>
+                <td>Total GST</td>
+                <td>{{totalGst}}</td>
+            </tr>
+            <tr>
+                <td>Total CESS</td>
+                <td>{{totalCess}}</td>
+            </tr>
+            <tr>
+                <td>Total TCS</td>
+                <td>{{totalTcs}}</td>
+            </tr>
+            <tr>
+                <td>Net Amount</td>
+                <td>{{netAmount}}</td>
+            </tr>
+        </table>
+    </div>
+    <div class="footer">
+        <p>NATHANIEL EXIM-N-HANDICRAFTS PVT. LTD.</p>
+        <p>This is a computer-generated document. No signature is required.</p>
+        <p>Gurgaon Jurisdiction</p>
+        <p>Customer Care Number: +91 9821 006419 | Email: info@anielexim.com</p>
+    </div>
+</div>

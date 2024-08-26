@@ -50,7 +50,7 @@ export class BannerAddComponent implements OnInit {
                 const height = img.naturalHeight;
                 const width = img.naturalWidth;
                 console.log('Width and Height', width, height);
-                if(width>=1920 && height>1080){
+                if(width>=1920 && height>=1080){
                 this.fileAccept= true; 
                 this.uploadImageUrl = reader.result; 
                 } else{
@@ -91,9 +91,11 @@ export class BannerAddComponent implements OnInit {
   uplodInfo:any = [];
    addBanner(){
       var uploadData;
+      //this.fileAccept =true;
       if(this.fileAccept){
         uploadData = new FormData();
         uploadData.append('image', this.selectedFile, this.selectedFile.name);
+        console.log("req body");
         console.log(uploadData);
         uploadData.append('text', this.text.value);
       } else{

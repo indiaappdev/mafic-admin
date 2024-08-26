@@ -1,0 +1,18 @@
+<form novalidate name="addUserForm" class="form" (ngSubmit)="submitForm(addUserForm)" #addUserForm="ngForm">
+    <div class="row" >
+        
+        
+        <div class="form-group col-md-12 mb-3">
+            <mat-form-field appearance="legacy" style="width: 100%;">
+                <mat-label>Delivery charges*</mat-label>
+                <input matInput required [(ngModel)]="formData.charges" name="charges" id="charges" #charges="ngModel"
+                    aria-describedby="charges">
+            </mat-form-field>
+        </div>
+        
+        <div class="form-group col-md-12 flex">
+            <button type="submit" class="btn btn-green m-3" [disabled]="addUserForm.invalid">Save</button>
+            <button type="button" class="btn btn-gold m-3" (click)="cancelForm()">Cancel</button>
+        </div>
+    </div>
+</form>

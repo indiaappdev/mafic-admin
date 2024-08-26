@@ -8,10 +8,12 @@ import { GlobalErrorHandler } from 'global-error-handler';
 import { MatSliderModule } from '@angular/material/slider';
 import { NgxImageZoomModule } from 'ngx-image-zoom';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import { MatTableModule } from '@angular/material/table';
+import {MatPaginatorModule} from '@angular/material/paginator';
 
 import { ReactiveFormsModule } from '@angular/forms';
 import {NgSelectizeModule } from 'ng-selectize';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
 import { MatDialogModule } from '@angular/material/dialog';
 
@@ -24,6 +26,24 @@ import { SidebarModule } from './common/sidebar/sidebar.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CookieService } from 'ngx-cookie-service';
 import { AuthGuard } from './services/auth.guard';
+import { MarketComponent } from './pages//market/market.component'
+import { AddProductCategoryComponent } from './pages/market-info/product-category/add-product-category/add-product-category.component';
+import { MatInputModule } from '@angular/material/input';
+import { DeleteProductcategoryComponent } from './pages/market-info/product-category/delete-productcategory/delete-productcategory.component';
+import { EditProductcategoryComponent } from './pages/market-info/product-category/edit-productcategory/edit-productcategory.component';
+import { ViewProductcategoryComponent } from './pages/market-info/product-category/view-productcategory/view-productcategory.component';
+import { AddProductComponent } from './pages/market-info/product-details/add-product/add-product.component';
+import { DeleteProductDetailsComponent } from './pages/market-info/product-details/delete-product-details/delete-product-details.component';
+import { EditProductDetailsComponent } from './pages/market-info/product-details/edit-product-details/edit-product-details.component';
+import { ViewProductDetailsComponent } from './pages/market-info/product-details/view-product-details/view-product-details.component';
+import { MatSelectModule } from '@angular/material/select';
+import { EditTaxDetailsComponent } from './pages/market-info/tax-details/edit-tax-details/edit-tax-details.component';
+import { DeleteTaxDetailsComponent } from './pages/market-info/tax-details/delete-tax-details/delete-tax-details.component';
+import { AddTaxDetailsComponent } from './pages/market-info/tax-details/add-tax-details/add-tax-details.component';
+import { EditPinComponent } from './pages/market-info/PIN-details/edit-pin/edit-pin.component';
+import { EditOrderStatusComponent } from './pages/market-info/order-details/edit-order-status/edit-order-status.component';
+import { InvoiceComponent } from './pages/market-info/order-details/invoice/invoice.component';
+
 const ErrorHandler = new GlobalErrorHandler();
 
 @NgModule({
@@ -32,8 +52,27 @@ const ErrorHandler = new GlobalErrorHandler();
     HeaderComponent,
     LoginComponent,
     AdminLayoutComponent,
+    MarketComponent,
+    AddProductCategoryComponent,
+    DeleteProductcategoryComponent,
+    EditProductcategoryComponent,
+    ViewProductcategoryComponent,
+    AddProductComponent,
+    DeleteProductDetailsComponent,
+    EditProductDetailsComponent,
+    ViewProductDetailsComponent,
+    EditTaxDetailsComponent,
+    DeleteTaxDetailsComponent,
+    AddTaxDetailsComponent,
+    EditPinComponent,
+    EditOrderStatusComponent,
+    InvoiceComponent,
   ],
   imports: [
+    MatSelectModule,
+    MatInputModule,
+    MatTableModule ,
+    MatPaginatorModule,
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
@@ -62,8 +101,10 @@ const ErrorHandler = new GlobalErrorHandler();
   providers: [
     {
       provide: ErrorHandler, 
-      useClass: GlobalErrorHandler
-    },CookieService
+      useClass: GlobalErrorHandler,
+      
+    },CookieService,
+    DatePipe
   ],
   bootstrap: [AppComponent],
 })

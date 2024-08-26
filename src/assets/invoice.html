@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invoice</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            /* margin-left:auto;
+            margin-right: auto; */
+            /* padding: 20px; */
+        }
+        .container {
+            max-width: 90dvw;
+            height: 9odvh;
+            /* margin-top: 20px; */
+            margin: 55px auto;
+           overflow-y: auto;
+            border: 1px solid #000;
+            margin-left:auto;
+            margin-right: auto;
+            padding: 40px;
+        }
+        /* h1,h2, h3, p, h5, h6 {
+            margin: 0;
+            color: #000;
+        } */
+        .heading{
+            font-size: 18px;
+            font-weight: 800;
+            color:#000;
+            margin: 0;
+        }
+        .label{
+            font-size: 16px;
+            color:#000;
+            margin: 0;
+            font-weight: 800;
+        }
+        .info{
+            font-size: 16px;
+            color:gray;
+            margin: 0;
+            font-weight: 300;
+        }
+        p{margin: 0;}
+        .header, .footer {
+            text-align: center;
+        }
+        .header h2, .header p {
+            margin: 0;
+        }
+        .contact-info, .invoice-info, .address, .items, .totals, .notes {
+            margin-top: 20px;
+        }
+        .contact-info, .invoice-info {
+            display: flex;
+            justify-content: space-between;
+        }
+        .contact-info div, .invoice-info div {
+            width: 48%;
+        }
+        .address {
+            display: flex;
+            justify-content: space-between;
+        }
+        .address div {
+            width: 48%;
+        }
+        Company-details{
+            justify-content: left;
+        }
+        .items {
+            margin-top: 20px;
+            overflow-x: auto;
+        }
+        .items table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        /* tr{
+            width:5%;
+        } */
+        .items table th, .items table td {
+            border: 1px solid #000;
+            padding: 8px;
+            text-align: left;
+            width:5%
+        }
+        .totals {
+            margin-top: 20px;
+        }
+        .totals table {
+            /* width: 50dvw; */
+            border-collapse: collapse;
+            justify-content: right;
+            display: flex;
+        }
+        .totals table th, .totals table td {
+            border: 1px solid #000;
+            padding: 8px;
+            text-align: left;
+           
+        }
+        .totals table td {
+            text-align: right;
+        }
+        .totals table td:last-child {
+            font-weight: bold;
+        }
+        .logo {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            /* gap:70px; */
+            padding:16px;
+        }
+        .logo img {
+            /* height: 30px;
+            width: 30px; */
+            padding: 16px;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="container ">
+        <div class="row logo">
+            <div class="col-3">
+                <img class="img" src="../assets/images/logo.png" alt="Company Logo">
+            </div>
+            
+            <div class="col-7 Company-details">
+                <p class="m-0 heading">NATHANIEL EXIM-N-HANDICRAFTS PVT. LTD.</p>
+                <p class="m-0"><span class="label">Registered office: </span><span class="info">F-317, IRWO Classic Apartment, Rail Vihar Sector -57, Gurgaon -122003, Haryana.</span></p>
+                <p class="m-0"><span class="label">CIN – </span><span class="info">U74999HR2021PTC092428 | PAN - AAHCN3972A | TAN-RTKN07259A GST-06AAHCN3972A1ZN | LUT # AD060521001874E Dated:21-05-2021 IEC-AAHCN3972A</span></p>
+                <p class="m-0"><span class="label">Email - </span><span class="info">info@anielexim.com | <span class="label">Mobile Number: </span> +91 9821 006419</span></p>
+            </div>
+        </div>
+        <hr class="my-3">
+
+        <div class="invoice-info">
+            <div>
+                <p>Invoice No. : {{invoiceNo}}</p>
+                <p>Invoice Date : {{invoiceDate}}</p>
+                <p>Due Date : {{dueDate}}</p>
+                <p>P.O.# : {{poNumber}}</p>
+            </div>
+            <div>
+                <p>Nature of Sale: {{natureOfSale}}</p>
+                <p>Sale against GST or LUT: {{saleAgainst}}</p>
+                <p>Place Of Supply: {{placeOfSupply}}</p>
+                <p>Channel: {{channel}}</p>
+                <p>Sub Channel: {{subChannel}}</p>
+                <p>Payment Mode: {{paymentMode}}</p>
+                <p>Subscription Plan: {{subscriptionPlan}}</p>
+                <p>Invoice Amount: {{invoiceAmount}}</p>
+                <p>Total Savings: {{totalSavings}}</p>
+                <p>Amount to be Collected: {{amountToBeCollected}}</p>
+            </div>
+        </div>
+<hr class="my-3">
+        <div class="address">
+            <div>
+                <p><strong>Bill To</strong></p>
+                <p>{{firstName}} {{lastName}}</p>
+                <p>{{billToAddressLine1}}</p>
+                <p>{{billToAddressLine2}}</p>
+                <p>{{billToCity}} {{billToState}} {{billToZip}}</p>
+            </div>
+            <hr>
+            <div>
+                <p><strong>Ship To</strong></p>
+                <p>{{shipToName}}</p>
+                <p>{{shipToAddressLine1}}</p>
+                <p>{{shipToAddressLine2}}</p>
+                <p>{{shipToCity}} {{shipToState}} {{shipToZip}}</p>
+            </div>
+            
+        </div>
+        <hr class="my-3">
+        <div class="items">
+            <table>
+                <tr>
+                    <th>S.No.</th>
+                    <th>Description</th>
+                    <th>SAC/HSN Code</th>
+                    <th>QTY</th>
+                    <th>MOU</th>
+                    <th>Unit Price</th>
+                    <th>Gross Amount</th>
+                    <th>Disc. %</th>
+                    <th>Disc. Amount</th>
+                    <th>GST %</th>
+                    <th>GST Amount</th>
+                    <th>CESS %</th>
+                    <th>CESS Amount</th>
+                    <th>TCS %</th>
+                    <th>TCS Amount</th>
+                    <th>Item Total</th>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>{{name}}</td>
+                    <td>{{itemCode}}</td>
+                    <td>{{qty}}</td>
+                    <td>{{itemMou}}</td>
+                    <td>{{unitPrice}}</td>
+                    <td>{{itemGrossAmount}}</td>
+                    <td>{{itemDiscPercent}}</td>
+                    <td>{{discountAmount}}</td>
+                    <td>{{itemGstPercent}}</td>
+                    <td>{{gstAmount}}</td>
+                    <td>{{itemCessPercent}}</td>
+                    <td>{{itemCessAmount}}</td>
+                    <td>{{itemTcsPercent}}</td>
+                    <td>{{itemTcsAmount}}</td>
+                    <td>{{itemTotal}}</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="totals">
+            <table>
+                <tr>
+                    <th>Description</th>
+                    <th>Value</th>
+                </tr>
+                <tr>
+                    <td>Total Gross Amount</td>
+                    <td>{{totalGrossAmount}}</td>
+                </tr>
+                <tr>
+                    <td>Total Discount</td>
+                    <td>{{totalDiscount}}</td>
+                </tr>
+                <tr>
+                    <td>Total GST</td>
+                    <td>{{totalGst}}</td>
+                </tr>
+                <tr>
+                    <td>Total CESS</td>
+                    <td>{{totalCess}}</td>
+                </tr>
+                <tr>
+                    <td>Total TCS</td>
+                    <td>{{totalTcs}}</td>
+                </tr>
+                <tr>
+                    <td>Net Amount</td>
+                    <td>{{netAmount}}</td>
+                </tr>
+            </table>
+        </div>
+        <br>
+        <hr class="my-3">
+        <br>
+        <br>
+        <div class="footer">
+            <p>NATHANIEL EXIM-N-HANDICRAFTS PVT. LTD.</p>
+            <p>This is a computer-generated document. No signature is required.</p>
+            <p>Gurgaon Jurisdiction</p>
+            <p>Customer Care Number: +91 9821 006419 | Email: info@anielexim.com</p>
+        </div>
+    </div>
+</body>
+</html>
