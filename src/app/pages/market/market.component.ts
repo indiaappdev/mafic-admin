@@ -22,6 +22,10 @@ import { Injectable } from '@angular/core';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
 import { Observable } from 'rxjs';
+import { AddMarketBannerComponent } from '../marketBanner/add-marketBanner/add-marketBanner.component';
+import { DeleteMarketBannerComponent } from '../marketBanner/delete-marketBanner/delete-marketBanner.component';
+import { EditMarketBannerComponent } from '../marketBanner/edit-marketBanner/edit-marketBanner.component';
+import { MarketBannerPopupComponent } from '../marketBanner/marketBanner-popup/marketBanner-popup.component';
 
 // import { default as invoice } from '../market-info/invoice.html';
 // import { PdfService } from 'pdf-service';
@@ -41,6 +45,38 @@ export class MarketComponent implements OnInit {
   @ViewChild('paginatorForTax', { static: false }) paginatorForTax!: MatPaginator;
   @ViewChild('paginatorForPin', { static: false }) paginatorForPin!: MatPaginator;
   @ViewChild('paginatorForOrderDetails', { static: false }) paginatorForOrderDetails!: MatPaginator;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+
+  userDetails:any = [];
+  popupClass:string;
+  displayedColumns: string[] = ['id' , 'text', 'image', 'action'];
+  dataSource:MatTableDataSource<any>;
+  cNameDetails:any = [];
+  cName = '';
+  cID:number;
+
+  configs = {
+    labelField: 'label',
+    valueField: 'value',
+    maxItems: 1,
+    highlight: true,
+    create: false,
+  };
+
+  data = [
+    {
+      label: 'Show All',
+      value: '1'
+    },
+      {
+      label: 'Unread',
+      value: '2'
+    },
+      {
+      label: 'Read',
+      value: '3'
+    }
+  ]
 
   ProductCategoryList: any[] = [];
   ProductData: any[] = [];
@@ -74,6 +110,7 @@ export class MarketComponent implements OnInit {
   element1: any;
   showInvoice: boolean = false;
   isCollapsed: boolean = true;
+  isCollapsedBanner: boolean = true;
   isCollapsedProductDetils: boolean = true;
   isCollapsedTax:  boolean = true;
   isCollapsedPIN: boolean = true;
@@ -88,16 +125,113 @@ export class MarketComponent implements OnInit {
     this.getTaxData();
     this.getPinCode();
     this.getOrderDetails();
+    this.getTableData();
   }
   pdfSrc: string = '';
 
  
   ngOnInit() {
-
   }
 
   ngOnchanges() {
     this.refreshTable();
+  }
+
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+  }
+
+  addCategory(data:any) {
+    const dialogRef = this.dialog.open(AddMarketBannerComponent,{
+      disableClose: true,
+      data: {
+        categoryData: data
+      }});
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.getTableData();
+    });
+    console.log(data);
+  }
+
+  openDeleteDialog(data:any) {
+    const dialogRef = this.dialog.open(DeleteMarketBannerComponent,{
+      disableClose: true,
+      data: {
+        categoryData: data
+      }});
+    dialogRef.afterClosed().subscribe(result => {
+      this.getTableData();
+    });
+    console.log(data);
+  }
+
+  openEditDialog(data:any) {
+    const dialogRef = this.dialog.open(EditMarketBannerComponent,{
+      disableClose: true,
+      data: {
+        categoryData: data
+      }});
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.getTableData();
+    });
+    console.log(data);
+  }
+
+
+  imageOpen(data1:any){
+    this.dialog.open(MarketBannerPopupComponent,{data:{
+      value:data1
+    }});
+  }
+
+  getTableData(){
+    this.http.get(''+this.sharedDataService.apiDomainPathDashTwo+'banner',{}) // Get Category details
+    .subscribe(data => {
+      console.log(data);
+      this.userDetails = data;
+      this.userDetails = this.userDetails.response;
+      this.dataSource = new MatTableDataSource(this.userDetails);
+    }),
+    // this.http.get(''+this.sharedDataService.apiDomainPathDash+'getCategoryTitle',{}) // Get Category details
+    // .subscribe(data => {
+    //   console.log(data);
+    //   this.cNameDetails = data;
+    //   this.cID = this.cNameDetails.response[0].id;
+    //   this.cName = this.cNameDetails.response[0].title;
+    // },
+    // err => {
+    //   // Swal.fire(err);
+    // });
+    this.popupClass = "popupHead d-none"
+  }
+
+  uplodInfo:any = [];
+  
+  updateCName(){
+    if(this.cName == ''){
+      this.sharedDataService.firePopup(false,'Please enter contest name');
+      return;
+    }
+    this.sharedDataService.showLoader();
+    this.http.post(''+this.sharedDataService.apiDomainPathDash+'editCategoryTitle',{title:this.cName}) // Set Category details
+    .subscribe(data => {
+      console.log(data);
+      this.sharedDataService.hideLoader();
+        this.uplodInfo = data;
+        if(this.uplodInfo.responseCode == "200"){
+          this.sharedDataService.firePopup(true,'Data Updated');
+          this.getTableData();
+        } else if(this.uplodInfo.responseCode == 803) {
+          this.sharedDataService.firePopup(false,'Something went wrong..!!!');
+        }else {
+          this.sharedDataService.firePopup(false,this.uplodInfo.responseMsg);
+        }
+    },
+    err => {
+      // Swal.fire(err);
+    });
   }
 
   // fetchHtml(filePath: string) {
@@ -112,6 +246,9 @@ export class MarketComponent implements OnInit {
 
   toggleCollapse() {
     this.isCollapsed = !this.isCollapsed;
+  }
+  toggleCollapseBanner() {
+    this.isCollapsedBanner = !this.isCollapsedBanner;
   }
   toggleCollapseProductDetils() {
     this.isCollapsedProductDetils = !this.isCollapsedProductDetils;
@@ -262,7 +399,7 @@ export class MarketComponent implements OnInit {
     }
   }
 
-  addCategory() {
+  addProductCategory() {
     const dialogRef = this.dialog.open(AddProductCategoryComponent, {
       disableClose: true,
       data: {
@@ -326,6 +463,7 @@ export class MarketComponent implements OnInit {
     this.getDataforProductCategory();
     this.getProductDetails();
   }
+
   openViewImagePopup(element: any) {
     this.element = element
     const dialogRefview = this.dialog.open(ViewProductcategoryComponent, {
