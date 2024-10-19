@@ -11,6 +11,10 @@ export class SharedDataService {
   // apiDomainPathDash:string = 'https://demoonline.xyz/api/MaficDashboard/';
   apiDomainPath:string = 'https://api.themafic.com/api/Mafic/';
   apiDomainPathDash:string = 'https://api.themafic.com/api/MaficDashboard/';
+  apiDomainPathDashTwo:string = 'https://api-dev.themafic.co.in/api/MaficDashboard/';
+  // apiDomainPathlocal:string = 'http://localhost/mafic-backend/api/portal/Market/';
+  // apiDomainPathserver:string = 'https://api-mafic-dev-ci.themafic.co.in/api/Market/';
+  // apiDomainPathserverTest:string = 'https://attendance-api-dev.cb-dev.in/api/portal/Dashboard/';
   loggedUserData:any;
   dummyProfilePic:string = '../../assets/images/blank-profile-picture.png'
   profileUrl:string = '';

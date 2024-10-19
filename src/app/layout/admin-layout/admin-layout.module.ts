@@ -117,6 +117,10 @@ import { QueryComponent } from 'src/app/pages/query/query.component';
 import { SendResponseComponent } from 'src/app/pages/query/send-response/send-response.component';
 import { ViewQueryComponent } from 'src/app/pages/query/view-query/view-query.component';
 import { MarketComponent } from 'src/app/pages/market/market.component';
+import { AddMarketBannerComponent } from 'src/app/pages/marketBanner/add-marketBanner/add-marketBanner.component';
+import { DeleteMarketBannerComponent } from 'src/app/pages/marketBanner/delete-marketBanner/delete-marketBanner.component';
+import { EditMarketBannerComponent } from 'src/app/pages/marketBanner/edit-marketBanner/edit-marketBanner.component';
+import { MarketBannerPopupComponent } from 'src/app/pages/marketBanner/marketBanner-popup/marketBanner-popup.component';
 // const ErrorHandler = new GlobalErrorHandler();
 const matDialogRefStub = {};
 
@@ -207,7 +211,11 @@ const matDialogRefStub = {};
     InvoiceSkuComponent,
     QueryComponent,
     SendResponseComponent,
-    ViewQueryComponent
+    ViewQueryComponent,
+    AddMarketBannerComponent,
+    EditMarketBannerComponent,
+    DeleteMarketBannerComponent,
+    MarketBannerPopupComponent
   ],
   entryComponents:[
     DeletePopComponent,

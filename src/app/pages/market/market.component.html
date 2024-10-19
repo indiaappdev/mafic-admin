@@ -12,6 +12,60 @@
 
         <div class="an-component-body">
           <div class="an-helper-block p-0">
+
+            <!-- MARKET BANNER -->
+            <div class="shadow-class m-3">
+              <h2 *ngIf="!sharedDataService.editDisable" class="an-page-title mt-0" data-bs-toggle="collapse" href="#categoryEdit" 
+              role="button" aria-expanded="false" aria-controls="categoryEdit" (click)="toggleCollapseBanner()">MARKET BANNER</h2>
+              <h2 *ngIf="sharedDataService.editDisable" class="an-page-title mt-0" >MARKET BANNER</h2>
+              <div [ngClass]="isCollapsedBanner? 'display-block' : 'display-none'">
+                <div *ngIf="!sharedDataService.editDisable" class="an-scrollable-x collapse" id="categoryEdit">
+  
+                  <a class="btn btn-green mb-3" (click)="addCategory(1)">ADD BANNER</a>
+                  
+                  <table mat-table *ngIf="dataSource" [dataSource]="dataSource" class="mat-elevation-z8">
+                  
+                      <ng-container matColumnDef="id" class="p-2">
+                          <th mat-header-cell *matHeaderCellDef> ID </th>
+                          <td mat-cell *matCellDef="let element;let i = index;"> {{i+1}} </td>
+                      </ng-container>
+                  
+                      <ng-container matColumnDef="text" class="p-2">
+                          <th mat-header-cell *matHeaderCellDef> CATEGORY </th>
+                          <td mat-cell *matCellDef="let element"> {{element.category}} </td>
+                      </ng-container>
+                  
+                  
+                  
+                      <ng-container matColumnDef="image" class="p-2">
+                          <th mat-header-cell *matHeaderCellDef> IMAGE </th>
+                          <td mat-cell *matCellDef="let element">
+                              <span class="msg-tag bg-success cursor-pointer px-5" (click)="imageOpen(element.images)">View</span>
+                          </td>
+                      </ng-container>
+                  
+                      <ng-container matColumnDef="action">
+                          <th mat-header-cell *matHeaderCellDef> ACTION </th>
+                          <td mat-cell *matCellDef="let element">
+                              <div class="d-flex">
+                                  <span class="cursor-pointer p-0" (click)="openEditDialog(element)"><i class="fas fa-edit" style="color: green;"></i></span>
+                                  <span class="cursor-pointer p-0 ms-3" (click)="openDeleteDialog(element)"><i class="fas fa-trash" style="color: red;"></i></span>
+                              </div>
+                          </td>
+                      </ng-container>
+                  
+                  
+                  
+                      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                  
+                      <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Select page of data elements">
+                      </mat-paginator>
+                  </table>
+                </div>
+              </div>
+            </div>
+
             <!-- PRODUCT CATEGORY -->
             <div class="shadow-class m-3">
               <h2 *ngIf="!sharedDataService.editDisable" class="an-page-title mt-0" data-bs-toggle="collapse" href="#bannerEdit"
@@ -20,7 +74,7 @@
               <div [ngClass]="isCollapsed? 'display-block' : 'display-none'">
                 <div *ngIf="!sharedDataService.editDisable" class="an-scrollable-x collapse" id="bannerEdit">
 
-                  <a class="btn btn-green mb-2" (click)="addCategory()">ADD CATEGORY</a>
+                  <a class="btn btn-green mb-2" (click)="addProductCategory()">ADD CATEGORY</a>
                   
                   <div class="an-component-body">
                     <div class="an-helper-block p-0">
@@ -409,4 +463,5 @@
 
 
 </div>
-<app-invoice *ngIf="showInvoice"></app-invoice>
+<!-- <app-invoice *ngIf="showInvoice"></app-invoice> -->
+ 
