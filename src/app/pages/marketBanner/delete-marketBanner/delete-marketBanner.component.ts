@@ -33,7 +33,7 @@ export class DeleteMarketBannerComponent implements OnInit {
     .subscribe(data => {
       this.deleteRes = data;
       if(this.deleteRes.responseCode == 200)
-      this.datas.firePopup(true,'Category deleted');
+      this.datas.firePopup(true,'Banner Data Deleted');
       else
       this.datas.firePopup(false,this.deleteRes.responseMsg);
     },

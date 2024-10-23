@@ -127,7 +127,7 @@ export class EditMarketBannerComponent implements OnInit {
         this.uplodInfo = data;
         if(this.uplodInfo.responseCode == "200"){
           this.fileAccept = false;
-          this.data.firePopup(true,'Data Updated');
+          this.data.firePopup(true,'Banner Data Updated');
         } else if(this.uplodInfo.responseCode == 803) {
           this.data.firePopup(false,'Something went wrong..!!!');
         }else {

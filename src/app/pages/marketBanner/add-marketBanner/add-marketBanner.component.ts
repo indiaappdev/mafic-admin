@@ -112,10 +112,10 @@ export class AddMarketBannerComponent implements OnInit {
             console.log(data);
             this.data.hideLoader();
             this.uplodInfo = data;
-            if (this.uplodInfo.responseCode === "200") {
+            if (this.uplodInfo.responseCode == 200) {
               this.fileAccept = false;
-              this.data.firePopup(true, 'Data Updated');
-            } else if (this.uplodInfo.responseCode === 803) {
+              this.data.firePopup(true, 'Banner Data Added');
+            } else if (this.uplodInfo.responseCode == 803) {
               this.data.firePopup(false, 'Something went wrong..!!!');
             } else {
               this.data.firePopup(false, this.uplodInfo.responseMsg);
