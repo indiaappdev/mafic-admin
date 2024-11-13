@@ -43,6 +43,11 @@ import { AddTaxDetailsComponent } from './pages/market-info/tax-details/add-tax-
 import { EditPinComponent } from './pages/market-info/PIN-details/edit-pin/edit-pin.component';
 import { EditOrderStatusComponent } from './pages/market-info/order-details/edit-order-status/edit-order-status.component';
 import { InvoiceComponent } from './pages/market-info/order-details/invoice/invoice.component';
+import { EditProductTermsComponent } from './pages/market-info/terms-details/edit-product-terms/edit-product-terms.component';
+import { AddProductTermsComponent } from './pages/market-info/terms-details/add-product-terms/add-product-terms.component';
+import { DeleteProductTermsComponent } from './pages/market-info/terms-details/delete-product-terms/delete-product-terms.component';
+import { ViewProductTermsComponent } from './pages/market-info/terms-details/view-product-terms/view-product-terms.component';
+import { ViewProductTermsAddComponent } from './pages/market-info/product-details/view-product-terms-add/view-product-terms-add.component';
 
 const ErrorHandler = new GlobalErrorHandler();
 
@@ -57,6 +62,11 @@ const ErrorHandler = new GlobalErrorHandler();
     DeleteProductcategoryComponent,
     EditProductcategoryComponent,
     ViewProductcategoryComponent,
+    AddProductTermsComponent,
+    EditProductTermsComponent,
+    DeleteProductTermsComponent,
+    ViewProductTermsComponent,
+    ViewProductTermsAddComponent,
     AddProductComponent,
     DeleteProductDetailsComponent,
     EditProductDetailsComponent,

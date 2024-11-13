@@ -115,6 +115,7 @@ export class AddMarketBannerComponent implements OnInit {
             if (this.uplodInfo.responseCode == 200) {
               this.fileAccept = false;
               this.data.firePopup(true, 'Banner Data Added');
+              this.router.navigate(['/market']);
             } else if (this.uplodInfo.responseCode == 803) {
               this.data.firePopup(false, 'Something went wrong..!!!');
             } else {

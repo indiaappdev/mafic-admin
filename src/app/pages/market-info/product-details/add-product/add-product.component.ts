@@ -3,6 +3,12 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { SharedDataService } from 'src/app/shared/shared-data.service';
+import { ViewProductTermsAddComponent } from '../view-product-terms-add/view-product-terms-add.component';
+
+interface DropdownOption {
+  id: string;
+  title: string;
+}
 
 @Component({
   selector: 'app-add-product',
@@ -12,26 +18,6 @@ import { SharedDataService } from 'src/app/shared/shared-data.service';
 export class AddProductComponent implements OnInit {
   ProductCategoryList: any;
   selectedCategoryId: any;
-  // formData = {
-  //   productName: '',
-  //   artName: '' ,
-  //   artistName:'' ,
-  //   productCategory:'',
-  //   subCategory:'',
-  //   productPrice:'',
-  //   productDiscount:'',
-  //   productSACHSNCode:'',
-  //   quantity:'',
-  //   productSKU:'',
-  //   size:'',
-  //   warranty:'',
-  //   returnPolicy:'',
-  //   Delivery:'',
-  //   descriptionHeader:'',
-  //   Description:'',
-  //   imgs: [] as string[]
-
-  // };
   fileInputs: { id: number, previewSrc: any }[] = [{ id: 1, previewSrc: '' }];
   res: any;
   productSACHSNCode: any;
@@ -40,6 +26,16 @@ export class AddProductComponent implements OnInit {
   productImages: any;
   formData: any;
   imgs: any=[];
+  
+  certificationAndComplianceOptions: DropdownOption[] = [];
+  materialOrderingOptions: DropdownOption[] = [];
+  boxingAndPackagingOptions: DropdownOption[] = [];
+  freightOptions: DropdownOption[] = [];
+  insuranceOptions: DropdownOption[] = [];
+  incotermOptions: DropdownOption[] = [];
+  brandWarrantyOptions: DropdownOption[] = [];
+  returnPolicyOptions: DropdownOption[] = [];
+
 
   constructor(public sharedDataService: SharedDataService,
     private dialog: MatDialog,
@@ -64,6 +60,22 @@ export class AddProductComponent implements OnInit {
       descriptionHeader: new FormControl(''),
       Description: new FormControl(''),
       imageCount: new FormControl(''),
+
+      finalProductPrice: new FormControl('', Validators.required),
+      productSize: new FormControl('', Validators.required),
+      netWeight: new FormControl('', Validators.required),
+      material: new FormControl('', Validators.required),
+      originCountry: new FormControl('', Validators.required),
+      productFeatures: new FormControl('', Validators.required),
+      certificationAndComplianceId: new FormControl(),
+      minOrderQuantity: new FormControl('', Validators.required),
+      sampleMaterialId: new FormControl('', Validators.required),
+      materialOrderingAndPaymentTermsId: new FormControl(),
+      boxingAndPackagingId: new FormControl(),
+      freightId: new FormControl(),
+      insuranceId: new FormControl(),
+      incotermId: new FormControl(),
+      preShipmentInspectionId: new FormControl(),
       imgs: new FormControl([]) // Initialize as empty array
     });
     this.ProductCategoryList = this.sharedDataService.ProductCategoryList
@@ -104,20 +116,44 @@ export class AddProductComponent implements OnInit {
   }
 
   addFileInput() {
-    const newId = this.fileInputs.length ? this.fileInputs[this.fileInputs.length - 1].id + 1 : 1;
-    this.fileInputs.push({ id: newId, previewSrc: '' });
+    if (this.fileInputs.length < 8) {  // Prevent adding more than 8 inputs
+      const newId = this.fileInputs.length ? this.fileInputs[this.fileInputs.length - 1].id + 1 : 1;
+      this.fileInputs.push({ id: newId, previewSrc: '' });
+    }
   }
 
+  onHSNCodeChange(hsnCode: string) {
+    this.http.get(`https://api-dev.themafic.co.in/api/MaficDashboard/terms?hsn_code=${hsnCode}`)
+      .subscribe((response: any) => {
+        if (response.responseCode === 200) {
+          const data = response.response;
+  
+          // Initialize options for each dropdown based on the slug
+          this.certificationAndComplianceOptions = data.filter((item: { slug: string; }) => item.slug === 'certification_and_compliance');
+          this.materialOrderingOptions = data.filter((item: { slug: string; }) => item.slug === 'material_ordering_and_payment_terms');
+          this.boxingAndPackagingOptions = data.filter((item: { slug: string; }) => item.slug === 'boxing_and_packaging');
+          this.freightOptions = data.filter((item: { slug: string; }) => item.slug === 'freight');
+          this.insuranceOptions = data.filter((item: { slug: string; }) => item.slug === 'insurance');
+          this.incotermOptions = data.filter((item: { slug: string; }) => item.slug === 'incoterm');
+          this.brandWarrantyOptions = data.filter((item: { slug: string; }) => item.slug === 'brand_warranty');
+          this.returnPolicyOptions = data.filter((item: { slug: string; }) => item.slug === 'return_policy');
+        }
+      }, error => {
+        console.error("Error fetching terms for the selected HSN code:", error);
+      });
+  }
+  
   removeFileInput(index: number) {
     this.fileInputs.splice(index, 1);
   }
-
+  
   previewImage(event: Event, inputId: number) {
     const input = event.target as HTMLInputElement;
     const file = input.files ? input.files[0] : null;
-    console.log(file)
+    console.log(file);
     this.imgs.push(file);
-    console.log(this.imgs)
+    console.log(this.imgs);
+    
     if (file) {
       const reader = new FileReader();
       reader.onload = (e: any) => {
@@ -128,7 +164,49 @@ export class AddProductComponent implements OnInit {
       };
       reader.readAsDataURL(file);
     }
-  }
+  }  
+
+  // openViewContentPopup(element: any) {
+  //   // this.element = element
+  //   const dialogRefContentview = this.dialog.open(ViewProductTermsAddComponent, {
+  //     disableClose: true,
+  //     data: {
+  //       element: 
+  //     }
+  //   });
+  //   dialogRefContentview.componentInstance.viewComplete.subscribe(() => {
+  //     // Call refreshTable() when deletion is complete
+  //     // this.getTandCDetails();
+  //   });
+  // }
+
+  // openViewContentPopup(certificationAndComplianceId: string) {
+    // console.log("certificationAndComplianceId :",certificationAndComplianceId);
+    // Make API call to fetch content based on the selected certificationAndComplianceId
+    // this.http.get(`https://api-dev.themafic.co.in/api/MaficDashboard/terms?slug=certification_and_compliance&hsn_code=${certificationAndComplianceId}`)
+    //     .subscribe((response: any) => {
+    //         if (response.responseCode === 200) {
+    //             // Assuming the content is inside response.response[0].content
+    //             const content = response.response[0].content;
+                
+    //             // Open dialog to show the content
+    //             const dialogRefContentview = this.dialog.open(ViewProductTermsAddComponent, {
+    //                 disableClose: true,
+    //                 data: {
+    //                     content: content // Pass the content to the dialog component
+    //                 }
+    //             });
+                
+    //             dialogRefContentview.componentInstance.viewComplete.subscribe(() => {
+    //                 // You can handle any actions after closing the dialog if needed
+    //             });
+    //         } else {
+    //             console.error('Error fetching content for certification and compliance.');
+    //         }
+    //     }, error => {
+    //         console.error('API Error:', error);
+    //     });
+  // }
 
   
   addProductData(){
@@ -161,7 +239,23 @@ export class AddProductComponent implements OnInit {
       uploadData.append('descriptionHeader', this.formData.descriptionHeader);
       uploadData.append('description', this.formData.Description);
 
-      this.http.post('https://api.themafic.com/api/MaficDashboard/addProductData', uploadData)
+      uploadData.append('finalProductPrice', this.formData.productPriceDiscount);
+      uploadData.append('productSize', this.formData.productSize);
+      uploadData.append('netWeight', this.formData.netWeight);
+      uploadData.append('material', this.formData.material);
+      uploadData.append('originCountry', this.formData.originCountry);
+      uploadData.append('productFeatures', this.formData.productFeatures);
+      uploadData.append('certificationAndComplianceId', this.formData.certificationAndComplianceId);
+      uploadData.append('minOrderQuantity', this.formData.minOrderQuantity);
+      uploadData.append('sampleMaterialId', this.formData.sampleMaterialId);
+      uploadData.append('materialOrderingAndPaymentTermsId', this.formData.materialOrderingAndPaymentTermsId);
+      // uploadData.append('boxingAndPackagingId', this.formData.boxingAndPackagingId);
+      uploadData.append('freightId', this.formData.freightId);
+      uploadData.append('insuranceId', this.formData.insuranceId);
+      uploadData.append('incotermId', this.formData.incotermId);
+      uploadData.append('preShipmentInspectionId', this.formData.preShipmentInspectionId);
+
+      this.http.post('https://api-dev.themafic.co.in/api/MaficDashboard/addProductData', uploadData)
         .subscribe(data => {
           console.log(data);
           this.sharedDataService.hideLoader();
@@ -169,7 +263,5 @@ export class AddProductComponent implements OnInit {
         },
           error => { },
           () => { });
-    
-    
   }
 }

@@ -455,6 +455,115 @@
               </div>
               
             </div>
+
+            <!-- Terms and Condition Details-->
+            <div class="shadow-class m-3">
+              <h2 *ngIf="!sharedDataService.editDisable" class="an-page-title mt-0" data-bs-toggle="collapse" href="#termsandconditiondetails"
+                role="button" aria-expanded="false" aria-controls="termsandconditiondetails" (click)="toggleTandCDetails()">TERMS AND CONDITION DETAILS</h2>
+              <h2 *ngIf="sharedDataService.editDisable" class="an-page-title mt-0">TERMS AND CONDITION DETAILS</h2>
+              <div [ngClass]="isTandCDetailsExpanded? 'display-block' : 'display-none'">
+                <div *ngIf="!sharedDataService.editDisable" class="an-scrollable-x collapse " id="termsandconditiondetails">
+                
+                  <a class="btn btn-green mb-2" (click)="addTandCDetails()">ADD TERMS AND CONDITION</a>
+
+                  <div class="an-component-body">
+                    <div class="an-helper-block p-0">
+                      <div class="an-scrollable-x">
+                        <table mat-table *ngIf="dataTandCDetails" [dataSource]="dataTandCDetails"
+                          class="mat-elevation-z8">
+  
+                          <ng-container matColumnDef="SiNo" class="p-2">
+                            <th mat-header-cell *matHeaderCellDef> SERIAL NUMBER </th>
+                            <td mat-cell *matCellDef="let element; let i=index"> {{i+1}} </td>
+                          </ng-container>
+                          
+                          <ng-container matColumnDef="ID" class="p-2">
+                            <th mat-header-cell *matHeaderCellDef> ID </th>
+                            <td mat-cell *matCellDef="let element; let i=index"> {{element.id}} </td>
+                          </ng-container>
+                          <ng-container matColumnDef="HSN_CODE" class="p-2">
+                            <th mat-header-cell *matHeaderCellDef> HSN CODE </th>
+                            <td mat-cell *matCellDef="let element"> {{element.hsn_code}} </td>
+                          </ng-container>
+                          <!-- <ng-container matColumnDef="SLUG" class="p-2">
+                            <th mat-header-cell *matHeaderCellDef> SLUG </th>
+                            <td mat-cell *matCellDef="let element"> {{element.slug}} </td>
+                          </ng-container> -->
+                          <ng-container matColumnDef="SLUG" class="p-2">
+                            <th mat-header-cell *matHeaderCellDef> SLUG </th>
+                            <td mat-cell *matCellDef="let element"> {{ getSlugDisplayName(element.slug) }} </td>
+                          </ng-container>                        
+                          <ng-container matColumnDef="TITLE" class="p-2">
+                            <th mat-header-cell *matHeaderCellDef> TITLE </th>
+                            <td mat-cell *matCellDef="let element"> {{element.title}} </td>
+                          </ng-container>
+                          <!-- <ng-container matColumnDef="CONTENT" class="p-2">
+                            <th mat-header-cell *matHeaderCellDef> CONTENT </th>
+                            <td mat-cell *matCellDef="let element; let i=index" 
+                                style="display: -webkit-box; 
+                                       -webkit-box-orient: vertical; 
+                                       overflow: hidden; 
+                                       text-overflow: ellipsis; 
+                                       -webkit-line-clamp: 3; 
+                                       line-height: 1.2em; 
+                                       max-height: 3.6em; 
+                                       white-space: normal;"> {{element.content}} </td>
+                          </ng-container> -->
+                          <!-- <ng-container matColumnDef="CONTENT" class="p-2">
+                            <th mat-header-cell *matHeaderCellDef> CONTENT </th>
+                            <td mat-cell *matCellDef="let element; let i=index" 
+                            >
+                              {{element.content}}
+                            </td>
+                          </ng-container>                           -->
+                          <ng-container matColumnDef="IMAGE" class="p-2">
+                            <th mat-header-cell *matHeaderCellDef> CONTENT </th>
+                            <td mat-cell *matCellDef="let element">
+                              <span  class="msg-tag bg-success cursor-pointer px-5" (click)="openViewContentPopup(element)">View</span>
+                            </td>
+                          </ng-container> 
+                          <ng-container matColumnDef="ISACTIVE" class="p-2">
+                            <th mat-header-cell *matHeaderCellDef> IS ACTIVE </th>
+                            <td mat-cell *matCellDef="let element"> {{element.is_active == '1' ? 'Yes' : 'No' }} </td>
+                          </ng-container>
+                          <ng-container matColumnDef="CREATED_AT" class="p-2">
+                            <th mat-header-cell *matHeaderCellDef> CREATED AT </th>
+                            <td mat-cell *matCellDef="let element"> {{element.created_at}} </td>
+                          </ng-container>
+                          <ng-container matColumnDef="UPDATED_AT" class="p-2">
+                            <th mat-header-cell *matHeaderCellDef> UPDATED AT</th>
+                            <td mat-cell *matCellDef="let element"> {{element.updated_at}} </td>
+                          </ng-container>
+                          <ng-container matColumnDef="ACTION">
+                            <th mat-header-cell *matHeaderCellDef> ACTION </th>
+                            <td mat-cell *matCellDef="let element">
+                              <div class="d-flex">
+                                <span class="cursor-pointer p-0" (click)="editTandCStatus(element)"><i class="fas fa-edit" style="color: green;"></i></span>
+                                <span class="cursor-pointer p-0 ms-3" (click)="deleteTandCDetails(element)"><i class="fas fa-trash"
+                                    style="color: red;"></i></span>
+                              </div>
+                            </td>
+                          </ng-container>
+  
+                          <tr mat-header-row *matHeaderRowDef="displayedColumnsForTandCDetails"></tr>
+                          <tr mat-row *matRowDef="let row; columns: displayedColumnsForTandCDetails;"></tr>
+  
+                        </table>
+                        
+                        <mat-paginator #paginatorForOrderDetails
+                        [length]="displayedColumnsForTandCDetails?.length"
+                        [pageSize]="10"
+                        [pageSizeOptions]="[5, 10, 25, 100]"
+                         class="mat-elevation-z1">
+                        </mat-paginator>
+                        
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+            </div>
           </div>
         </div>
       </div>

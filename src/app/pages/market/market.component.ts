@@ -26,6 +26,10 @@ import { AddMarketBannerComponent } from '../marketBanner/add-marketBanner/add-m
 import { DeleteMarketBannerComponent } from '../marketBanner/delete-marketBanner/delete-marketBanner.component';
 import { EditMarketBannerComponent } from '../marketBanner/edit-marketBanner/edit-marketBanner.component';
 import { MarketBannerPopupComponent } from '../marketBanner/marketBanner-popup/marketBanner-popup.component';
+import { EditProductTermsComponent } from '../market-info/terms-details/edit-product-terms/edit-product-terms.component';
+import { AddProductTermsComponent } from '../market-info/terms-details/add-product-terms/add-product-terms.component';
+import { DeleteProductTermsComponent } from '../market-info/terms-details/delete-product-terms/delete-product-terms.component';
+import { ViewProductTermsComponent } from '../market-info/terms-details/view-product-terms/view-product-terms.component';
 
 // import { default as invoice } from '../market-info/invoice.html';
 // import { PdfService } from 'pdf-service';
@@ -83,25 +87,29 @@ export class MarketComponent implements OnInit {
   TaxData: any[] = [];
   PinData: any[] = [];
   OrderDetails: any[] = [];
+  TandCDetails: any[] = [];
   res: any;
   currentPage = 1;
   itemsPerPage = 10;
   currentItems: any[] = [];
   fileContent: string;
   htmlContent: string;
+  slugOptions: any[] = [];
 
   dataSourceForProductCategory: MatTableDataSource<any>;
   dataSourceForProductDetails: MatTableDataSource<any>;
   dataSourceForTax: MatTableDataSource<any>;
   dataSourceForPin: MatTableDataSource<any>;
   dataSourceForOrderDetails: MatTableDataSource<any>;
+  dataTandCDetails: MatTableDataSource<any>;
 
   displayedColumnsForProductCategory: string[] = ['ID', 'CATEGORY', 'IMAGE', 'ACTION'];
   displayedColumnsForProductDetails: string[] = ['ID', 'NAME', 'PRICE', 'QUANTITY', 'DISCOUNT', 'CATEGORY', 'BRAND WARRANTY', 'RETURN POLICY', 'IMAGE', 'ACTION'];
   displayedColumnsForTax: string[] = ['ID', 'SAC_HSN', 'SACHSN_Code', 'Description', 'CGST', 'SGST', 'IGST', 'ACTION'];
   displayedColumnsForPin: string[] = ['ID', 'PO NAME', 'PIN-Code', 'DISTRICT', 'CITY', 'STATE', 'DELIVERY CHARGE', 'ACTION'];
   displayedColumnsForOrderDetails: string[] = ['ID', 'OrderId', 'PRODUCT', 'NAME', 'PRICE', 'QUANTITY', 'DISCOUNT(%)', 'GST', 'TOTAL', 'DATE', 'STATUS', 'INVOICE', 'UPDATE'];
-
+  displayedColumnsForTandCDetails: string[] = ['SiNo', 'ID', 'HSN_CODE', 'SLUG', 'TITLE', 'IMAGE', 'ISACTIVE', 'CREATED_AT', 'UPDATED_AT', 'ACTION'];
+  
   formDataforProductCategory = {
     text: '',
     id: ''
@@ -116,6 +124,7 @@ export class MarketComponent implements OnInit {
   isCollapsedPIN: boolean = true;
   isCollapsedOrder: boolean = true;
   isOrderDetailsExpanded: boolean = true;
+  isTandCDetailsExpanded: boolean = true;
   constructor(private http: HttpClient,
     public sharedDataService: SharedDataService,
     public datePipe: DatePipe,
@@ -125,12 +134,29 @@ export class MarketComponent implements OnInit {
     this.getTaxData();
     this.getPinCode();
     this.getOrderDetails();
+    this.getTandCDetails();
     this.getTableData();
+    this.fetchSlugData();
   }
   pdfSrc: string = '';
-
  
   ngOnInit() {
+  }
+
+  fetchSlugData(): void {
+    const apiUrl = 'https://api-dev.themafic.co.in/api/MaficDashboard/terms/details';
+    this.http.get<any>(apiUrl).subscribe(response => {
+      if (response.responseCode === 200 && response.response) {
+        this.slugOptions = response.response; // Store the API response
+      }
+    }, error => {
+      console.error('Error fetching slug data', error); // Handle the error
+    });
+  }
+
+  getSlugDisplayName(slug: string): string {
+    const option = this.slugOptions.find(option => option.slug === slug);
+    return option ? option.name : slug; // Fallback to slug if no match is found
   }
 
   ngOnchanges() {
@@ -265,6 +291,9 @@ export class MarketComponent implements OnInit {
   toggleOrderDetails() {
     this.isOrderDetailsExpanded = !this.isOrderDetailsExpanded;
   }
+  toggleTandCDetails() {
+    this.isTandCDetailsExpanded = !this.isTandCDetailsExpanded;
+  }
 
   getDataforProductCategory() {
     this.sharedDataService.showLoader();
@@ -297,7 +326,7 @@ export class MarketComponent implements OnInit {
 
   getProductDetails() {
     try {
-      this.http.get('https://api.themafic.com/api/MaficDashboard/getProductData').subscribe(data => {
+      this.http.get('https://api-dev.themafic.co.in/api/MaficDashboard/getProductData').subscribe(data => {
         console.log(data);
         this.res = data;
         console.log(this.res)
@@ -399,6 +428,32 @@ export class MarketComponent implements OnInit {
     }
   }
 
+  getTandCDetails() {
+    try {
+      this.http.get('https://api-dev.themafic.co.in/api/MaficDashboard/terms', {}).subscribe(data => {
+        console.log(data);
+        this.res = data;
+        console.log(this.res)
+        if (this.res.responseCode == 200) {
+          this.TandCDetails = this.res.response;
+          console.log(this.TandCDetails)
+        }
+
+      }, error => { },
+        () => {
+          console.log(this.TandCDetails)
+          this.dataTandCDetails = new MatTableDataSource<any>();
+          this.dataTandCDetails.data = this.TandCDetails
+          this.dataTandCDetails.paginator = this.paginatorForOrderDetails;
+          console.log(this.dataTandCDetails)
+        });
+
+    }
+    catch (error) {
+      console.error("not able to get response from getProductCategory API")
+    }
+  }
+
   addProductCategory() {
     const dialogRef = this.dialog.open(AddProductCategoryComponent, {
       disableClose: true,
@@ -478,6 +533,20 @@ export class MarketComponent implements OnInit {
     });
   }
 
+  openViewContentPopup(element: any) {
+    this.element = element
+    const dialogRefContentview = this.dialog.open(ViewProductTermsComponent, {
+      disableClose: true,
+      data: {
+        element: this.element
+      }
+    });
+    dialogRefContentview.componentInstance.viewComplete.subscribe(() => {
+      // Call refreshTable() when deletion is complete
+      this.getTandCDetails();
+    });
+  }
+
   addProductDetails(){
     const dialogRef = this.dialog.open(AddProductComponent, {
       disableClose: true,
@@ -490,6 +559,20 @@ export class MarketComponent implements OnInit {
       // Refresh the parent table here
       //this.refreshTable();
       this.getProductDetails();
+    });
+  }
+
+  addTandCDetails(){
+    const dialogRef = this.dialog.open(AddProductTermsComponent, {
+      disableClose: true,
+      data: {
+        
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      // Refresh the parent table here
+      this.getTandCDetails();
     });
   }
 
@@ -520,6 +603,21 @@ export class MarketComponent implements OnInit {
       this.refreshTable();
     });
   }
+
+  editTandCStatus(element: any){
+    this.element = element
+    const dialogRefeditForTandCedit = this.dialog.open(EditProductTermsComponent, {
+      disableClose: true,
+      data: {
+        element: this.element
+      }
+    });
+    dialogRefeditForTandCedit.componentInstance.viewComplete.subscribe(() => {
+      // Call refreshTable() when deletion is complete
+      this.getTandCDetails();
+    });
+  }
+
   deletePdocuctDetails(element: any){
     this.element = element
     const dialogRefDeleteForProductDetails = this.dialog.open(DeleteProductDetailsComponent, {
@@ -531,6 +629,20 @@ export class MarketComponent implements OnInit {
     dialogRefDeleteForProductDetails.componentInstance.deleteComplete.subscribe(() => {
       // Call refreshTable() when deletion is complete
       this.refreshTable();
+    });
+  }
+
+  deleteTandCDetails(element: any){
+    this.element = element
+    const dialogRefDeleteForTandCDetails = this.dialog.open(DeleteProductTermsComponent, {
+      disableClose: true,
+      data: {
+        element: this.element
+      }
+    });
+    dialogRefDeleteForTandCDetails.componentInstance.deleteComplete.subscribe(() => {
+      // Call refreshTable() when deletion is complete
+      this.getTandCDetails();
     });
   }
 
@@ -600,6 +712,20 @@ export class MarketComponent implements OnInit {
       this.getOrderDetails();
     });
   }
+
+  // editTandCStatus(element: any){
+  //   this.element = element
+  //   const dialogRefeditForTandCedit = this.dialog.open(EditOrderStatusComponent, {
+  //     disableClose: true,
+  //     data: {
+  //       element: this.element
+  //     }
+  //   });
+  //   dialogRefeditForTandCedit.componentInstance.viewComplete.subscribe(() => {
+  //     this.getTandCDetails();
+  //   });
+  // }
+
   openInvoice(){
     this.showInvoice = true;
   }

@@ -55,6 +55,23 @@ export class EditProductDetailsComponent implements OnInit {
       descriptionHeader: new FormControl(''),
       Description: new FormControl(''),
       imageCount: new FormControl(''),
+
+      finalProductPrice: new FormControl('', Validators.required),
+      productSize: new FormControl('', Validators.required),
+      netWeight: new FormControl('', Validators.required),
+      material: new FormControl('', Validators.required),
+      originCountry: new FormControl('', Validators.required),
+      productFeatures: new FormControl('', Validators.required),
+      certificationAndComplianceId: new FormControl('', Validators.required),
+      minOrderQuantity: new FormControl('', Validators.required),
+      sampleMaterialId: new FormControl('', Validators.required),
+      materialOrderingAndPaymentTermsId: new FormControl('', Validators.required),
+      boxingAndPackagingId: new FormControl('', Validators.required),
+      freightId: new FormControl('', Validators.required),
+      insuranceId: new FormControl('', Validators.required),
+      incotermId: new FormControl('', Validators.required),
+      preShipmentInspectionId: new FormControl('', Validators.required),
+
       imgs: new FormControl([]) // Initialize as empty array
     });
 
@@ -98,7 +115,8 @@ export class EditProductDetailsComponent implements OnInit {
       var httpbody: Object = {
         "productId": this.productID
       }
-      this.http.post('https://api.themafic.com/api/MaficDashboard/getSingleProduct', httpbody).subscribe(data => {
+      // this.http.post('https://api.themafic.com/api/MaficDashboard/getSingleProduct', httpbody).subscribe(data => {
+        this.http.post('https://api-dev.themafic.co.in/api/MaficDashboard/getSingleProduct', httpbody).subscribe(data => {
         console.log(data);
         this.res = JSON.parse(JSON.stringify(data));
         console.log(this.res)
@@ -127,7 +145,22 @@ export class EditProductDetailsComponent implements OnInit {
             returnPolicy: this.productData[0].return_policy,
             Delivery: this.productData[0].delivery,
             descriptionHeader: this.productData[0].header,
-            Description: this.productData[0].description
+            Description: this.productData[0].description,
+            finalProductPrice: this.productData[0].product_price_discount,
+            productSize: this.productData[0].product_size,
+            netWeight: this.productData[0].net_weight,
+            material: this.productData[0].material,
+            originCountry: this.productData[0].origin_country,
+            productFeatures: this.productData[0].product_features,
+            certificationAndComplianceId: this.productData[0].certification_and_compliance_id,
+            minOrderQuantity: this.productData[0].min_order_quantity,
+            sampleMaterialId: this.productData[0].sample_material_id,
+            materialOrderingAndPaymentTermsId: this.productData[0].material_ordering_and_payment_terms_id,
+            // boxingAndPackagingId: this.productData[0].boxingAndPackagingId,
+            freightId: this.productData[0].freight_id,
+            insuranceId: this.productData[0].insurance_id,
+            incotermId: this.productData[0].incoterm_id,
+            preShipmentInspectionId: this.productData[0].pre_shipment_inspection_id
           };
           this.fileInputs = this.productExistingImage
         }
@@ -196,27 +229,90 @@ export class EditProductDetailsComponent implements OnInit {
   }
 
 
-  addProductData() {
-    this.sharedDataService.showLoader();
+  // addProductData() {
+  //   this.sharedDataService.showLoader();
 
-    var uploadData;
+  //   var uploadData;
 
-    uploadData = new FormData();
-    var image_number = 0;
-    if (this.imgs.length > 0) {
-      var image_count = this.imgs.length
-      for (let i = 0; i < this.imgs.length; i++) {
-        image_number = (i + 1)
-        uploadData.append('image' + image_number, this.imgs[i]);
+  //   uploadData = new FormData();
+  //   var image_number = 0;
+  //   if (this.imgs.length > 0) {
+  //     var image_count = this.imgs.length
+  //     for (let i = 0; i < this.imgs.length; i++) {
+  //       image_number = (i + 1)
+  //       uploadData.append('image' + image_number, this.imgs[i]);
         
-      }
-      uploadData.append('imageCount', image_count);
-    }
-    else
-    uploadData.append('imageCount', '0');
+  //     }
+  //     uploadData.append('imageCount', image_count);
+  //   }
+  //   else
+  //   uploadData.append('imageCount', '0');
 
 
     
+  //   uploadData.append('productId', this.productID);
+  //   uploadData.append('name', this.formData.productName);
+  //   uploadData.append('art_name', this.formData.artName);
+  //   uploadData.append('artist_name', this.formData.artistName);
+  //   uploadData.append('category', this.formData.productCategory);
+  //   uploadData.append('sub_category', this.formData.subCategory);
+  //   uploadData.append('price', this.formData.productPrice);
+  //   uploadData.append('discount', this.formData.productDiscount);
+  //   uploadData.append('hsn_code', this.formData.productSACHSNCode);
+  //   uploadData.append('quantity', this.formData.quantity);
+  //   uploadData.append('sku', this.formData.productSKU);
+  //   uploadData.append('size', this.formData.size);
+  //   uploadData.append('brand_warranty', this.formData.warranty);
+  //   uploadData.append('return_policy', this.formData.returnPolicy);
+  //   uploadData.append('delivery', this.formData.Delivery);
+  //   uploadData.append('descriptionHeader', this.formData.descriptionHeader);
+  //   uploadData.append('description', this.formData.Description);
+  //   finalProductPrice: this.productData[0].product_price_discount,
+  //   productSize: this.productData[0].product_size,
+  //   netWeight: this.productData[0].net_weight,
+  //   material: this.productData[0].material,
+  //   originCountry: this.productData[0].origin_country,
+  //   productFeatures: this.productData[0].product_features,
+  //   certificationAndComplianceId: this.productData[0].certification_and_compliance_id,
+  //   minOrderQuantity: this.productData[0].min_order_quantity,
+  //   sampleMaterialId: this.productData[0].sample_material_id,
+  //   materialOrderingAndPaymentTermsId: this.productData[0].material_ordering_and_payment_terms_id,
+  //   // boxingAndPackagingId: this.productData[0].boxingAndPackagingId,
+  //   freightId: this.productData[0].freight_id,
+  //   insuranceId: this.productData[0].insurance_id,
+  //   incotermId: this.productData[0].incoterm_id,
+  //   preShipmentInspectionId: this.productData[0].pre_shipment_inspection_id
+
+  //   this.http.post('https://api-dev.themafic.co.in/api/MaficDashboard/addProductData', uploadData)
+  //     .subscribe(data => {
+  //       console.log(data);
+  //       this.sharedDataService.hideLoader();
+  //       this.dialog.closeAll();
+  //       this.viewComplete.emit();
+  //     },
+  //       error => { },
+  //       () => { });
+
+
+  // }
+
+  addProductData() {
+    this.sharedDataService.showLoader();
+  
+    const uploadData = new FormData();
+    
+    // Append images to uploadData
+    if (this.imgs.length > 0) {
+      for (let i = 0; i < this.imgs.length; i++) {
+        const imageNumber = i + 1;
+        uploadData.append('image' + imageNumber, this.imgs[i]);
+      }
+      uploadData.append('imageCount', this.imgs.length.toString());
+    } else {
+      uploadData.append('imageCount', '0');
+    }
+  
+    // Append product form data to uploadData
     uploadData.append('productId', this.productID);
     uploadData.append('name', this.formData.productName);
     uploadData.append('art_name', this.formData.artName);
@@ -234,17 +330,37 @@ export class EditProductDetailsComponent implements OnInit {
     uploadData.append('delivery', this.formData.Delivery);
     uploadData.append('descriptionHeader', this.formData.descriptionHeader);
     uploadData.append('description', this.formData.Description);
-
-    this.http.post('https://api.themafic.com/api/MaficDashboard/editProductData', uploadData)
-      .subscribe(data => {
-        console.log(data);
-        this.sharedDataService.hideLoader();
-        this.dialog.closeAll();
-        this.viewComplete.emit();
-      },
-        error => { },
-        () => { });
-
-
+  
+    uploadData.append('finalProductPrice', this.formData.productPriceDiscount);
+    uploadData.append('productSize', this.formData.productSize);
+    uploadData.append('netWeight', this.formData.netWeight);
+    uploadData.append('material', this.formData.material);
+    uploadData.append('originCountry', this.formData.originCountry);
+    uploadData.append('productFeatures', this.formData.productFeatures);
+    uploadData.append('certificationAndComplianceId', this.formData.certificationAndComplianceId);
+    uploadData.append('minOrderQuantity', this.formData.minOrderQuantity);
+    uploadData.append('sampleMaterialId', this.formData.sampleMaterialId);
+    uploadData.append('materialOrderingAndPaymentTermsId', this.formData.materialOrderingAndPaymentTermsId);
+    // uploadData.append('boxingAndPackagingId', this.formData.boxingAndPackagingId);
+    uploadData.append('freightId', this.formData.freightId);
+    uploadData.append('insuranceId', this.formData.insuranceId);
+    uploadData.append('incotermId', this.formData.incotermId);
+    uploadData.append('preShipmentInspectionId', this.formData.preShipmentInspectionId);
+  
+    // Make the HTTP POST request
+    this.http.post('https://api-dev.themafic.co.in/api/MaficDashboard/addProductData', uploadData)
+      .subscribe(
+        data => {
+          console.log(data);
+          this.sharedDataService.hideLoader();
+          this.dialog.closeAll();
+          this.viewComplete.emit();
+        },
+        error => {
+          console.error(error);
+          this.sharedDataService.hideLoader();
+        }
+      );
   }
+  
 }

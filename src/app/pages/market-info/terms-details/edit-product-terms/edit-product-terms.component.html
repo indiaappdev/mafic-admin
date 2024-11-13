@@ -1,0 +1,74 @@
+<form novalidate name="addUserForm" class="form" (ngSubmit)="submitForm(addUserForm)" #addUserForm="ngForm">
+    <div class="row">
+        <!-- <div class="form-group col-md-6 mb-3">
+            <mat-form-field appearance="legacy" style="width: 100%;">
+                <mat-label>HSN CODE *</mat-label>
+                <input matInput required [(ngModel)]="formData.hsn_code" name="hsn_code" id="hsn_code" #hsn_code="ngModel"
+                aria-describedby="hsn_code">
+            </mat-form-field>
+        </div> -->
+        <div class="form-group col-md-6 mb-3">
+            <mat-form-field appearance="legacy" style="width: 100%;">
+                <mat-label>Product SAC/HSN Code *</mat-label>
+                <mat-select [(value)]="formData.hsn_code" name="hsn_code" id="hsn_code">
+                    <mat-option *ngFor="let code of hsn_code" [value]="code.SACHSN_Code">
+                        {{ code.SACHSN_Code }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <!-- <div class="form-group col-md-6 mb-3">
+            <mat-form-field appearance="legacy" style="width: 100%;">
+                <mat-label>Slug *</mat-label>
+                <input matInput required [(ngModel)]="formData.slug" name="slug" id="slug"
+                    #slug="ngModel" aria-describedby="slug">
+            </mat-form-field>
+        </div> -->
+        <div class="form-group col-md-6 mb-3">
+            <mat-form-field appearance="legacy" style="width: 100%;">
+              <mat-label>Slug *</mat-label>
+              <mat-select [(value)]="formData.slug" name="slug" id="slug" required>
+                <mat-option *ngFor="let option of slugOptions" [value]="option.slug">
+                  {{ option.name }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="form-group col-md-6 mb-3">
+            <mat-form-field appearance="legacy" style="width: 100%;">
+                <mat-label>Title *</mat-label>
+                <input matInput required [(ngModel)]="formData.title" name="title" id="title"
+                    #title="ngModel" aria-describedby="title">
+                </mat-form-field>
+        </div>
+        <!-- <div class="form-group col-md-6 mb-3">
+            <mat-form-field appearance="legacy" style="width: 100%;">
+                <mat-label>Content *</mat-label>
+                <input matInput required [(ngModel)]="formData.content" name="content" id="content"
+                    #content="ngModel" aria-describedby="content">
+            </mat-form-field>
+        </div> -->
+        <div class="form-group col-md-6 mb-3">
+            <mat-form-field appearance="legacy" style="width: 100%;">
+                <mat-label>Is Active *</mat-label>
+                <mat-select [(ngModel)]="formData.is_active" name="is_active" required>
+                    <mat-option *ngFor="let option of isActiveOptions" [value]="option.value">
+                        {{ option.label }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="form-group col-md-6 mb-3">
+            <mat-form-field appearance="legacy" style="width: 100%;">
+                <mat-label>Content *</mat-label>
+                <textarea matInput required [(ngModel)]="formData.content" name="content" id="content"
+                    #content="ngModel" aria-describedby="content" rows="5"></textarea>
+            </mat-form-field>
+        </div>
+            
+        <div class="form-group col-md-12 flex">
+            <button type="submit" class="btn btn-green m-3" [disabled]="addUserForm.invalid">Save</button>
+            <button type="button" class="btn btn-gold m-3" (click)="cancelForm()">Cancel</button>
+        </div>
+    </div>
+</form>

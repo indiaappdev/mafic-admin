@@ -142,7 +142,113 @@
             </div>
         </div>
 
-
+        <div class="row">
+            <div class="form-group col-md-6 mb-3">
+                <mat-form-field appearance="legacy" style="width: 100%;">
+                    <mat-label>Final Product price and discount *</mat-label>
+                    <input matInput required [(ngModel)]="formData.finalProductPrice" name="finalProductPrice" id="finalProductPrice"
+                        #finalProductPrice="ngModel" aria-describedby="finalProductPrice">
+                </mat-form-field>
+            </div>
+            <div class="form-group col-md-6 mb-3">
+                <mat-form-field appearance="legacy" style="width: 100%;">
+                    <mat-label>Product Size with primary packing material in CM *</mat-label>
+                    <input matInput required [(ngModel)]="formData.productSize" name="productSize" id="productSize"
+                        #productSize="ngModel" aria-describedby="productSize">
+                </mat-form-field>
+            </div>
+            <div class="form-group col-md-6 mb-3">
+                <mat-form-field appearance="legacy" style="width: 100%;">
+                    <mat-label>Weight in Kg *</mat-label>
+                    <input matInput required [(ngModel)]="formData.netWeight" name="netWeight" id="netWeight"
+                        #netWeight="ngModel" aria-describedby="netWeight">
+                </mat-form-field>
+            </div>
+            <div class="form-group col-md-6 mb-3">
+                <mat-form-field appearance="legacy" style="width: 100%;">
+                    <mat-label>Material *</mat-label>
+                    <input matInput required [(ngModel)]="formData.material" name="material" id="material"
+                        #material="ngModel" aria-describedby="material">
+                </mat-form-field>
+            </div>
+            <div class="form-group col-md-6 mb-3">
+                <mat-form-field appearance="legacy" style="width: 100%;">
+                    <mat-label>Country of Origin *</mat-label>
+                    <input matInput required [(ngModel)]="formData.originCountry" name="originCountry" id="originCountry"
+                        #originCountry="ngModel" aria-describedby="originCountry">
+                </mat-form-field>
+            </div>
+            <div class="form-group col-md-6 mb-3">
+                <mat-form-field appearance="legacy" style="width: 100%;">
+                    <mat-label>Product Features *</mat-label>
+                    <input matInput required [(ngModel)]="formData.productFeatures" name="productFeatures" id="productFeatures"
+                        #productFeatures="ngModel" aria-describedby="productFeatures">
+                </mat-form-field>
+            </div>
+            <div class="form-group col-md-6 mb-3">
+                <mat-form-field appearance="legacy" style="width: 100%;">
+                    <mat-label>Certification and Compliance *</mat-label>
+                    <input matInput required [(ngModel)]="formData.certificationAndComplianceId" name="certificationAndComplianceId" id="certificationAndComplianceId"
+                        #certificationAndComplianceId="ngModel" aria-describedby="certificationAndComplianceId">
+                </mat-form-field>
+            </div>
+            <div class="form-group col-md-6 mb-3">
+                <mat-form-field appearance="legacy" style="width: 100%;">
+                    <mat-label>Minimum order quantity *</mat-label>
+                    <input matInput required [(ngModel)]="formData.minOrderQuantity" name="minOrderQuantity" id="minOrderQuantity"
+                        #minOrderQuantity="ngModel" aria-describedby="minOrderQuantity">
+                </mat-form-field>
+            </div>
+            <div class="form-group col-md-6 mb-3">
+                <mat-form-field appearance="legacy" style="width: 100%;">
+                    <mat-label>Sample material *</mat-label>
+                    <input matInput required [(ngModel)]="formData.sampleMaterialId" name="sampleMaterialId" id="sampleMaterialId"
+                        #sampleMaterialId="ngModel" aria-describedby="sampleMaterialId">
+                </mat-form-field>
+            </div>
+            <div class="form-group col-md-6 mb-3">
+                <mat-form-field appearance="legacy" style="width: 100%;">
+                    <mat-label>Material ordering and payment terms *</mat-label>
+                    <input matInput required [(ngModel)]="formData.materialOrderingAndPaymentTermsId" name="materialOrderingAndPaymentTermsId" id="materialOrderingAndPaymentTermsId"
+                        #materialOrderingAndPaymentTermsId="ngModel" aria-describedby="materialOrderingAndPaymentTermsId">
+                </mat-form-field>
+            </div>
+            <div class="form-group col-md-6 mb-3">
+                <mat-form-field appearance="legacy" style="width: 100%;">
+                    <mat-label>Boxing and packaging *</mat-label>
+                    <input matInput required [(ngModel)]="formData.boxingAndPackagingId" name="boxingAndPackagingId" id="boxingAndPackagingId"
+                        #boxingAndPackagingId="ngModel" aria-describedby="boxingAndPackagingId">
+                </mat-form-field>
+            </div>
+            <div class="form-group col-md-6 mb-3">
+                <mat-form-field appearance="legacy" style="width: 100%;">
+                    <mat-label>Freight *</mat-label>
+                    <input matInput required [(ngModel)]="formData.freightId" name="freightId" id="freightId"
+                        #freightId="ngModel" aria-describedby="freightId">
+                </mat-form-field>
+            </div>
+            <div class="form-group col-md-6 mb-3">
+                <mat-form-field appearance="legacy" style="width: 100%;">
+                    <mat-label>Insurance *</mat-label>
+                    <input matInput required [(ngModel)]="formData.insuranceId" name="insuranceId" id="insuranceId"
+                        #insuranceId="ngModel" aria-describedby="insuranceId">
+                </mat-form-field>
+            </div>
+            <div class="form-group col-md-6 mb-3">
+                <mat-form-field appearance="legacy" style="width: 100%;">
+                    <mat-label>Incoterm *</mat-label>
+                    <input matInput required [(ngModel)]="formData.incotermId" name="incotermId" id="incotermId"
+                        #incotermId="ngModel" aria-describedby="incotermId">
+                </mat-form-field>
+            </div>
+            <div class="form-group col-md-6 mb-3">
+                <mat-form-field appearance="legacy" style="width: 100%;">
+                    <mat-label>Pre-Shipment inspection *</mat-label>
+                    <input matInput required [(ngModel)]="formData.preShipmentInspectionId" name="preShipmentInspectionId" id="preShipmentInspectionId"
+                        #preShipmentInspectionId="ngModel" aria-describedby="preShipmentInspectionId">
+                </mat-form-field>
+            </div>
+        </div>   
 
         <div class="form-group col-md-12 flex">
             <button type="submit" class="btn btn-green m-3" [disabled]="addUserForm.invalid">Save</button>
