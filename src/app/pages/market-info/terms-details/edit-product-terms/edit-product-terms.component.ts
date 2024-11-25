@@ -26,6 +26,7 @@ export class EditProductTermsComponent implements OnInit {
   productExistingImage: any;
   viewComplete: EventEmitter<any> = new EventEmitter();
   slugOptions: { slug: string, name: string }[] = [];
+  selectedFile: File | null = null;
 
   isActiveOptions = [
     { label: 'Yes', value: 1 },
@@ -45,11 +46,11 @@ export class EditProductTermsComponent implements OnInit {
     this.getSACData();
     this.getSingleProductData();
     this.formData = new FormGroup({
-      content: new FormControl('', Validators.required),
-      hsn_code: new FormControl('', Validators.required),
+      // content: new FormControl('', Validators.required),
+      // hsn_code: new FormControl('', Validators.required),
       slug: new FormControl('', Validators.required),
       title: new FormControl('', Validators.required),
-      is_active: new FormControl(1, Validators.required),
+      // is_active: new FormControl(1, Validators.required),
     });
     this.fetchSlugOptions();
   }
@@ -63,6 +64,18 @@ export class EditProductTermsComponent implements OnInit {
     }, error => {
       console.error('Error fetching slug options', error); // Handle the error
     });
+  }
+
+  onFileSelected(event: Event) {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      this.selectedFile = input.files[0];
+    }
+  }
+
+  removeFile() {
+    this.formData.existingFile = null;
+    this.selectedFile = null;
   }
 
   cancelForm() {
@@ -101,20 +114,21 @@ export class EditProductTermsComponent implements OnInit {
   getSingleProductData() {
     this.sharedDataService.showLoader();
     try {
-        this.http.get(`https://api-dev.themafic.co.in/api/MaficDashboard/terms/show?id=${this.productID}`).subscribe(data => {
+        this.http.get(`https://api-dev.themafic.co.in/api/terms/show?id=${this.productID}`).subscribe(data => {
         console.log(data);
         this.res = JSON.parse(JSON.stringify(data));
         console.log(this.res)
-        if (this.res.responseCode == 200) {
+        if (this.res.status == 200) {
           this.sharedDataService.hideLoader();
-          this.SingleProductData = this.res.response;
+          this.SingleProductData = this.res.data;
 
           this.formData = {
-            content: this.SingleProductData.content,
-            hsn_code: this.SingleProductData.hsn_code,
+            // content: this.SingleProductData.content,
+            // hsn_code: this.SingleProductData.hsn_code,
             slug: this.SingleProductData.slug,
             title: this.SingleProductData.title,
-            is_active: this.SingleProductData.is_active ? 1 : 0
+            existingFile: this.SingleProductData.file
+            // is_active: this.SingleProductData.is_active ? 1 : 0
           };
           // this.fileInputs = this.productExistingImage
         }
@@ -191,14 +205,18 @@ export class EditProductTermsComponent implements OnInit {
     uploadData = new FormData();
 
     uploadData.append('id', this.productID);
-    uploadData.append('content', this.formData.content);
-    uploadData.append('hsn_code', this.formData.hsn_code);
+    // uploadData.append('content', this.formData.content);
+    // uploadData.append('hsn_code', this.formData.hsn_code);
     uploadData.append('slug', this.formData.slug);
     uploadData.append('title', this.formData.title);
     // uploadData.append('is_active', '1');
-    uploadData.append('is_active', this.formData.is_active.toString());
+    // uploadData.append('is_active', this.formData.is_active.toString());
+    if (this.selectedFile) {
+      uploadData.append('file', this.selectedFile, this.selectedFile.name);
+    }
+    console.log(uploadData, 'uploaded data');
 
-    this.http.post('https://api-dev.themafic.co.in/api/MaficDashboard/terms/update', uploadData)
+    this.http.post('https://api-dev.themafic.co.in/api/terms/update', uploadData)
       .subscribe(data => {
         console.log(data);
         this.sharedDataService.hideLoader();
