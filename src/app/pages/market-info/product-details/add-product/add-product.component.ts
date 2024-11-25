@@ -92,28 +92,29 @@ export class AddProductComponent implements OnInit {
       console.log('Form is invalid.');
     }
   }
-  getSACData(){
-    this.sharedDataService.showLoader();
-    try {
-      this.http.get('https://api.themafic.com/api/MaficDashboard/getHsnCode').subscribe(data => {
+  getSACData() {
+    this.sharedDataService.showLoader();  // Show loader before API call
+  
+    this.http.get('https://api-dev.themafic.co.in/api/hsn').subscribe({
+      next: (data) => {
         console.log(data);
-        this.res = JSON.parse(JSON.stringify(data));
-        console.log(this.res)
-        if (this.res.responseCode == 200) {
-          this.sharedDataService.hideLoader();
-           this.productSACHSNCode = this.res.response;
-          console.log(this.productSACHSNCode)
+        this.res = data;  // Directly assign the response
+  
+        if (this.res.status === 200) {
+          this.productSACHSNCode = this.res.data;
+          console.log(this.productSACHSNCode);
+        } else {
+          console.error('Error: Response status is not 200');
         }
-
-      }, error => { },
-        () => {
-        });
-
-    }
-    catch (error) {
-      console.error("not able to get response from getProductCategory API")
-    }
-  }
+      },
+      error: (error) => {
+        console.error("Error fetching SAC data:", error);
+      },
+      complete: () => {
+        this.sharedDataService.hideLoader();  // Hide loader after API call completes, whether success or failure
+      }
+    });
+  }  
 
   addFileInput() {
     if (this.fileInputs.length < 8) {  // Prevent adding more than 8 inputs

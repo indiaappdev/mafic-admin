@@ -64,8 +64,8 @@
             <mat-form-field appearance="legacy" style="width: 100%;">
                 <mat-label>Product SAC/HSN Code *</mat-label>
                 <mat-select [(ngModel)]="formData.productSACHSNCode" name="productSACHSNCode" id="productSACHSNCode" (selectionChange)="onHSNCodeChange($event.value)">
-                    <mat-option *ngFor="let code of productSACHSNCode" [value]="code.SACHSN_Code">
-                        {{ code.SACHSN_Code }}
+                    <mat-option *ngFor="let code of productSACHSNCode" [value]="code.id">
+                        {{ code.code }} - {{code.title}}
                     </mat-option>
                 </mat-select>
             </mat-form-field>
