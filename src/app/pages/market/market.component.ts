@@ -326,12 +326,12 @@ export class MarketComponent implements OnInit {
 
   getProductDetails() {
     try {
-      this.http.get('https://api-dev.themafic.co.in/api/MaficDashboard/getProductData').subscribe(data => {
+      this.http.get('https://api-dev.themafic.co.in/api/products').subscribe(data => {
         console.log(data);
         this.res = data;
         console.log(this.res)
-        if (this.res.responseCode == 200) {
-          this.ProductData = this.res.response;
+        if (this.res.status == 200) {
+          this.ProductData = this.res.data;
           console.log(this.ProductData)
         }
 
