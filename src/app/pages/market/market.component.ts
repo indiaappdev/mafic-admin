@@ -108,7 +108,7 @@ export class MarketComponent implements OnInit {
   displayedColumnsForTax: string[] = ['ID', 'SAC_HSN', 'SACHSN_Code', 'Description', 'CGST', 'SGST', 'IGST', 'ACTION'];
   displayedColumnsForPin: string[] = ['ID', 'PO NAME', 'PIN-Code', 'DISTRICT', 'CITY', 'STATE', 'DELIVERY CHARGE', 'ACTION'];
   displayedColumnsForOrderDetails: string[] = ['ID', 'OrderId', 'PRODUCT', 'NAME', 'PRICE', 'QUANTITY', 'DISCOUNT(%)', 'GST', 'TOTAL', 'DATE', 'STATUS', 'INVOICE', 'UPDATE'];
-  displayedColumnsForTandCDetails: string[] = ['SiNo', 'ID', 'HSN_CODE', 'SLUG', 'TITLE', 'IMAGE', 'ISACTIVE', 'CREATED_AT', 'UPDATED_AT', 'ACTION'];
+  displayedColumnsForTandCDetails: string[] = ['SiNo', 'ID', 'FILE', 'SLUG', 'TITLE', 'ACTION'];
   
   formDataforProductCategory = {
     text: '',
@@ -430,29 +430,29 @@ export class MarketComponent implements OnInit {
 
   getTandCDetails() {
     try {
-      this.http.get('https://api-dev.themafic.co.in/api/MaficDashboard/terms', {}).subscribe(data => {
-        console.log(data);
-        this.res = data;
-        console.log(this.res)
-        if (this.res.responseCode == 200) {
-          this.TandCDetails = this.res.response;
-          console.log(this.TandCDetails)
+      this.http.get('https://api-dev.themafic.co.in/api/terms', {}).subscribe(
+        (data: any) => {
+          console.log('API response:', data);
+          if (data.status === 200) {
+            this.TandCDetails = data.data;
+            console.log('Terms and Conditions Details:', this.TandCDetails);
+  
+            this.dataTandCDetails = new MatTableDataSource<any>(this.TandCDetails);
+            this.dataTandCDetails.paginator = this.paginatorForOrderDetails;
+            console.log('Data Source:', this.dataTandCDetails);
+          } else {
+            console.error('Unexpected response status:', data.status);
+          }
+        },
+        (error) => {
+          console.error('Error fetching terms and conditions:', error);
         }
-
-      }, error => { },
-        () => {
-          console.log(this.TandCDetails)
-          this.dataTandCDetails = new MatTableDataSource<any>();
-          this.dataTandCDetails.data = this.TandCDetails
-          this.dataTandCDetails.paginator = this.paginatorForOrderDetails;
-          console.log(this.dataTandCDetails)
-        });
-
-    }
-    catch (error) {
-      console.error("not able to get response from getProductCategory API")
+      );
+    } catch (error) {
+      console.error('An unexpected error occurred:', error);
     }
   }
+  
 
   addProductCategory() {
     const dialogRef = this.dialog.open(AddProductCategoryComponent, {

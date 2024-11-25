@@ -239,7 +239,7 @@ export class AddProductComponent implements OnInit {
       uploadData.append('descriptionHeader', this.formData.descriptionHeader);
       uploadData.append('description', this.formData.Description);
 
-      uploadData.append('finalProductPrice', this.formData.productPriceDiscount);
+      uploadData.append('finalProductPrice', this.formData.finalProductPrice);
       uploadData.append('productSize', this.formData.productSize);
       uploadData.append('netWeight', this.formData.netWeight);
       uploadData.append('material', this.formData.material);
@@ -249,7 +249,7 @@ export class AddProductComponent implements OnInit {
       uploadData.append('minOrderQuantity', this.formData.minOrderQuantity);
       uploadData.append('sampleMaterialId', this.formData.sampleMaterialId);
       uploadData.append('materialOrderingAndPaymentTermsId', this.formData.materialOrderingAndPaymentTermsId);
-      // uploadData.append('boxingAndPackagingId', this.formData.boxingAndPackagingId);
+      uploadData.append('boxingAndPackagingId', this.formData.boxingAndPackagingId);
       uploadData.append('freightId', this.formData.freightId);
       uploadData.append('insuranceId', this.formData.insuranceId);
       uploadData.append('incotermId', this.formData.incotermId);
