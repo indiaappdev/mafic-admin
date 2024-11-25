@@ -21,6 +21,7 @@ export class AddProductTermsComponent implements OnInit {
   formData: any;
   imgs: any=[];
   slugOptions: { slug: string, name: string }[] = [];
+  selectedFile: File | null = null;
 
   constructor(public sharedDataService: SharedDataService,
     private dialog: MatDialog,
@@ -28,8 +29,8 @@ export class AddProductTermsComponent implements OnInit {
 
   ngOnInit(): void {
     this.formData = new FormGroup({
-      content: new FormControl('', Validators.required),
-      hsn_code: new FormControl('', Validators.required),
+      // content: new FormControl('', Validators.required),
+      // hsn_code: new FormControl('', Validators.required),
       slug: new FormControl('', Validators.required),
       title: new FormControl('', Validators.required),
     });
@@ -52,6 +53,13 @@ export class AddProductTermsComponent implements OnInit {
     this.dialog.closeAll();
   }
 
+  onFileSelected(event: Event) {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      this.selectedFile = input.files[0];
+    }
+  }
+
   submitForm(form: NgForm) {
     if (form.valid) {
       this.addProductData();
@@ -62,26 +70,26 @@ export class AddProductTermsComponent implements OnInit {
   }
   
   getSACData(){
-    this.sharedDataService.showLoader();
-    try {
-      this.http.get('https://api.themafic.com/api/MaficDashboard/getHsnCode').subscribe(data => {
-        console.log(data);
-        this.res = JSON.parse(JSON.stringify(data));
-        console.log(this.res)
-        if (this.res.responseCode == 200) {
-          this.sharedDataService.hideLoader();
-           this.hsn_code = this.res.response;
-          console.log(this.hsn_code)
-        }
+    // this.sharedDataService.showLoader();
+    // try {
+    //   this.http.get('https://api.themafic.com/api/MaficDashboard/getHsnCode').subscribe(data => {
+    //     console.log(data);
+    //     this.res = JSON.parse(JSON.stringify(data));
+    //     console.log(this.res)
+    //     if (this.res.responseCode == 200) {
+    //       this.sharedDataService.hideLoader();
+    //        this.hsn_code = this.res.response;
+    //       console.log(this.hsn_code)
+    //     }
 
-      }, error => { },
-        () => {
-        });
+    //   }, error => { },
+    //     () => {
+    //     });
 
-    }
-    catch (error) {
-      console.error("not able to get response from getProductCategory API")
-    }
+    // }
+    // catch (error) {
+    //   console.error("not able to get response from getProductCategory API")
+    // }
   }
 
   addFileInput() {
@@ -116,12 +124,16 @@ export class AddProductTermsComponent implements OnInit {
     this.sharedDataService.showLoader();
     var uploadData;
     uploadData = new FormData();
-    uploadData.append('content', this.formData.content);
-    uploadData.append('hsn_code', this.formData.hsn_code);
+    // uploadData.append('content', this.formData.content);
+    // uploadData.append('hsn_code', this.formData.hsn_code);
     uploadData.append('slug', this.formData.slug);
     uploadData.append('title', this.formData.title);
 
-    this.http.post('https://api-dev.themafic.co.in/api/MaficDashboard/terms', uploadData)
+    if (this.selectedFile) {
+      uploadData.append('file', this.selectedFile, this.selectedFile.name);
+    }
+
+    this.http.post('https://api-dev.themafic.co.in/api/terms', uploadData)
       .subscribe(data => {
         console.log(data);
         this.sharedDataService.hideLoader();
