@@ -25,7 +25,7 @@ export class DeleteProductTermsComponent implements OnInit {
         "id": this.data.element.id,     
     };
 console.log(httpbody)
-    this.http.post('https://api-dev.themafic.co.in/api/MaficDashboard/terms/delete', httpbody)
+    this.http.post('https://api-dev.themafic.co.in/api/terms/delete', httpbody)
       .subscribe(data => {
         console.log(data);
         this.sharedDataService.hideLoader();
