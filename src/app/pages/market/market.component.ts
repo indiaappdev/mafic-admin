@@ -49,6 +49,7 @@ export class MarketComponent implements OnInit {
   @ViewChild('paginatorForTax', { static: false }) paginatorForTax!: MatPaginator;
   @ViewChild('paginatorForPin', { static: false }) paginatorForPin!: MatPaginator;
   @ViewChild('paginatorForOrderDetails', { static: false }) paginatorForOrderDetails!: MatPaginator;
+  @ViewChild('paginatorForTandC', { static: false }) paginatorForTandC!: MatPaginator;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   userDetails:any = [];
@@ -108,7 +109,7 @@ export class MarketComponent implements OnInit {
   displayedColumnsForTax: string[] = ['ID', 'SAC_HSN', 'SACHSN_Code', 'Description', 'CGST', 'SGST', 'IGST', 'ACTION'];
   displayedColumnsForPin: string[] = ['ID', 'PO NAME', 'PIN-Code', 'DISTRICT', 'CITY', 'STATE', 'DELIVERY CHARGE', 'ACTION'];
   displayedColumnsForOrderDetails: string[] = ['ID', 'OrderId', 'PRODUCT', 'NAME', 'PRICE', 'QUANTITY', 'DISCOUNT(%)', 'GST', 'TOTAL', 'DATE', 'STATUS', 'INVOICE', 'UPDATE'];
-  displayedColumnsForTandCDetails: string[] = ['SiNo', 'ID', 'FILE', 'SLUG', 'TITLE', 'ACTION'];
+  displayedColumnsForTandCDetails: string[] = ['SiNo', 'SLUG', 'TITLE', 'IMAGE', 'ACTION'];
   
   formDataforProductCategory = {
     text: '',
@@ -144,10 +145,10 @@ export class MarketComponent implements OnInit {
   }
 
   fetchSlugData(): void {
-    const apiUrl = 'https://api-dev.themafic.co.in/api/MaficDashboard/terms/details';
+    const apiUrl = 'https://api-dev.themafic.co.in/api/terms/keys';
     this.http.get<any>(apiUrl).subscribe(response => {
-      if (response.responseCode === 200 && response.response) {
-        this.slugOptions = response.response; // Store the API response
+      if (response.status === 200 && response.data) {
+        this.slugOptions = response.data; // Store the API response
       }
     }, error => {
       console.error('Error fetching slug data', error); // Handle the error
@@ -430,29 +431,29 @@ export class MarketComponent implements OnInit {
 
   getTandCDetails() {
     try {
-      this.http.get('https://api-dev.themafic.co.in/api/terms', {}).subscribe(
-        (data: any) => {
-          console.log('API response:', data);
-          if (data.status === 200) {
-            this.TandCDetails = data.data;
-            console.log('Terms and Conditions Details:', this.TandCDetails);
-  
-            this.dataTandCDetails = new MatTableDataSource<any>(this.TandCDetails);
-            this.dataTandCDetails.paginator = this.paginatorForOrderDetails;
-            console.log('Data Source:', this.dataTandCDetails);
-          } else {
-            console.error('Unexpected response status:', data.status);
-          }
-        },
-        (error) => {
-          console.error('Error fetching terms and conditions:', error);
+      this.http.get('https://api-dev.themafic.co.in/api/terms', {}).subscribe(data => {
+        console.log(data);
+        this.res = data;
+        console.log(this.res)
+        if (this.res.status == 200) {
+          this.TandCDetails = this.res.data;
+          console.log(this.TandCDetails)
         }
-      );
-    } catch (error) {
-      console.error('An unexpected error occurred:', error);
+
+      }, error => { },
+        () => {
+          console.log(this.TandCDetails)
+          this.dataTandCDetails = new MatTableDataSource<any>();
+          this.dataTandCDetails.data = this.TandCDetails
+          this.dataTandCDetails.paginator = this.paginatorForTandC;
+          console.log(this.dataTandCDetails)
+        });
+
     }
-  }
-  
+    catch (error) {
+      console.error("not able to get response from getProductCategory API")
+    }
+  }  
 
   addProductCategory() {
     const dialogRef = this.dialog.open(AddProductCategoryComponent, {

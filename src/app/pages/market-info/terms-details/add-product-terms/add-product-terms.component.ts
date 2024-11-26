@@ -39,10 +39,10 @@ export class AddProductTermsComponent implements OnInit {
   }
 
   fetchSlugOptions(): void {
-    const apiUrl = 'https://api-dev.themafic.co.in/api/MaficDashboard/terms/details';
+    const apiUrl = 'https://api-dev.themafic.co.in/api/terms/keys';
     this.http.get<any>(apiUrl).subscribe(response => {
-      if (response.responseCode === 200 && response.response) {
-        this.slugOptions = response.response; // Store the API response in slugOptions
+      if (response.status === 200 && response.data) {
+        this.slugOptions = response.data; // Store the API response in slugOptions
       }
     }, error => {
       console.error('Error fetching slug options', error); // Handle the error
