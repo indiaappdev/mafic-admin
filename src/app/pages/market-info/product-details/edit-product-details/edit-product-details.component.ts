@@ -112,25 +112,22 @@ export class EditProductDetailsComponent implements OnInit {
   getSingleProductData() {
     this.sharedDataService.showLoader();
     try {
-      var httpbody: Object = {
-        "productId": this.productID
-      }
       // this.http.post('https://api.themafic.com/api/MaficDashboard/getSingleProduct', httpbody).subscribe(data => {
-        this.http.post('https://api-dev.themafic.co.in/api/MaficDashboard/getSingleProduct', httpbody).subscribe(data => {
+        this.http.get(`https://api-dev.themafic.co.in/api/products/show?id=${this.productID}`).subscribe(data => {
         console.log(data);
         this.res = JSON.parse(JSON.stringify(data));
         console.log(this.res)
-        if (this.res.responseCode == 200) {
+        if (this.res.status == 200) {
           this.sharedDataService.hideLoader();
-          this.SingleProductData = this.res.response;
-          this.productData = this.SingleProductData.productData;
-          this.fileInputs = this.productExistingImage = this.SingleProductData.productImages
+          this.SingleProductData = this.res.data;
+          this.productData = this.res.data;
+          this.fileInputs = this.productExistingImage = this.SingleProductData.images
           console.log(this.productData)
           console.log(this.productExistingImage)
 
           // 
           this.formData = {
-            productName: this.productData[0].name,
+            productName: this.productData.name,
             artName: this.productData[0].art_name,
             artistName: this.productData[0].artist_name,
             productCategory: this.productData[0].category,

@@ -3,6 +3,10 @@ import { Component, EventEmitter, Inject, OnInit } from '@angular/core';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 // @import '~bootstrap/dist/css/bootstrap.min.css';
 
+interface ProductImage {
+  id: number;
+  images: string;
+}
 
 @Component({
   selector: 'app-view-product-details',
@@ -25,26 +29,54 @@ export class ViewProductDetailsComponent implements OnInit {
   ngOnInit(): void {
     this.getProductImages();
   }
-  getProductImages(){
+  // getProductImages(){
+  //   try {
+  //     var httpBody: Object={
+  //       "productId": this.productID
+  //     }
+  //     this.http.get(`https://api-dev.themafic.co.in/api/products/images?id=${this.productID}`).subscribe(data => {
+  //       console.log(data);
+  //       this.res = data;
+  //       console.log(this.res)
+  //       if (this.res.status == 200) {
+  //         this.images = this.res.data.images;
+  //         console.log(this.images)
+  //       }
+
+  //     }, error => { },
+  //       () => {});
+
+  //   }
+  //   catch (error) {
+  //     console.error("not able to get response from getProductCategory API")
+  //   }
+  // }
+
+  getProductImages() {
     try {
-      var httpBody: Object={
+      var httpBody: Object = {
         "productId": this.productID
-      }
-      this.http.post('https://api.themafic.com/api/MaficDashboard/getProductImages',httpBody).subscribe(data => {
-        console.log(data);
-        this.res = data;
-        console.log(this.res)
-        if (this.res.responseCode == 200) {
-          this.images = this.res.response;
-          console.log(this.images)
+      };
+      this.http.get(`https://api-dev.themafic.co.in/api/products/images?id=${this.productID}`).subscribe(
+        (data: any) => {
+          console.log(data);
+          this.res = data;
+          console.log(this.res);
+          if (this.res.status === 200) {
+            // Map the images from the data array
+            this.images = this.res.data.map((item: ProductImage) => item.images);
+            console.log(this.images);
+          }
+        },
+        error => {
+          console.error("Error occurred while fetching product images:", error);
+        },
+        () => {
+          // Optional complete handler
         }
-
-      }, error => { },
-        () => {});
-
-    }
-    catch (error) {
-      console.error("not able to get response from getProductCategory API")
+      );
+    } catch (error) {
+      console.error("Unable to get response from getProductImages API", error);
     }
   }
 
