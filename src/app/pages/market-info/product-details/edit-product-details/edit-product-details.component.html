@@ -1,4 +1,4 @@
-<form novalidate name="addUserForm" class="form" (ngSubmit)="submitForm(addUserForm)" #addUserForm="ngForm">
+<!-- <form novalidate name="addUserForm" class="form" (ngSubmit)="submitForm(addUserForm)" #addUserForm="ngForm">
     <div class="row" style="height:90dvh">
         <div class="form-group col-md-6 mb-3">
             <mat-form-field appearance="legacy" style="width: 100%;">
@@ -250,6 +250,369 @@
             </div>
         </div>   
 
+        <div class="form-group col-md-12 flex">
+            <button type="submit" class="btn btn-green m-3" [disabled]="addUserForm.invalid">Save</button>
+            <button type="button" class="btn btn-gold m-3" (click)="cancelForm()">Cancel</button>
+        </div>
+    </div>
+</form> -->
+
+<form novalidate name="addUserForm" class="form" (ngSubmit)="submitForm(addUserForm)" #addUserForm="ngForm">
+    <div class="row" style="height:90dvh">
+        <div class="form-group col-md-6 mb-3">
+            <mat-form-field appearance="legacy" style="width: 100%;">
+                <mat-label>Product Name *</mat-label>
+                <input matInput required [(ngModel)]="formData.productName" name="productName" id="productName"
+                    #productName="ngModel" aria-describedby="productName">
+            </mat-form-field>
+        </div>
+        <div class="form-group col-md-6 mb-3">
+            <mat-form-field appearance="legacy" style="width: 100%;">
+                <mat-label>Art Name *</mat-label>
+                <input matInput required [(ngModel)]="formData.artName" name="artName" id="artName" #artName="ngModel"
+                    aria-describedby="artName">
+            </mat-form-field>
+        </div>
+        <div class="form-group col-md-6 mb-3">
+            <mat-form-field appearance="legacy" style="width: 100%;">
+                <mat-label>Artist Name *</mat-label>
+                <input matInput required [(ngModel)]="formData.artistName" name="artistName" id="artistName"
+                    #artistName="ngModel" aria-describedby="artistName">
+            </mat-form-field>
+        </div>
+        <div class="form-group col-md-6 mb-3">
+            <mat-form-field appearance="legacy" style="width: 100%;">
+              <mat-label>Product Category *</mat-label>
+              <mat-select formControlName="productCategory" name="productCategory" id="productCategory">
+                <mat-option *ngFor="let category of ProductCategoryList" [value]="category.id">
+                  {{ category.category }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+        </div>          
+        <div class="form-group col-md-6 mb-3">
+            <mat-form-field appearance="legacy" style="width: 100%;">
+                <mat-label>Product Sub Category *</mat-label>
+                <input matInput required [(ngModel)]="formData.subCategory" name="subCategory" id="subCategory"
+                    #subCategory="ngModel" aria-describedby="subCategory">
+            </mat-form-field>
+        </div>
+        <div class="form-group col-md-6 mb-3">
+            <mat-form-field appearance="legacy" style="width: 100%;">
+                <mat-label>Product Price *</mat-label>
+                <input matInput required [(ngModel)]="formData.productPrice" name="productPrice" id="productPrice"
+                    #productPrice="ngModel" aria-describedby="productPrice">
+            </mat-form-field>
+        </div>
+        <div class="form-group col-md-6 mb-3">
+            <mat-form-field appearance="legacy" style="width: 100%;">
+                <mat-label>Product Discount *</mat-label>
+                <input matInput required [(ngModel)]="formData.productDiscount" name="productDiscount"
+                    id="productDiscount" #productDiscount="ngModel" aria-describedby="productDiscount">
+            </mat-form-field>
+        </div>
+        <div class="form-group col-md-6 mb-3">
+            <mat-form-field appearance="legacy" style="width: 100%;">
+                <mat-label>Final Product price and discount *</mat-label>
+                <input matInput required [(ngModel)]="formData.finalProductPrice" name="finalProductPrice" id="finalProductPrice"
+                    #finalProductPrice="ngModel" aria-describedby="finalProductPrice">
+            </mat-form-field>
+        </div>
+        <div class="form-group col-md-6 mb-3">
+            <mat-form-field appearance="legacy" style="width: 100%;">
+                <mat-label>Product SAC/HSN Code *</mat-label>
+                <mat-select [(ngModel)]="formData.productSACHSNCode" name="productSACHSNCode" id="productSACHSNCode">
+                    <mat-option *ngFor="let code of productSACHSNCode" [value]="code.id">
+                        {{ code.code }} - {{code.title}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="form-group col-md-6 mb-3">
+            <mat-form-field appearance="legacy" style="width: 100%;">
+                <mat-label>Product Quantity Available*</mat-label>
+                <input matInput required [(ngModel)]="formData.quantity" name="quantity" id="quantity"
+                    #quantity="ngModel" aria-describedby="quantity">
+            </mat-form-field>
+        </div>
+        <!-- <div class="form-group col-md-6 mb-3">
+            <mat-form-field appearance="legacy" style="width: 100%;">
+                <mat-label>Product SKU *</mat-label>
+                <input matInput required [(ngModel)]="formData.productSKU" name="productSKU" id="productSKU"
+                    #productSKU="ngModel" aria-describedby="productSKU">
+            </mat-form-field>
+        </div> -->
+        <div class="form-group col-md-6 mb-3">
+            <mat-form-field appearance="legacy" style="width: 100%;">
+                <mat-label>Product Length in CM</mat-label>
+                <input matInput [(ngModel)]="formData.productSizeLength" name="productSizeLength" id="productSizeLength" #productSizeLength="ngModel"
+                    aria-describedby="productSizeLength">
+            </mat-form-field>
+        </div>
+        <div class="form-group col-md-6 mb-3">
+            <mat-form-field appearance="legacy" style="width: 100%;">
+                <mat-label>Product Width in CM</mat-label>
+                <input matInput [(ngModel)]="formData.productSizeWidth" name="productSizeWidth" id="productSizeWidth" #productSizeWidth="ngModel"
+                    aria-describedby="productSizeWidth">
+            </mat-form-field>
+        </div>
+        <div class="form-group col-md-6 mb-3">
+            <mat-form-field appearance="legacy" style="width: 100%;">
+                <mat-label>Product Height in CM</mat-label>
+                <input matInput [(ngModel)]="formData.productSizeHeight" name="productSizeHeight" id="productSizeHeight" #productSizeHeight="ngModel"
+                    aria-describedby="productSizeHeight">
+            </mat-form-field>
+        </div>
+        <div class="form-group col-md-6 mb-3">
+            <mat-form-field appearance="legacy" style="width: 100%;">
+                <mat-label>Product Length with primary packing material in CM *</mat-label>
+                <input matInput required [(ngModel)]="formData.sizeLength" name="sizeLength" id="sizeLength"
+                    #sizeLength="ngModel" aria-describedby="sizeLength">
+            </mat-form-field>
+        </div>
+        <div class="form-group col-md-6 mb-3">
+            <mat-form-field appearance="legacy" style="width: 100%;">
+                <mat-label>Product Width with primary packing material in CM *</mat-label>
+                <input matInput required [(ngModel)]="formData.sizeWidth" name="sizeWidth" id="sizeWidth"
+                    #sizeWidth="ngModel" aria-describedby="sizeWidth">
+            </mat-form-field>
+        </div>
+        <div class="form-group col-md-6 mb-3">
+            <mat-form-field appearance="legacy" style="width: 100%;">
+                <mat-label>Product Height with primary packing material in CM *</mat-label>
+                <input matInput required [(ngModel)]="formData.sizeHeight" name="sizeHeight" id="sizeHeight"
+                    #sizeHeight="ngModel" aria-describedby="sizeHeight">
+            </mat-form-field>
+        </div>
+        <div class="form-group col-md-6 mb-3">
+            <mat-form-field appearance="legacy" style="width: 100%;">
+                <mat-label>Gross Weight in Kg *</mat-label>
+                <input matInput required [(ngModel)]="formData.grossWeight" name="grossWeight" id="grossWeight"
+                    #grossWeight="ngModel" aria-describedby="grossWeight">
+            </mat-form-field>
+        </div>
+        <div class="form-group col-md-6 mb-3">
+            <mat-form-field appearance="legacy" style="width: 100%;">
+                <mat-label>Net Weight in Kg *</mat-label>
+                <input matInput required [(ngModel)]="formData.netWeight" name="netWeight" id="netWeight"
+                    #netWeight="ngModel" aria-describedby="netWeight">
+            </mat-form-field>
+        </div>
+        <div class="form-group col-md-6 mb-3">
+            <mat-form-field appearance="legacy" style="width: 100%;">
+                <mat-label>Material *</mat-label>
+                <input matInput required [(ngModel)]="formData.material" name="material" id="material"
+                    #material="ngModel" aria-describedby="material">
+            </mat-form-field>
+        </div>
+        <div class="form-group col-md-6 mb-3">
+            <mat-form-field appearance="legacy" style="width: 100%;">
+                <mat-label>Country of Origin *</mat-label>
+                <mat-select [(ngModel)]="formData.productCountry" name="productCountry" id="productCountry">
+                    <mat-option *ngFor="let code of productCountry" [value]="code.id">
+                        {{ code.name }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <!-- <div class="form-group col-md-6 mb-3">
+            <mat-form-field appearance="legacy" style="width: 100%;">
+                <mat-label>Country of Origin *</mat-label>
+                <input matInput required [(ngModel)]="formData.originCountry" name="originCountry" id="originCountry"
+                    #originCountry="ngModel" aria-describedby="originCountry">
+            </mat-form-field>
+        </div> -->
+        <div class="form-group col-md-6 mb-3">
+            <mat-form-field appearance="legacy" style="width: 100%;">
+                <mat-label>Product Features *</mat-label>
+                <input matInput required [(ngModel)]="formData.productFeatures" name="productFeatures" id="productFeatures"
+                    #productFeatures="ngModel" aria-describedby="productFeatures">
+            </mat-form-field>
+        </div>
+        <div class="form-group col-md-6 mb-3">
+            <mat-form-field appearance="legacy" style="width: 100%;">
+                <mat-label>Minimum order quantity *</mat-label>
+                <input matInput required [(ngModel)]="formData.minOrderQuantity" name="minOrderQuantity" id="minOrderQuantity"
+                    #minOrderQuantity="ngModel" aria-describedby="minOrderQuantity">
+            </mat-form-field>
+        </div>
+        <!-- <div class="form-group col-md-6 mb-3">
+            <mat-form-field appearance="legacy" style="width: 100%;">
+                <mat-label>Sample material *</mat-label>
+                <input matInput required [(ngModel)]="formData.sampleMaterialId" name="sampleMaterialId" id="sampleMaterialId"
+                    #sampleMaterialId="ngModel" aria-describedby="sampleMaterialId">
+            </mat-form-field>
+        </div> -->
+
+        <div class="form-group col-md-6 mb-3 d-flex align-items-center">
+            <mat-form-field appearance="legacy" style="flex: 1; margin-right: 10px;">
+                <mat-label>Sample material *</mat-label>
+                <mat-select [(ngModel)]="formData.sampleMaterialId" (selectionChange)="onSelectionChange($event, 'sampleMaterial')" name="sampleMaterialId" id="sampleMaterialId">
+                    <mat-option *ngFor="let item of sampleMaterialOptions" [value]="item.id">
+                        {{ item.title }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <!-- <span *ngIf="formData.sampleMaterialId" class="msg-tag bg-success cursor-pointer px-5" (click)="openViewContentPopup($event, 'sampleMaterial')">View</span> -->
+        </div> 
+
+        <div class="form-group col-md-6 mb-3 d-flex align-items-center">
+            <mat-form-field appearance="legacy" style="flex: 1; margin-right: 10px;">
+                <mat-label>Certification and Compliance *</mat-label>
+                <mat-select [(ngModel)]="formData.certificationAndComplianceId" (selectionChange)="onSelectionChange($event, 'certificationAndCompliance')" name="certificationAndComplianceId" id="certificationAndComplianceId">
+                    <mat-option *ngFor="let item of certificationAndComplianceOptions" [value]="item.id">
+                        {{ item.title }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <!-- <span class="msg-tag bg-success cursor-pointer px-5" (click)="openViewContentPopup($event, 'certificationAndCompliance')">View</span> -->
+        </div>        
+        
+        <div class="form-group col-md-6 mb-3 d-flex align-items-center">
+            <mat-form-field appearance="legacy" style="flex: 1; margin-right: 10px;">
+                <mat-label>Material ordering and payment terms *</mat-label>
+                <mat-select [(ngModel)]="formData.materialOrderingAndPaymentTermsId" (selectionChange)="onSelectionChange($event, 'materialOrdering')" name="materialOrderingAndPaymentTermsId" id="materialOrderingAndPaymentTermsId">
+                    <mat-option *ngFor="let item of materialOrderingOptions" [value]="item.id">
+                        {{ item.title }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <!-- <span class="msg-tag bg-success cursor-pointer px-5" (click)="openViewContentPopup($event, 'materialOrdering')">View</span> -->
+        </div>
+        
+        <div class="form-group col-md-6 mb-3 d-flex align-items-center">
+            <mat-form-field appearance="legacy" style="flex: 1; margin-right: 10px;">
+                <mat-label>Boxing and packaging *</mat-label>
+                <mat-select [(ngModel)]="formData.boxingAndPackagingId" (selectionChange)="onSelectionChange($event, 'boxingAndPackaging')" name="boxingAndPackagingId" id="boxingAndPackagingId">
+                    <mat-option *ngFor="let item of boxingAndPackagingOptions" [value]="item.id">
+                        {{ item.title }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <!-- <span class="msg-tag bg-success cursor-pointer px-5" (click)="openViewContentPopup($event, 'boxingAndPackaging')">View</span> -->
+        </div>
+        
+        <div class="form-group col-md-6 mb-3 d-flex align-items-center">
+            <mat-form-field appearance="legacy" style="flex: 1; margin-right: 10px;">
+                <mat-label>Freight *</mat-label>
+                <mat-select [(ngModel)]="formData.freightId" (selectionChange)="onSelectionChange($event, 'freight')" name="freightId" id="freightId">
+                    <mat-option *ngFor="let item of freightOptions" [value]="item.id">
+                        {{ item.title }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <!-- <span class="msg-tag bg-success cursor-pointer px-5" (click)="openViewContentPopup($event, 'freight')">View</span> -->
+        </div>
+        
+        <div class="form-group col-md-6 mb-3 d-flex align-items-center">
+            <mat-form-field appearance="legacy" style="flex: 1; margin-right: 10px;">
+                <mat-label>Insurance *</mat-label>
+                <mat-select [(ngModel)]="formData.insuranceId" (selectionChange)="onSelectionChange($event, 'insurance')" name="insuranceId" id="insuranceId">
+                    <mat-option *ngFor="let item of insuranceOptions" [value]="item.id">
+                        {{ item.title }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <!-- <span class="msg-tag bg-success cursor-pointer px-5" (click)="openViewContentPopup($event, 'insurance')">View</span> -->
+        </div>
+        
+        <div class="form-group col-md-6 mb-3 d-flex align-items-center">
+            <mat-form-field appearance="legacy" style="flex: 1; margin-right: 10px;">
+                <mat-label>Incoterm *</mat-label>
+                <mat-select [(ngModel)]="formData.incotermId" (selectionChange)="onSelectionChange($event, 'incoterm')" name="incotermId" id="incotermId">
+                    <mat-option *ngFor="let item of incotermOptions" [value]="item.id">
+                        {{ item.title }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <!-- <span class="msg-tag bg-success cursor-pointer px-5" (click)="openViewContentPopup($event, 'incoterm')">View</span> -->
+        </div>
+        
+        <div class="form-group col-md-6 mb-3 d-flex align-items-center">
+            <mat-form-field appearance="legacy" style="flex: 1; margin-right: 10px;">
+                <mat-label>Brand Warranty</mat-label>
+                <mat-select [(ngModel)]="formData.warranty" (selectionChange)="onSelectionChange($event, 'brandWarranty')" name="warranty" id="warranty">
+                    <mat-option *ngFor="let item of brandWarrantyOptions" [value]="item.id">
+                        {{ item.title }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <!-- <span class="msg-tag bg-success cursor-pointer px-5" (click)="openViewContentPopup($event, 'brandWarranty')">View</span> -->
+        </div>
+        
+        <div class="form-group col-md-6 mb-3 d-flex align-items-center">
+            <mat-form-field appearance="legacy" style="flex: 1; margin-right: 10px;">
+                <mat-label>Return Policy</mat-label>
+                <mat-select [(ngModel)]="formData.returnPolicy" (selectionChange)="onSelectionChange($event, 'returnPolicy')" name="returnPolicy" id="returnPolicy">
+                    <mat-option *ngFor="let item of returnPolicyOptions" [value]="item.id">
+                        {{ item.title }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <!-- <span class="msg-tag bg-success cursor-pointer px-5" (click)="openViewContentPopup($event, 'returnPolicy')">View</span> -->
+        </div>        
+        
+        <!-- <div class="form-group col-md-6 mb-3">
+            <mat-form-field appearance="legacy" style="width: 100%;">
+                <mat-label>Pre-Shipment inspection *</mat-label>
+                <input matInput required [(ngModel)]="formData.preShipmentInspectionId" name="preShipmentInspectionId" id="preShipmentInspectionId"
+                    #preShipmentInspectionId="ngModel" aria-describedby="preShipmentInspectionId">
+            </mat-form-field>
+        </div> -->
+
+        <div class="form-group col-md-6 mb-3">
+            <mat-form-field appearance="legacy" style="width: 100%;">
+                <mat-label>Pre-Shipment inspection *</mat-label>
+                <mat-select required [(value)]="formData.preShipmentInspectionId" name="preShipmentInspectionId" id="preShipmentInspectionId">
+                    <mat-option *ngFor="let option of preShipmentInspectionOptions" [value]="option">
+                        {{ option }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <div class="form-group col-md-6 mb-3">
+            <mat-form-field appearance="legacy" style="width: 100%;">
+                <mat-label>Delivery</mat-label>
+                <mat-select required [(value)]="formData.delivery" name="delivery" id="delivery">
+                    <mat-option *ngFor="let option of deliveryOptions" [value]="option">
+                        {{ option }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="form-group col-md-6 mb-3">
+            <mat-form-field appearance="legacy" style="width: 100%;">
+                <mat-label>Description Header</mat-label>
+                <input matInput required [(ngModel)]="formData.descriptionHeader" name="descriptionHeader"
+                    id="descriptionHeader" #descriptionHeader="ngModel" aria-describedby="descriptionHeader">
+            </mat-form-field>
+        </div>
+        <div class="form-group col-md-12 mb-3">
+            <mat-form-field appearance="legacy" style="width: 100%;">
+              <mat-label>Description</mat-label>
+              <textarea matInput required [(ngModel)]="formData.Description" name="Description" id="Description"
+                        #Description="ngModel" aria-describedby="Description" rows="5"></textarea>
+            </mat-form-field>
+        </div>
+
+        <div class="row">
+            <div *ngFor="let fileInput of fileInputs; let i = index">
+                <div class="form-group col-md-5">
+                    <label for="imageUpload{{fileInput.id}}">Image Upload {{fileInput.id}}:</label>
+                    <input type="file" class="form-control-file" id="imageUpload{{fileInput.id}}" accept="image/*"
+                        (change)="previewImage($event, fileInput.id)">
+                    <img *ngIf="fileInput.images" [src]="fileInput.images" alt="Image Preview"
+                        class="img-thumbnail mt-2">
+                    <button type="button" class="btn btn-danger mt-2" (click)="removeFileInput(i,fileInput.id)"
+                        *ngIf="fileInputs.length > 1">Remove</button>
+                </div>
+            </div>
+            <div class="form-group col-md-2">
+                <button type="button" class="btn btn-primary mt-2" (click)="addFileInput()">Add Another Image</button>
+            </div>
+        </div>
+        
         <div class="form-group col-md-12 flex">
             <button type="submit" class="btn btn-green m-3" [disabled]="addUserForm.invalid">Save</button>
             <button type="button" class="btn btn-gold m-3" (click)="cancelForm()">Cancel</button>
