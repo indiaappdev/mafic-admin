@@ -105,7 +105,7 @@ export class MarketComponent implements OnInit {
   dataTandCDetails: MatTableDataSource<any>;
 
   displayedColumnsForProductCategory: string[] = ['ID', 'CATEGORY', 'IMAGE', 'ACTION'];
-  displayedColumnsForProductDetails: string[] = ['ID', 'NAME', 'PRICE', 'QUANTITY', 'DISCOUNT', 'CATEGORY', 'BRAND WARRANTY', 'RETURN POLICY', 'IMAGE', 'ACTION'];
+  displayedColumnsForProductDetails: string[] = ['ID', 'NAME', 'CATEGORY', 'PRICE', 'DISCOUNT', 'DISCOUNT_PRICE', 'QUANTITY', 'SKU', 'SIZE', 'WEIGHT', 'IMAGE', 'ACTION'];
   displayedColumnsForTax: string[] = ['ID', 'SAC_HSN', 'SACHSN_Code', 'Description', 'CGST', 'SGST', 'IGST', 'ACTION'];
   displayedColumnsForPin: string[] = ['ID', 'PO NAME', 'PIN-Code', 'DISTRICT', 'CITY', 'STATE', 'DELIVERY CHARGE', 'ACTION'];
   displayedColumnsForOrderDetails: string[] = ['ID', 'OrderId', 'PRODUCT', 'NAME', 'PRICE', 'QUANTITY', 'DISCOUNT(%)', 'GST', 'TOTAL', 'DATE', 'STATUS', 'INVOICE', 'UPDATE'];
