@@ -22,32 +22,10 @@ export class DeleteProductDetailsComponent implements OnInit {
   deleteProductItem() {
     this.sharedDataService.showLoader();
     var httpbody: Object = {      
-      "productId":{
-        "id": this.data.element.id,
-        "name": this.data.element.name,
-        "header": this.data.element.header,
-        "description": this.data.element.description,
-        "price": this.data.element.price,
-        "discount": this.data.element.discount,
-        "categoryId": this.data.element.categoryId,
-        "sub_category": this.data.element.sub_category,
-        "sku": this.data.element.sku,
-        "item_no": this.data.element.item_no,
-        "art_name": this.data.element.art_name,
-        "artist_name": this.data.element.artist_name,
-        "quantity": this.data.element.quantity,
-        "size": this.data.element.size,
-        "category": this.data.element.category,
-        "hsn_code": this.data.element.hsn_code,
-        "total_price": this.data.element.total_price,
-        "brand_warranty": this.data.element.brand_warranty,
-        "return_policy": this.data.element.return_policy,
-        "delivery": this.data.element.delivery,
-      }
-      
+      "id": this.data.element.id,
     };
 console.log(httpbody)
-    this.http.post('https://api-dev.themafic.co.in/api/MaficDashboard/deleteProductData', httpbody)
+    this.http.post('https://api-dev.themafic.co.in/api/products/delete', httpbody)
       .subscribe(data => {
         console.log(data);
         this.sharedDataService.hideLoader();
