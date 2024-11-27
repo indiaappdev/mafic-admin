@@ -1,8 +1,6 @@
-import { HttpClient } from '@angular/common/http';
-import { Component, EventEmitter, Inject, OnInit } from '@angular/core';
-import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
-// @import '~bootstrap/dist/css/bootstrap.min.css';
-
+import { Component, Inject, OnInit } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-view-product-terms-add',
@@ -10,43 +8,37 @@ import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
   styleUrls: ['./view-product-terms-add.component.css']
 })
 export class ViewProductTermsAddComponent implements OnInit {
-  viewComplete: EventEmitter<any> = new EventEmitter();
-  content: any;
-  res: any;
-  productID: any;
-  SingleProductData: any;
-  images: any[] = [];
+  fileUrl: SafeResourceUrl; // Change to SafeResourceUrl
+  fileType: string;
 
-  constructor(private dialog:MatDialog,
-    @Inject(MAT_DIALOG_DATA) public data: any,
-    private http: HttpClient,) {
-      this.productID= data.element.id
-     }
-
-  ngOnInit(): void {
-    this.getProductImages();
-  }
-  getProductImages(){
-    try {~
-      // this.http.post('https://api.themafic.com/api/MaficDashboard/getProductImages',httpBody).subscribe(data => {
-        this.http.get(`https://api-dev.themafic.co.in/api/MaficDashboard/terms/show?id=${this.productID}`).subscribe(data => {
-        console.log(data);
-        this.res = JSON.parse(JSON.stringify(data));
-        console.log(this.res)
-        if (this.res.responseCode == 200) {
-          this.SingleProductData = this.res.response;
-          this.content = this.SingleProductData.content;
-        }
-      }, error => { },
-        () => {});
-
-    }
-    catch (error) {
-      console.error("not able to get response from getProductCategory API")
-    }
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: any, 
+    private dialogRef: MatDialogRef<ViewProductTermsAddComponent>, 
+    private sanitizer: DomSanitizer // Inject DomSanitizer
+  ) {
+    this.fileType = this.getFileType(data.fileUrl);
+    this.fileUrl = this.sanitizeUrl(data.fileUrl); // Sanitize the URL
   }
 
-  closepopup(){
-    this.dialog.closeAll();
+  ngOnInit(): void {}
+
+  getFileType(fileUrl: string): string {
+    const extension = fileUrl.split('.').pop()?.toLowerCase();
+    if (extension === 'pdf') {
+      return 'pdf';
+    } else if (['jpeg', 'jpg', 'png'].includes(extension!)) {
+      return 'image';
+    }
+    return 'unknown';
+  }
+
+  // Sanitize the URL
+  sanitizeUrl(fileUrl: string): SafeResourceUrl {
+    return this.sanitizer.bypassSecurityTrustResourceUrl(fileUrl);
+  }
+
+  // Close the specific dialog (ViewProductTermsAddComponent)
+  closepopup() {
+    this.dialogRef.close(); // Close only this dialog
   }
 }

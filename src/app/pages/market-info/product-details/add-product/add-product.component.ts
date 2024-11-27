@@ -5,9 +5,11 @@ import { MatDialog } from '@angular/material/dialog';
 import { SharedDataService } from 'src/app/shared/shared-data.service';
 import { ViewProductTermsAddComponent } from '../view-product-terms-add/view-product-terms-add.component';
 
-interface DropdownOption {
-  id: string;
+interface Term {
+  id: number;
   title: string;
+  slug: string;
+  file: string | null;
 }
 
 @Component({
@@ -24,19 +26,45 @@ export class AddProductComponent implements OnInit {
   productCountry: any;
   imagePreviews: string[] = [];
   deliveryOptions=['Yes','No']
+  preShipmentInspectionOptions=['Yes','No']
   productImages: any;
   formData: any;
   imgs: any=[];
-  
-  certificationAndComplianceOptions: DropdownOption[] = [];
-  materialOrderingOptions: DropdownOption[] = [];
-  boxingAndPackagingOptions: DropdownOption[] = [];
-  freightOptions: DropdownOption[] = [];
-  insuranceOptions: DropdownOption[] = [];
-  incotermOptions: DropdownOption[] = [];
-  brandWarrantyOptions: DropdownOption[] = [];
-  returnPolicyOptions: DropdownOption[] = [];
 
+  sampleMaterialOptions: Term[] = [];
+  certificationAndComplianceOptions: Term[] = [];
+  materialOrderingOptions: Term[] = [];
+  boxingAndPackagingOptions: Term[] = [];
+  freightOptions: Term[] = [];
+  insuranceOptions: Term[] = [];
+  incotermOptions: Term[] = [];
+  brandWarrantyOptions: Term[] = [];
+  returnPolicyOptions: Term[] = [];
+
+  selectedFiles: { [key: string]: string | null } = {
+    sampleMaterial: null,
+    certificationAndCompliance: null,
+    materialOrdering: null,
+    boxingAndPackaging: null,
+    freight: null,
+    insurance: null,
+    incoterm: null,
+    brandWarranty: null,
+    returnPolicy: null
+  };
+
+  // Create a mapping of field names to option arrays
+  optionsMapping: { [key: string]: Term[] } = {
+    sampleMaterial: this.sampleMaterialOptions,
+    certificationAndCompliance: this.certificationAndComplianceOptions,
+    materialOrdering: this.materialOrderingOptions,
+    boxingAndPackaging: this.boxingAndPackagingOptions,
+    freight: this.freightOptions,
+    insurance: this.insuranceOptions,
+    incoterm: this.incotermOptions,
+    brandWarranty: this.brandWarrantyOptions,
+    returnPolicy: this.returnPolicyOptions
+  };
 
   constructor(public sharedDataService: SharedDataService,
     private dialog: MatDialog,
@@ -88,10 +116,28 @@ export class AddProductComponent implements OnInit {
     this.ProductCategoryList = this.sharedDataService.ProductCategoryList
     this.getSACData();
     this.getCountryData();
+
+    this.http.get<any>('https://api-dev.themafic.co.in/api/terms').subscribe(response => {
+      if (response.status === 200) {
+        const terms = response.data as Term[];
+
+        this.sampleMaterialOptions = terms.filter(term => term.slug == 'sample_material');
+        this.certificationAndComplianceOptions = terms.filter(term => term.slug == 'certification_and_compliance');
+        this.materialOrderingOptions = terms.filter(term => term.slug == 'material_ordering_and_payment_terms');
+        this.boxingAndPackagingOptions = terms.filter(term => term.slug == 'boxing_and_packaging');
+        this.freightOptions = terms.filter(term => term.slug == 'freight');
+        this.insuranceOptions = terms.filter(term => term.slug == 'insurance');
+        this.incotermOptions = terms.filter(term => term.slug == 'incoterm');
+        this.brandWarrantyOptions = terms.filter(term => term.slug == 'brand_warranty');
+        this.returnPolicyOptions = terms.filter(term => term.slug == 'return_policy');
+      }
+    });
   }
+  
   cancelForm(){
     this.dialog.closeAll();
   }
+  
   submitForm(form: NgForm) {
     if (form.valid) {
       this.addProductData();
@@ -154,27 +200,6 @@ export class AddProductComponent implements OnInit {
       this.fileInputs.push({ id: newId, previewSrc: '' });
     }
   }
-
-  // onHSNCodeChange(hsnCode: string) {
-  //   this.http.get(`https://api-dev.themafic.co.in/api/MaficDashboard/terms?hsn_code=${hsnCode}`)
-  //     .subscribe((response: any) => {
-  //       if (response.responseCode === 200) {
-  //         const data = response.response;
-  
-  //         // Initialize options for each dropdown based on the slug
-  //         this.certificationAndComplianceOptions = data.filter((item: { slug: string; }) => item.slug === 'certification_and_compliance');
-  //         this.materialOrderingOptions = data.filter((item: { slug: string; }) => item.slug === 'material_ordering_and_payment_terms');
-  //         this.boxingAndPackagingOptions = data.filter((item: { slug: string; }) => item.slug === 'boxing_and_packaging');
-  //         this.freightOptions = data.filter((item: { slug: string; }) => item.slug === 'freight');
-  //         this.insuranceOptions = data.filter((item: { slug: string; }) => item.slug === 'insurance');
-  //         this.incotermOptions = data.filter((item: { slug: string; }) => item.slug === 'incoterm');
-  //         this.brandWarrantyOptions = data.filter((item: { slug: string; }) => item.slug === 'brand_warranty');
-  //         this.returnPolicyOptions = data.filter((item: { slug: string; }) => item.slug === 'return_policy');
-  //       }
-  //     }, error => {
-  //       console.error("Error fetching terms for the selected HSN code:", error);
-  //     });
-  // }
   
   removeFileInput(index: number) {
     this.fileInputs.splice(index, 1);
@@ -199,48 +224,40 @@ export class AddProductComponent implements OnInit {
     }
   }  
 
-  // openViewContentPopup(element: any) {
-  //   // this.element = element
-  //   const dialogRefContentview = this.dialog.open(ViewProductTermsAddComponent, {
-  //     disableClose: true,
-  //     data: {
-  //       element: 
-  //     }
-  //   });
-  //   dialogRefContentview.componentInstance.viewComplete.subscribe(() => {
-  //     // Call refreshTable() when deletion is complete
-  //     // this.getTandCDetails();
-  //   });
-  // }
+  onSelectionChange(event: any, field: string) {
+    const selectedId = event.value;
+    console.log(selectedId);
 
-  // openViewContentPopup(certificationAndComplianceId: string) {
-    // console.log("certificationAndComplianceId :",certificationAndComplianceId);
-    // Make API call to fetch content based on the selected certificationAndComplianceId
-    // this.http.get(`https://api-dev.themafic.co.in/api/MaficDashboard/terms?slug=certification_and_compliance&hsn_code=${certificationAndComplianceId}`)
-    //     .subscribe((response: any) => {
-    //         if (response.responseCode === 200) {
-    //             // Assuming the content is inside response.response[0].content
-    //             const content = response.response[0].content;
-                
-    //             // Open dialog to show the content
-    //             const dialogRefContentview = this.dialog.open(ViewProductTermsAddComponent, {
-    //                 disableClose: true,
-    //                 data: {
-    //                     content: content // Pass the content to the dialog component
-    //                 }
-    //             });
-                
-    //             dialogRefContentview.componentInstance.viewComplete.subscribe(() => {
-    //                 // You can handle any actions after closing the dialog if needed
-    //             });
-    //         } else {
-    //             console.error('Error fetching content for certification and compliance.');
-    //         }
-    //     }, error => {
-    //         console.error('API Error:', error);
-    //     });
-  // }
+    this.http.get(`https://api-dev.themafic.co.in/api/terms/show?id=${selectedId}`).subscribe(
+      (data: any) => {
+        console.log(data);
+        const fileUrl = data.data.file;
+        console.log(fileUrl);
+        this.selectedFiles[field] = fileUrl;
+      },
+      error => {
+        console.error('Error fetching file URL', error);
+        this.selectedFiles[field] = null;
+      }
+    );
+  }
 
+  openViewContentPopup(field: string) {
+    const fileUrl = this.selectedFiles[field];
+    console.log(fileUrl);
+    if (fileUrl) {
+      const dialogRef = this.dialog.open(ViewProductTermsAddComponent, {
+        width: '600px',
+        data: { fileUrl }
+      });
+
+      dialogRef.afterClosed().subscribe(result => {
+        console.log('The dialog was closed');
+      });
+    } else {
+      alert('No file available for the selected option.');
+    }
+  }
   
   addProductData(){
     this.sharedDataService.showLoader();
@@ -252,7 +269,7 @@ export class AddProductComponent implements OnInit {
       var image_count = this.imgs.length
       for(let i=0; i<this.imgs.length; i++){
         var image_number = (i + 1)
-        uploadData.append('image'+image_number, this.imgs[i]);
+        uploadData.append('image_'+image_number, this.imgs[i]);
       }
       uploadData.append('name', this.formData.productName);
       uploadData.append('description_header', this.formData.descriptionHeader);
@@ -280,13 +297,13 @@ export class AddProductComponent implements OnInit {
       uploadData.append('minimum_order_quantity', this.formData.minOrderQuantity);
       uploadData.append('product_features', this.formData.productFeatures);
       uploadData.append('certification_and_compliance_id', this.formData.certificationAndComplianceId);
-      uploadData.append('sample_material_id', this.formData.sampleMaterialId);
-      uploadData.append('material_ordering_and_payment_terms_id', this.formData.materialOrderingAndPaymentTermsId);
+      uploadData.append('sample_material_id', this.formData.sampleMaterialId || null);
+      uploadData.append('material_ordering_and_payment_terms_id', this.formData.materialOrderingAndPaymentTermsId || null);
       uploadData.append('boxing_and_packaging_id', this.formData.boxingAndPackagingId);
       uploadData.append('freight_id', this.formData.freightId);
       uploadData.append('insurance_id', this.formData.insuranceId);
       uploadData.append('incoterm_id', this.formData.incotermId);
-      uploadData.append('pre_shipment_inspection_id', this.formData.preShipmentInspectionId);
+      uploadData.append('pre_shipment_inspection', this.formData.preShipmentInspectionId || null);
       uploadData.append('brand_warranty_id', this.formData.warranty);
       uploadData.append('return_policy_id', this.formData.returnPolicy);
       uploadData.append('image_count', image_count);
