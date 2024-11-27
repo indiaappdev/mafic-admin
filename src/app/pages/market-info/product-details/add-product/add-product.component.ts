@@ -86,8 +86,6 @@ export class AddProductComponent implements OnInit {
       sizeLength: new FormControl(''),
       sizeWidth: new FormControl(''),
       sizeHeight: new FormControl(''),
-      warranty: new FormControl(''),
-      returnPolicy: new FormControl(''),
       delivery: new FormControl('', Validators.required),
       descriptionHeader: new FormControl(''),
       Description: new FormControl(''),
@@ -102,14 +100,16 @@ export class AddProductComponent implements OnInit {
       material: new FormControl('', Validators.required),
       originCountry: new FormControl('', Validators.required),
       productFeatures: new FormControl('', Validators.required),
-      certificationAndComplianceId: new FormControl(),
       minOrderQuantity: new FormControl(''),
-      sampleMaterialId: new FormControl(''),
-      materialOrderingAndPaymentTermsId: new FormControl(),
-      boxingAndPackagingId: new FormControl(),
-      freightId: new FormControl(),
-      insuranceId: new FormControl(),
-      incotermId: new FormControl(),
+      // sampleMaterialId: new FormControl(''),
+      // certificationAndComplianceId: new FormControl(),
+      // materialOrderingAndPaymentTermsId: new FormControl(),
+      // boxingAndPackagingId: new FormControl(),
+      // freightId: new FormControl(),
+      // insuranceId: new FormControl(),
+      // incotermId: new FormControl(),
+      // warranty: new FormControl(''),
+      // returnPolicy: new FormControl(''),
       preShipmentInspectionId: new FormControl(),
       imgs: new FormControl([]) // Initialize as empty array
     });
@@ -296,16 +296,16 @@ export class AddProductComponent implements OnInit {
       uploadData.append('country_id', this.formData.productCountry);
       uploadData.append('minimum_order_quantity', this.formData.minOrderQuantity);
       uploadData.append('product_features', this.formData.productFeatures);
-      uploadData.append('certification_and_compliance_id', this.formData.certificationAndComplianceId);
-      uploadData.append('sample_material_id', this.formData.sampleMaterialId || null);
-      uploadData.append('material_ordering_and_payment_terms_id', this.formData.materialOrderingAndPaymentTermsId || null);
-      uploadData.append('boxing_and_packaging_id', this.formData.boxingAndPackagingId);
-      uploadData.append('freight_id', this.formData.freightId);
-      uploadData.append('insurance_id', this.formData.insuranceId);
-      uploadData.append('incoterm_id', this.formData.incotermId);
-      uploadData.append('pre_shipment_inspection', this.formData.preShipmentInspectionId || null);
-      uploadData.append('brand_warranty_id', this.formData.warranty);
-      uploadData.append('return_policy_id', this.formData.returnPolicy);
+      uploadData.append('certification_and_compliance_id', this.formData.certificationAndComplianceId || '');
+      uploadData.append('sample_material_id', this.formData.sampleMaterialId || '');
+      uploadData.append('material_ordering_and_payment_terms_id', this.formData.materialOrderingAndPaymentTermsId || '');
+      uploadData.append('boxing_and_packaging_id', this.formData.boxingAndPackagingId || '');
+      uploadData.append('freight_id', this.formData.freightId || '');
+      uploadData.append('insurance_id', this.formData.insuranceId || '');
+      uploadData.append('incoterm_id', this.formData.incotermId || '');
+      uploadData.append('brand_warranty_id', this.formData.warranty || '');
+      uploadData.append('return_policy_id', this.formData.returnPolicy || '');
+      uploadData.append('pre_shipment_inspection', this.formData.preShipmentInspectionId);
       uploadData.append('image_count', image_count);
       // uploadData.append('sku', this.formData.productSKU);
       
