@@ -70,6 +70,7 @@ export class EditProductDetailsComponent implements OnInit {
     brandWarranty: this.brandWarrantyOptions,
     returnPolicy: this.returnPolicyOptions
   };
+  productCategory: any;
   
   constructor(public sharedDataService: SharedDataService,
     private dialog: MatDialog,
@@ -119,11 +120,6 @@ export class EditProductDetailsComponent implements OnInit {
 
     // Use getTermsFromSomeSource to fetch and assign terms
     this.getTermsFromSomeSource();
-
-    // Once you have the product data, update the form control
-    if (this.productData && this.productData.categoryId) {
-      this.formData.get('productCategory')?.setValue(this.productData.categoryId);
-    }
   }
 
   getProductCategories() {
@@ -132,8 +128,8 @@ export class EditProductDetailsComponent implements OnInit {
     this.http.get<any>('https://api-dev.themafic.co.in/api/MaficDashboard/getProductCategory').subscribe({
       next: (data) => {
         if (data.responseCode === 200) {
-          this.ProductCategoryList = data.response;
-          console.log(this.ProductCategoryList)
+          this.productCategory = data.response;
+          console.log(this.productCategory)
         } else {
           console.error('Error: Response status is not 200');
         }
@@ -250,7 +246,7 @@ export class EditProductDetailsComponent implements OnInit {
             productName: this.productData.name,
             artName: this.productData.art_name,
             artistName: this.productData.artist_name,
-            productCategory: this.productData.categoryId,
+            productCategory: parseInt(this.productData.categoryId),
             subCategory: this.productData.sub_category,
             productPrice: this.productData.price,
             productDiscount: this.productData.discount,
@@ -266,7 +262,7 @@ export class EditProductDetailsComponent implements OnInit {
             warranty: this.productData.brand_warranty_id,
             returnPolicy: this.productData.return_policy_id,
             delivery: this.productData.delivery,
-            descriptionHeader: this.productData.description_header,
+            descriptionHeader: this.productData.header,
             Description: this.productData.description,
             finalProductPrice: this.productData.final_product_price_discount,
             productSize: this.productData.product_size,
@@ -287,6 +283,8 @@ export class EditProductDetailsComponent implements OnInit {
           };
           this.fileInputs = this.productExistingImage
         }
+
+        console.log(this.formData.productCategory);
 
       }, error => { },
         () => {
@@ -417,8 +415,8 @@ export class EditProductDetailsComponent implements OnInit {
     uploadData.append('hsn_code_id', this.formData.productSACHSNCode);
     uploadData.append('quantity', this.formData.quantity);
     uploadData.append('sku', this.formData.productSKU);
-    uploadData.append('brand_warranty_id', this.formData.warranty);
-    uploadData.append('return_policy_id', this.formData.returnPolicy);
+    uploadData.append('brand_warranty_id', this.formData.warranty || '');
+    uploadData.append('return_policy_id', this.formData.returnPolicy || '');
     uploadData.append('delivery', this.formData.delivery);
     uploadData.append('description_header', this.formData.descriptionHeader);
     uploadData.append('description', this.formData.Description);
@@ -435,14 +433,14 @@ export class EditProductDetailsComponent implements OnInit {
     uploadData.append('material', this.formData.material);
     uploadData.append('country_id', this.formData.productCountry);
     uploadData.append('product_features', this.formData.productFeatures);
-    uploadData.append('certification_and_compliance_id', this.formData.certificationAndComplianceId);
+    uploadData.append('certification_and_compliance_id', this.formData.certificationAndComplianceId || '');
     uploadData.append('minimum_order_quantity', this.formData.minOrderQuantity);
-    uploadData.append('sample_material_id', this.formData.sampleMaterialId);
-    uploadData.append('material_ordering_and_payment_terms_id', this.formData.materialOrderingAndPaymentTermsId);
-    uploadData.append('boxing_and_packaging_id', this.formData.boxingAndPackagingId);
-    uploadData.append('freight_id', this.formData.freightId);
-    uploadData.append('insurance_id', this.formData.insuranceId);
-    uploadData.append('incoterm_id', this.formData.incotermId);
+    uploadData.append('sample_material_id', this.formData.sampleMaterialId || '');
+    uploadData.append('material_ordering_and_payment_terms_id', this.formData.materialOrderingAndPaymentTermsId || '');
+    uploadData.append('boxing_and_packaging_id', this.formData.boxingAndPackagingId || '');
+    uploadData.append('freight_id', this.formData.freightId || '');
+    uploadData.append('insurance_id', this.formData.insuranceId || '');
+    uploadData.append('incoterm_id', this.formData.incotermId || '');
     uploadData.append('pre_shipment_inspection', this.formData.preShipmentInspectionId);
   
     // Make the HTTP POST request

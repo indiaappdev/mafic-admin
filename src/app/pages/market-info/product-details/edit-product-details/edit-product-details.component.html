@@ -283,11 +283,16 @@
         <div class="form-group col-md-6 mb-3">
             <mat-form-field appearance="legacy" style="width: 100%;">
               <mat-label>Product Category *</mat-label>
-              <mat-select formControlName="productCategory" name="productCategory" id="productCategory">
-                <mat-option *ngFor="let category of ProductCategoryList" [value]="category.id">
+              <mat-select [(ngModel)]="formData.productCategory" name="productCategory" id="productCategory">
+                <mat-option *ngFor="let category of productCategory" [value]="category.id">
                   {{ category.category }}
                 </mat-option>
               </mat-select>
+              <!-- <mat-select [(ngModel)]="formData.productCountry" name="productCountry" id="productCountry">
+                <mat-option *ngFor="let code of productCountry" [value]="code.id">
+                    {{ code.name }}
+                </mat-option>
+            </mat-select> -->
             </mat-form-field>
         </div>          
         <div class="form-group col-md-6 mb-3">
