@@ -293,7 +293,7 @@
         <div class="form-group col-md-6 mb-3 d-flex align-items-center" *ngIf="formData.preShipmentInspectionId == 'Yes'">
             <mat-form-field appearance="legacy" style="flex: 1; margin-right: 10px;">
                 <mat-label>Pre-Shipment Inspection Warranty *</mat-label>
-                <mat-select required [(ngModel)]="formData.preShipmentWarranty" (selectionChange)="onSelectionChange($event, 'preShipmentWarranty')" name="warranty" id="warranty">
+                <mat-select required [(ngModel)]="formData.preShipmentWarranty" (selectionChange)="onSelectionChange($event, 'preShipmentWarranty')" name="preShipmentWarranty" id="preShipmentWarranty">
                     <mat-option *ngFor="let item of preShipmentWarrantyOptions" [value]="item.id">
                         {{ item.title }}
                     </mat-option>

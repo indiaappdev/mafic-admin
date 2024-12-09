@@ -25,6 +25,7 @@ export class EditProductDetailsComponent implements OnInit {
   productSACHSNCode: any;
   imagePreviews: string[] = [];
   deliveryOptions = ['Yes', 'No']
+  additionalInformationOptions=['Yes','No']
   preShipmentInspectionOptions=['Yes','No']
   productImages: any;
   formData: any;
@@ -44,6 +45,8 @@ export class EditProductDetailsComponent implements OnInit {
   insuranceOptions: Term[] = [];
   incotermOptions: Term[] = [];
   brandWarrantyOptions: Term[] = [];
+  deliveryWarrantyOptions: Term[] = [];
+  preShipmentWarrantyOptions: Term[] = [];
   returnPolicyOptions: Term[] = [];
 
   selectedFiles: { [key: string]: string | null } = {
@@ -55,6 +58,8 @@ export class EditProductDetailsComponent implements OnInit {
     insurance: null,
     incoterm: null,
     brandWarranty: null,
+    deliveryWarranty: null,
+    preShipmentWarranty: null,
     returnPolicy: null
   };
 
@@ -68,6 +73,8 @@ export class EditProductDetailsComponent implements OnInit {
     insurance: this.insuranceOptions,
     incoterm: this.incotermOptions,
     brandWarranty: this.brandWarrantyOptions,
+    deliveryWarranty: this.deliveryWarrantyOptions,
+    preShipmentWarranty: this.preShipmentWarrantyOptions,
     returnPolicy: this.returnPolicyOptions
   };
   productCategory: any;
@@ -95,15 +102,14 @@ export class EditProductDetailsComponent implements OnInit {
       productSACHSNCode: new FormControl('', Validators.required),
       productCountry: new FormControl('', Validators.required),
       quantity: new FormControl('', Validators.required),
-      productSKU: new FormControl(''),
-      sizeLength: new FormControl(''),
-      sizeWidth: new FormControl(''),
-      sizeHeight: new FormControl(''),
+      productSKU: new FormControl('', Validators.required),
+      sizeLength: new FormControl('', Validators.required),
+      sizeWidth: new FormControl('', Validators.required),
+      sizeHeight: new FormControl('', Validators.required),
       delivery: new FormControl('', Validators.required),
-      descriptionHeader: new FormControl(''),
-      Description: new FormControl(''),
+      descriptionHeader: new FormControl('', Validators.required),
+      Description: new FormControl('', Validators.required),
       imageCount: new FormControl(''),
-
       finalProductPrice: new FormControl('', Validators.required),
       productSizeLength: new FormControl('', Validators.required),
       productSizeWidth: new FormControl('', Validators.required),
@@ -113,8 +119,10 @@ export class EditProductDetailsComponent implements OnInit {
       material: new FormControl('', Validators.required),
       originCountry: new FormControl('', Validators.required),
       productFeatures: new FormControl('', Validators.required),
-      minOrderQuantity: new FormControl(''),
-      preShipmentInspectionId: new FormControl(),
+      color: new FormControl('', Validators.required),
+      minOrderQuantity: new FormControl('', Validators.required),
+      preShipmentInspectionId: new FormControl('', Validators.required),
+      additionalInformation: new FormControl('', Validators.required),
       imgs: new FormControl([]) // Initialize as empty array
     });
 
@@ -149,15 +157,17 @@ export class EditProductDetailsComponent implements OnInit {
       if (response.status === 200) {
         const terms = response.data as Term[];
         
-        this.sampleMaterialOptions = terms.filter(term => term.slug === 'sample_material');
-        this.certificationAndComplianceOptions = terms.filter(term => term.slug === 'certification_and_compliance');
-        this.materialOrderingOptions = terms.filter(term => term.slug === 'material_ordering_and_payment_terms');
-        this.boxingAndPackagingOptions = terms.filter(term => term.slug === 'boxing_and_packaging');
-        this.freightOptions = terms.filter(term => term.slug === 'freight');
-        this.insuranceOptions = terms.filter(term => term.slug === 'insurance');
-        this.incotermOptions = terms.filter(term => term.slug === 'incoterm');
-        this.brandWarrantyOptions = terms.filter(term => term.slug === 'brand_warranty');
-        this.returnPolicyOptions = terms.filter(term => term.slug === 'return_policy');
+        this.sampleMaterialOptions = terms.filter(term => term.slug == 'sample_material');
+        this.certificationAndComplianceOptions = terms.filter(term => term.slug == 'certification_and_compliance');
+        this.materialOrderingOptions = terms.filter(term => term.slug == 'material_ordering_and_payment_terms');
+        this.boxingAndPackagingOptions = terms.filter(term => term.slug == 'boxing_and_packaging');
+        this.freightOptions = terms.filter(term => term.slug == 'freight');
+        this.insuranceOptions = terms.filter(term => term.slug == 'insurance');
+        this.incotermOptions = terms.filter(term => term.slug == 'incoterm');
+        this.brandWarrantyOptions = terms.filter(term => term.slug == 'brand_warranty');
+        this.deliveryWarrantyOptions = terms.filter(term => term.slug == 'delivery');
+        this.preShipmentWarrantyOptions = terms.filter(term => term.slug == 'pre_shipment_inspection');
+        this.returnPolicyOptions = terms.filter(term => term.slug == 'return_policy');
       }
     });
   }
@@ -261,6 +271,9 @@ export class EditProductDetailsComponent implements OnInit {
             sizeHeight: this.productData.product_size_packaging_height,
             warranty: this.productData.brand_warranty_id,
             returnPolicy: this.productData.return_policy_id,
+            preShipmentWarranty: this.productData.pre_shipment_inspection_id,
+            deliveryWarranty: this.productData.delivery_id,
+            additionalInformation: this.productData.additional_information,
             delivery: this.productData.delivery,
             descriptionHeader: this.productData.header,
             Description: this.productData.description,
@@ -271,6 +284,7 @@ export class EditProductDetailsComponent implements OnInit {
             material: this.productData.material,
             productCountry: this.productData.country_id,
             productFeatures: this.productData.product_features,
+            color: this.productData.color,
             certificationAndComplianceId: this.productData.certification_and_compliance_id,
             minOrderQuantity: this.productData.minimum_order_quantity,
             sampleMaterialId: this.productData.sample_material_id,
@@ -433,6 +447,7 @@ export class EditProductDetailsComponent implements OnInit {
     uploadData.append('material', this.formData.material);
     uploadData.append('country_id', this.formData.productCountry);
     uploadData.append('product_features', this.formData.productFeatures);
+    uploadData.append('color', this.formData.color);
     uploadData.append('certification_and_compliance_id', this.formData.certificationAndComplianceId || '');
     uploadData.append('minimum_order_quantity', this.formData.minOrderQuantity);
     uploadData.append('sample_material_id', this.formData.sampleMaterialId || '');
@@ -442,7 +457,10 @@ export class EditProductDetailsComponent implements OnInit {
     uploadData.append('insurance_id', this.formData.insuranceId || '');
     uploadData.append('incoterm_id', this.formData.incotermId || '');
     uploadData.append('pre_shipment_inspection', this.formData.preShipmentInspectionId);
-  
+    uploadData.append('additional_information', this.formData.additionalInformation);
+    uploadData.append('delivery_id', this.formData.deliveryWarranty || '');
+    uploadData.append('pre_shipment_inspection_id', this.formData.preShipmentWarranty || '');
+    
     // Make the HTTP POST request
     this.http.post('https://api-dev.themafic.co.in/api/products/update', uploadData)
       .subscribe(
