@@ -26,6 +26,7 @@ export class AddProductComponent implements OnInit {
   productCountry: any;
   imagePreviews: string[] = [];
   deliveryOptions=['Yes','No']
+  additionalInformationOptions=['Yes','No']
   preShipmentInspectionOptions=['Yes','No']
   productImages: any;
   formData: any;
@@ -39,6 +40,8 @@ export class AddProductComponent implements OnInit {
   insuranceOptions: Term[] = [];
   incotermOptions: Term[] = [];
   brandWarrantyOptions: Term[] = [];
+  deliveryWarrantyOptions: Term[] = [];
+  preShipmentWarrantyOptions: Term[] = [];
   returnPolicyOptions: Term[] = [];
 
   selectedFiles: { [key: string]: string | null } = {
@@ -50,6 +53,8 @@ export class AddProductComponent implements OnInit {
     insurance: null,
     incoterm: null,
     brandWarranty: null,
+    deliveryWarranty: null,
+    preShipmentWarranty: null,
     returnPolicy: null
   };
 
@@ -63,6 +68,8 @@ export class AddProductComponent implements OnInit {
     insurance: this.insuranceOptions,
     incoterm: this.incotermOptions,
     brandWarranty: this.brandWarrantyOptions,
+    deliveryWarranty: this.deliveryWarrantyOptions,
+    preShipmentWarranty: this.preShipmentWarrantyOptions,
     returnPolicy: this.returnPolicyOptions
   };
 
@@ -82,15 +89,15 @@ export class AddProductComponent implements OnInit {
       productSACHSNCode: new FormControl('', Validators.required),
       productCountry: new FormControl('', Validators.required),
       quantity: new FormControl('', Validators.required),
-      productSKU: new FormControl(''),
-      sizeLength: new FormControl(''),
-      sizeWidth: new FormControl(''),
-      sizeHeight: new FormControl(''),
+      productSKU: new FormControl('', Validators.required),
+      sizeLength: new FormControl('', Validators.required),
+      sizeWidth: new FormControl('', Validators.required),
+      sizeHeight: new FormControl('', Validators.required),
       delivery: new FormControl('', Validators.required),
-      descriptionHeader: new FormControl(''),
-      Description: new FormControl(''),
+      additionalInformation: new FormControl('', Validators.required),
+      descriptionHeader: new FormControl('', Validators.required),
+      Description: new FormControl('', Validators.required),
       imageCount: new FormControl(''),
-
       finalProductPrice: new FormControl('', Validators.required),
       productSizeLength: new FormControl('', Validators.required),
       productSizeWidth: new FormControl('', Validators.required),
@@ -98,19 +105,10 @@ export class AddProductComponent implements OnInit {
       grossWeight: new FormControl('', Validators.required),
       netWeight: new FormControl('', Validators.required),
       material: new FormControl('', Validators.required),
-      originCountry: new FormControl('', Validators.required),
       productFeatures: new FormControl('', Validators.required),
-      minOrderQuantity: new FormControl(''),
-      // sampleMaterialId: new FormControl(''),
-      // certificationAndComplianceId: new FormControl(),
-      // materialOrderingAndPaymentTermsId: new FormControl(),
-      // boxingAndPackagingId: new FormControl(),
-      // freightId: new FormControl(),
-      // insuranceId: new FormControl(),
-      // incotermId: new FormControl(),
-      // warranty: new FormControl(''),
-      // returnPolicy: new FormControl(''),
-      preShipmentInspectionId: new FormControl(),
+      color: new FormControl('', Validators.required),
+      minOrderQuantity: new FormControl('', Validators.required),
+      preShipmentInspectionId: new FormControl('', Validators.required),
       imgs: new FormControl([]) // Initialize as empty array
     });
     this.ProductCategoryList = this.sharedDataService.ProductCategoryList
@@ -129,6 +127,8 @@ export class AddProductComponent implements OnInit {
         this.insuranceOptions = terms.filter(term => term.slug == 'insurance');
         this.incotermOptions = terms.filter(term => term.slug == 'incoterm');
         this.brandWarrantyOptions = terms.filter(term => term.slug == 'brand_warranty');
+        this.deliveryWarrantyOptions = terms.filter(term => term.slug == 'delivery');
+        this.preShipmentWarrantyOptions = terms.filter(term => term.slug == 'pre_shipment_inspection'); //additional_information_id
         this.returnPolicyOptions = terms.filter(term => term.slug == 'return_policy');
       }
     });
@@ -293,9 +293,11 @@ export class AddProductComponent implements OnInit {
       uploadData.append('net_weight', this.formData.netWeight);
       uploadData.append('material', this.formData.material);
       uploadData.append('delivery', this.formData.delivery);
+      uploadData.append('additional_information', this.formData.additionalInformation);
       uploadData.append('country_id', this.formData.productCountry);
       uploadData.append('minimum_order_quantity', this.formData.minOrderQuantity);
       uploadData.append('product_features', this.formData.productFeatures);
+      uploadData.append('color', this.formData.color);
       uploadData.append('certification_and_compliance_id', this.formData.certificationAndComplianceId || '');
       uploadData.append('sample_material_id', this.formData.sampleMaterialId || '');
       uploadData.append('material_ordering_and_payment_terms_id', this.formData.materialOrderingAndPaymentTermsId || '');
@@ -304,6 +306,8 @@ export class AddProductComponent implements OnInit {
       uploadData.append('insurance_id', this.formData.insuranceId || '');
       uploadData.append('incoterm_id', this.formData.incotermId || '');
       uploadData.append('brand_warranty_id', this.formData.warranty || '');
+      uploadData.append('delivery_id', this.formData.deliveryWarranty || '');
+      uploadData.append('pre_shipment_inspection_id', this.formData.preShipmentWarranty || '');
       uploadData.append('return_policy_id', this.formData.returnPolicy || '');
       uploadData.append('pre_shipment_inspection', this.formData.preShipmentInspectionId);
       uploadData.append('image_count', image_count);

@@ -24,7 +24,7 @@
         <div class="form-group col-md-6 mb-3">
             <mat-form-field appearance="legacy" style="width: 100%;">
                 <mat-label>Product Category *</mat-label>
-                <mat-select [(value)]="formData.productCategory" name="productCategory" id="productCategory">
+                <mat-select required [(value)]="formData.productCategory" name="productCategory" id="productCategory">
                     <mat-option *ngFor="let category of ProductCategoryList" [value]="category.id">
                         {{ category.category }}
                     </mat-option>
@@ -62,7 +62,7 @@
         <div class="form-group col-md-6 mb-3">
             <mat-form-field appearance="legacy" style="width: 100%;">
                 <mat-label>Product SAC/HSN Code *</mat-label>
-                <mat-select [(ngModel)]="formData.productSACHSNCode" name="productSACHSNCode" id="productSACHSNCode">
+                <mat-select required [(ngModel)]="formData.productSACHSNCode" name="productSACHSNCode" id="productSACHSNCode">
                     <mat-option *ngFor="let code of productSACHSNCode" [value]="code.id">
                         {{ code.code }} - {{code.title}}
                     </mat-option>
@@ -76,32 +76,11 @@
                     #quantity="ngModel" aria-describedby="quantity">
             </mat-form-field>
         </div>
-        <!-- <div class="form-group col-md-6 mb-3">
-            <mat-form-field appearance="legacy" style="width: 100%;">
-                <mat-label>Product SKU *</mat-label>
-                <input matInput required [(ngModel)]="formData.productSKU" name="productSKU" id="productSKU"
-                    #productSKU="ngModel" aria-describedby="productSKU">
-            </mat-form-field>
-        </div> -->
         <div class="form-group col-md-6 mb-3">
             <mat-form-field appearance="legacy" style="width: 100%;">
-                <mat-label>Product Length in CM</mat-label>
-                <input matInput [(ngModel)]="formData.productSizeLength" name="productSizeLength" id="productSizeLength" #productSizeLength="ngModel"
+                <mat-label>Product Length in CM *</mat-label>
+                <input matInput required [(ngModel)]="formData.productSizeLength" name="productSizeLength" id="productSizeLength" #productSizeLength="ngModel"
                     aria-describedby="productSizeLength">
-            </mat-form-field>
-        </div>
-        <div class="form-group col-md-6 mb-3">
-            <mat-form-field appearance="legacy" style="width: 100%;">
-                <mat-label>Product Width in CM</mat-label>
-                <input matInput [(ngModel)]="formData.productSizeWidth" name="productSizeWidth" id="productSizeWidth" #productSizeWidth="ngModel"
-                    aria-describedby="productSizeWidth">
-            </mat-form-field>
-        </div>
-        <div class="form-group col-md-6 mb-3">
-            <mat-form-field appearance="legacy" style="width: 100%;">
-                <mat-label>Product Height in CM</mat-label>
-                <input matInput [(ngModel)]="formData.productSizeHeight" name="productSizeHeight" id="productSizeHeight" #productSizeHeight="ngModel"
-                    aria-describedby="productSizeHeight">
             </mat-form-field>
         </div>
         <div class="form-group col-md-6 mb-3">
@@ -113,9 +92,23 @@
         </div>
         <div class="form-group col-md-6 mb-3">
             <mat-form-field appearance="legacy" style="width: 100%;">
+                <mat-label>Product Width in CM *</mat-label>
+                <input matInput required [(ngModel)]="formData.productSizeWidth" name="productSizeWidth" id="productSizeWidth" #productSizeWidth="ngModel"
+                    aria-describedby="productSizeWidth">
+            </mat-form-field>
+        </div>
+        <div class="form-group col-md-6 mb-3">
+            <mat-form-field appearance="legacy" style="width: 100%;">
                 <mat-label>Product Width with primary packing material in CM *</mat-label>
                 <input matInput required [(ngModel)]="formData.sizeWidth" name="sizeWidth" id="sizeWidth"
                     #sizeWidth="ngModel" aria-describedby="sizeWidth">
+            </mat-form-field>
+        </div>
+        <div class="form-group col-md-6 mb-3">
+            <mat-form-field appearance="legacy" style="width: 100%;">
+                <mat-label>Product Height in CM *</mat-label>
+                <input matInput required [(ngModel)]="formData.productSizeHeight" name="productSizeHeight" id="productSizeHeight" #productSizeHeight="ngModel"
+                    aria-describedby="productSizeHeight">
             </mat-form-field>
         </div>
         <div class="form-group col-md-6 mb-3">
@@ -149,20 +142,13 @@
         <div class="form-group col-md-6 mb-3">
             <mat-form-field appearance="legacy" style="width: 100%;">
                 <mat-label>Country of Origin *</mat-label>
-                <mat-select [(ngModel)]="formData.productCountry" name="productCountry" id="productCountry">
+                <mat-select required [(ngModel)]="formData.productCountry" name="productCountry" id="productCountry">
                     <mat-option *ngFor="let code of productCountry" [value]="code.id">
                         {{ code.name }}
                     </mat-option>
                 </mat-select>
             </mat-form-field>
         </div>
-        <!-- <div class="form-group col-md-6 mb-3">
-            <mat-form-field appearance="legacy" style="width: 100%;">
-                <mat-label>Country of Origin *</mat-label>
-                <input matInput required [(ngModel)]="formData.originCountry" name="originCountry" id="originCountry"
-                    #originCountry="ngModel" aria-describedby="originCountry">
-            </mat-form-field>
-        </div> -->
         <div class="form-group col-md-6 mb-3">
             <mat-form-field appearance="legacy" style="width: 100%;">
                 <mat-label>Product Features *</mat-label>
@@ -172,22 +158,22 @@
         </div>
         <div class="form-group col-md-6 mb-3">
             <mat-form-field appearance="legacy" style="width: 100%;">
+                <mat-label>Color *</mat-label>
+                <input matInput required [(ngModel)]="formData.color" name="color" id="color"
+                    #color="ngModel" aria-describedby="color">
+            </mat-form-field>
+        </div>
+        <div class="form-group col-md-6 mb-3">
+            <mat-form-field appearance="legacy" style="width: 100%;">
                 <mat-label>Minimum order quantity *</mat-label>
                 <input matInput required [(ngModel)]="formData.minOrderQuantity" name="minOrderQuantity" id="minOrderQuantity"
                     #minOrderQuantity="ngModel" aria-describedby="minOrderQuantity">
             </mat-form-field>
         </div>
-        <!-- <div class="form-group col-md-6 mb-3">
-            <mat-form-field appearance="legacy" style="width: 100%;">
-                <mat-label>Sample material *</mat-label>
-                <input matInput required [(ngModel)]="formData.sampleMaterialId" name="sampleMaterialId" id="sampleMaterialId"
-                    #sampleMaterialId="ngModel" aria-describedby="sampleMaterialId">
-            </mat-form-field>
-        </div> -->
 
         <div class="form-group col-md-6 mb-3 d-flex align-items-center">
             <mat-form-field appearance="legacy" style="flex: 1; margin-right: 10px;">
-                <mat-label>Sample material *</mat-label>
+                <mat-label>Sample material </mat-label>
                 <mat-select [(ngModel)]="formData.sampleMaterialId" (selectionChange)="onSelectionChange($event, 'sampleMaterial')" name="sampleMaterialId" id="sampleMaterialId">
                     <mat-option *ngFor="let item of sampleMaterialOptions" [value]="item.id">
                         {{ item.title }}
@@ -199,7 +185,7 @@
 
         <div class="form-group col-md-6 mb-3 d-flex align-items-center">
             <mat-form-field appearance="legacy" style="flex: 1; margin-right: 10px;">
-                <mat-label>Certification and Compliance *</mat-label>
+                <mat-label>Certification and Compliance </mat-label>
                 <mat-select [(ngModel)]="formData.certificationAndComplianceId" (selectionChange)="onSelectionChange($event, 'certificationAndCompliance')" name="certificationAndComplianceId" id="certificationAndComplianceId">
                     <mat-option *ngFor="let item of certificationAndComplianceOptions" [value]="item.id">
                         {{ item.title }}
@@ -211,7 +197,7 @@
         
         <div class="form-group col-md-6 mb-3 d-flex align-items-center">
             <mat-form-field appearance="legacy" style="flex: 1; margin-right: 10px;">
-                <mat-label>Material ordering and payment terms *</mat-label>
+                <mat-label>Material ordering and payment terms </mat-label>
                 <mat-select [(ngModel)]="formData.materialOrderingAndPaymentTermsId" (selectionChange)="onSelectionChange($event, 'materialOrdering')" name="materialOrderingAndPaymentTermsId" id="materialOrderingAndPaymentTermsId">
                     <mat-option *ngFor="let item of materialOrderingOptions" [value]="item.id">
                         {{ item.title }}
@@ -223,7 +209,7 @@
         
         <div class="form-group col-md-6 mb-3 d-flex align-items-center">
             <mat-form-field appearance="legacy" style="flex: 1; margin-right: 10px;">
-                <mat-label>Boxing and packaging *</mat-label>
+                <mat-label>Boxing and packaging </mat-label>
                 <mat-select [(ngModel)]="formData.boxingAndPackagingId" (selectionChange)="onSelectionChange($event, 'boxingAndPackaging')" name="boxingAndPackagingId" id="boxingAndPackagingId">
                     <mat-option *ngFor="let item of boxingAndPackagingOptions" [value]="item.id">
                         {{ item.title }}
@@ -235,7 +221,7 @@
         
         <div class="form-group col-md-6 mb-3 d-flex align-items-center">
             <mat-form-field appearance="legacy" style="flex: 1; margin-right: 10px;">
-                <mat-label>Freight *</mat-label>
+                <mat-label>Freight </mat-label>
                 <mat-select [(ngModel)]="formData.freightId" (selectionChange)="onSelectionChange($event, 'freight')" name="freightId" id="freightId">
                     <mat-option *ngFor="let item of freightOptions" [value]="item.id">
                         {{ item.title }}
@@ -247,7 +233,7 @@
         
         <div class="form-group col-md-6 mb-3 d-flex align-items-center">
             <mat-form-field appearance="legacy" style="flex: 1; margin-right: 10px;">
-                <mat-label>Insurance *</mat-label>
+                <mat-label>Insurance </mat-label>
                 <mat-select [(ngModel)]="formData.insuranceId" (selectionChange)="onSelectionChange($event, 'insurance')" name="insuranceId" id="insuranceId">
                     <mat-option *ngFor="let item of insuranceOptions" [value]="item.id">
                         {{ item.title }}
@@ -259,7 +245,7 @@
         
         <div class="form-group col-md-6 mb-3 d-flex align-items-center">
             <mat-form-field appearance="legacy" style="flex: 1; margin-right: 10px;">
-                <mat-label>Incoterm *</mat-label>
+                <mat-label>Incoterm </mat-label>
                 <mat-select [(ngModel)]="formData.incotermId" (selectionChange)="onSelectionChange($event, 'incoterm')" name="incotermId" id="incotermId">
                     <mat-option *ngFor="let item of incotermOptions" [value]="item.id">
                         {{ item.title }}
@@ -267,18 +253,6 @@
                 </mat-select>
             </mat-form-field>
             <span class="msg-tag bg-success cursor-pointer px-5" (click)="openViewContentPopup('incoterm')">View</span>
-        </div>
-        
-        <div class="form-group col-md-6 mb-3 d-flex align-items-center">
-            <mat-form-field appearance="legacy" style="flex: 1; margin-right: 10px;">
-                <mat-label>Brand Warranty</mat-label>
-                <mat-select [(ngModel)]="formData.warranty" (selectionChange)="onSelectionChange($event, 'brandWarranty')" name="warranty" id="warranty">
-                    <mat-option *ngFor="let item of brandWarrantyOptions" [value]="item.id">
-                        {{ item.title }}
-                    </mat-option>
-                </mat-select>
-            </mat-form-field>
-            <span class="msg-tag bg-success cursor-pointer px-5" (click)="openViewContentPopup('brandWarranty')">View</span>
         </div>
         
         <div class="form-group col-md-6 mb-3 d-flex align-items-center">
@@ -293,17 +267,21 @@
             <span class="msg-tag bg-success cursor-pointer px-5" (click)="openViewContentPopup('returnPolicy')">View</span>
         </div>        
         
-        <!-- <div class="form-group col-md-6 mb-3">
-            <mat-form-field appearance="legacy" style="width: 100%;">
-                <mat-label>Pre-Shipment inspection *</mat-label>
-                <input matInput required [(ngModel)]="formData.preShipmentInspectionId" name="preShipmentInspectionId" id="preShipmentInspectionId"
-                    #preShipmentInspectionId="ngModel" aria-describedby="preShipmentInspectionId">
+        <div class="form-group col-md-6 mb-3 d-flex align-items-center">
+            <mat-form-field appearance="legacy" style="flex: 1; margin-right: 10px;">
+                <mat-label>Brand Warranty</mat-label>
+                <mat-select [(ngModel)]="formData.warranty" (selectionChange)="onSelectionChange($event, 'brandWarranty')" name="warranty" id="warranty">
+                    <mat-option *ngFor="let item of brandWarrantyOptions" [value]="item.id">
+                        {{ item.title }}
+                    </mat-option>
+                </mat-select>
             </mat-form-field>
-        </div> -->
+            <span class="msg-tag bg-success cursor-pointer px-5" (click)="openViewContentPopup('brandWarranty')">View</span>
+        </div>
 
         <div class="form-group col-md-6 mb-3">
             <mat-form-field appearance="legacy" style="width: 100%;">
-                <mat-label>Pre-Shipment inspection *</mat-label>
+                <mat-label>Pre-Shipment Inspection *</mat-label>
                 <mat-select required [(value)]="formData.preShipmentInspectionId" name="preShipmentInspectionId" id="preShipmentInspectionId">
                     <mat-option *ngFor="let option of preShipmentInspectionOptions" [value]="option">
                         {{ option }}
@@ -312,9 +290,21 @@
             </mat-form-field>
         </div>
 
+        <div class="form-group col-md-6 mb-3 d-flex align-items-center" *ngIf="formData.preShipmentInspectionId == 'Yes'">
+            <mat-form-field appearance="legacy" style="flex: 1; margin-right: 10px;">
+                <mat-label>Pre-Shipment Inspection Warranty *</mat-label>
+                <mat-select required [(ngModel)]="formData.preShipmentWarranty" (selectionChange)="onSelectionChange($event, 'preShipmentWarranty')" name="warranty" id="warranty">
+                    <mat-option *ngFor="let item of preShipmentWarrantyOptions" [value]="item.id">
+                        {{ item.title }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <span class="msg-tag bg-success cursor-pointer px-5" (click)="openViewContentPopup('preShipmentWarranty')">View</span>
+        </div>
+
         <div class="form-group col-md-6 mb-3">
             <mat-form-field appearance="legacy" style="width: 100%;">
-                <mat-label>Delivery</mat-label>
+                <mat-label>Delivery *</mat-label>
                 <mat-select required [(value)]="formData.delivery" name="delivery" id="delivery">
                     <mat-option *ngFor="let option of deliveryOptions" [value]="option">
                         {{ option }}
@@ -322,16 +312,52 @@
                 </mat-select>
             </mat-form-field>
         </div>
+
+        <div class="form-group col-md-6 mb-3 d-flex align-items-center" *ngIf="formData.delivery == 'Yes'">
+            <mat-form-field appearance="legacy" style="flex: 1; margin-right: 10px;">
+                <mat-label>Delivery Warranty *</mat-label>
+                <mat-select required [(ngModel)]="formData.deliveryWarranty" (selectionChange)="onSelectionChange($event, 'deliveryWarranty')" name="deliveryWarranty" id="deliveryWarranty">
+                    <mat-option *ngFor="let item of deliveryWarrantyOptions" [value]="item.id">
+                        {{ item.title }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <span class="msg-tag bg-success cursor-pointer px-5" (click)="openViewContentPopup('deliveryWarranty')">View</span>
+        </div>
+
         <div class="form-group col-md-6 mb-3">
             <mat-form-field appearance="legacy" style="width: 100%;">
-                <mat-label>Description Header</mat-label>
+                <mat-label>Additional Information *</mat-label>
+                <mat-select required [(value)]="formData.additionalInformation" name="additionalInformation" id="additionalInformation">
+                    <mat-option *ngFor="let option of additionalInformationOptions" [value]="option">
+                        {{ option }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <div class="form-group col-md-6 mb-3 d-flex align-items-center" *ngIf="formData.additionalInformation == 'Yes'">
+            <mat-form-field appearance="legacy" style="flex: 1; margin-right: 10px;">
+                <mat-label>Additional Information *</mat-label>
+                <mat-select required [(ngModel)]="formData.deliveryWarranty" (selectionChange)="onSelectionChange($event, 'deliveryWarranty')" name="deliveryWarranty" id="deliveryWarranty">
+                    <mat-option *ngFor="let item of deliveryWarrantyOptions" [value]="item.id">
+                        {{ item.title }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <span class="msg-tag bg-success cursor-pointer px-5" (click)="openViewContentPopup('deliveryWarranty')">View</span>
+        </div>
+
+        <div class="form-group col-md-6 mb-3">
+            <mat-form-field appearance="legacy" style="width: 100%;">
+                <mat-label>Description Header *</mat-label>
                 <input matInput required [(ngModel)]="formData.descriptionHeader" name="descriptionHeader"
                     id="descriptionHeader" #descriptionHeader="ngModel" aria-describedby="descriptionHeader">
             </mat-form-field>
         </div>
         <div class="form-group col-md-12 mb-3">
             <mat-form-field appearance="legacy" style="width: 100%;">
-              <mat-label>Description</mat-label>
+              <mat-label>Description *</mat-label>
               <textarea matInput required [(ngModel)]="formData.Description" name="Description" id="Description"
                         #Description="ngModel" aria-describedby="Description" rows="5"></textarea>
             </mat-form-field>
