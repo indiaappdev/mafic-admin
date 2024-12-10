@@ -40,21 +40,21 @@
         </div>
         <div class="form-group col-md-6 mb-3">
             <mat-form-field appearance="legacy" style="width: 100%;">
-                <mat-label>Product Price *</mat-label>
+                <mat-label>Product Price (₹)*</mat-label>
                 <input matInput required [(ngModel)]="formData.productPrice" name="productPrice" id="productPrice"
                     #productPrice="ngModel" aria-describedby="productPrice">
             </mat-form-field>
         </div>
         <div class="form-group col-md-6 mb-3">
             <mat-form-field appearance="legacy" style="width: 100%;">
-                <mat-label>Product Discount *</mat-label>
+                <mat-label>Product Discount (%)*</mat-label>
                 <input matInput required [(ngModel)]="formData.productDiscount" name="productDiscount"
                     id="productDiscount" #productDiscount="ngModel" aria-describedby="productDiscount">
             </mat-form-field>
         </div>
         <div class="form-group col-md-6 mb-3">
             <mat-form-field appearance="legacy" style="width: 100%;">
-                <mat-label>Final Product price and discount *</mat-label>
+                <mat-label>Discounted Price (₹)*</mat-label>
                 <input matInput required [(ngModel)]="formData.finalProductPrice" name="finalProductPrice" id="finalProductPrice"
                     #finalProductPrice="ngModel" aria-describedby="finalProductPrice">
             </mat-form-field>
@@ -338,9 +338,9 @@
 
         <div class="form-group col-md-6 mb-3 d-flex align-items-center" *ngIf="formData.additionalInformation == 'Yes'">
             <mat-form-field appearance="legacy" style="flex: 1; margin-right: 10px;">
-                <mat-label>Additional Information *</mat-label>
-                <mat-select required [(ngModel)]="formData.deliveryWarranty" (selectionChange)="onSelectionChange($event, 'deliveryWarranty')" name="deliveryWarranty" id="deliveryWarranty">
-                    <mat-option *ngFor="let item of deliveryWarrantyOptions" [value]="item.id">
+                <mat-label>Additional Information Warranty*</mat-label>
+                <mat-select required [(ngModel)]="formData.additionalInformationWarranty" (selectionChange)="onSelectionChange($event, 'additionalInformationWarranty')" name="additionalInformationWarranty" id="additionalInformationWarranty">
+                    <mat-option *ngFor="let item of additionalInformationWarrantyOptions" [value]="item.id">
                         {{ item.title }}
                     </mat-option>
                 </mat-select>

@@ -46,6 +46,7 @@ export class EditProductDetailsComponent implements OnInit {
   incotermOptions: Term[] = [];
   brandWarrantyOptions: Term[] = [];
   deliveryWarrantyOptions: Term[] = [];
+  additionalInformationWarrantyOptions: Term[] = [];
   preShipmentWarrantyOptions: Term[] = [];
   returnPolicyOptions: Term[] = [];
 
@@ -59,6 +60,7 @@ export class EditProductDetailsComponent implements OnInit {
     incoterm: null,
     brandWarranty: null,
     deliveryWarranty: null,
+    additionalInformationWarranty: null,
     preShipmentWarranty: null,
     returnPolicy: null
   };
@@ -74,6 +76,7 @@ export class EditProductDetailsComponent implements OnInit {
     incoterm: this.incotermOptions,
     brandWarranty: this.brandWarrantyOptions,
     deliveryWarranty: this.deliveryWarrantyOptions,
+    additionalInformationWarranty: this.additionalInformationWarrantyOptions,
     preShipmentWarranty: this.preShipmentWarrantyOptions,
     returnPolicy: this.returnPolicyOptions
   };
@@ -166,6 +169,7 @@ export class EditProductDetailsComponent implements OnInit {
         this.incotermOptions = terms.filter(term => term.slug == 'incoterm');
         this.brandWarrantyOptions = terms.filter(term => term.slug == 'brand_warranty');
         this.deliveryWarrantyOptions = terms.filter(term => term.slug == 'delivery');
+        this.additionalInformationWarrantyOptions = terms.filter(term => term.slug == 'additional_information');
         this.preShipmentWarrantyOptions = terms.filter(term => term.slug == 'pre_shipment_inspection');
         this.returnPolicyOptions = terms.filter(term => term.slug == 'return_policy');
       }
@@ -273,6 +277,7 @@ export class EditProductDetailsComponent implements OnInit {
             returnPolicy: this.productData.return_policy_id,
             preShipmentWarranty: this.productData.pre_shipment_inspection_id,
             deliveryWarranty: this.productData.delivery_id,
+            additionalInformationWarranty: this.productData.additional_information_id,
             additionalInformation: this.productData.additional_information,
             delivery: this.productData.delivery,
             descriptionHeader: this.productData.header,
@@ -456,6 +461,7 @@ export class EditProductDetailsComponent implements OnInit {
     uploadData.append('freight_id', this.formData.freightId || '');
     uploadData.append('insurance_id', this.formData.insuranceId || '');
     uploadData.append('incoterm_id', this.formData.incotermId || '');
+    uploadData.append('additional_information_id', this.formData.additionalInformationWarranty || '');
     uploadData.append('pre_shipment_inspection', this.formData.preShipmentInspectionId);
     uploadData.append('additional_information', this.formData.additionalInformation);
     uploadData.append('delivery_id', this.formData.deliveryWarranty || '');

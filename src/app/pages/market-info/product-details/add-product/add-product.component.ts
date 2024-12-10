@@ -41,6 +41,7 @@ export class AddProductComponent implements OnInit {
   incotermOptions: Term[] = [];
   brandWarrantyOptions: Term[] = [];
   deliveryWarrantyOptions: Term[] = [];
+  additionalInformationWarrantyOptions: Term[] = [];
   preShipmentWarrantyOptions: Term[] = [];
   returnPolicyOptions: Term[] = [];
 
@@ -54,6 +55,7 @@ export class AddProductComponent implements OnInit {
     incoterm: null,
     brandWarranty: null,
     deliveryWarranty: null,
+    additionalInformationWarranty: null,
     preShipmentWarranty: null,
     returnPolicy: null
   };
@@ -69,6 +71,7 @@ export class AddProductComponent implements OnInit {
     incoterm: this.incotermOptions,
     brandWarranty: this.brandWarrantyOptions,
     deliveryWarranty: this.deliveryWarrantyOptions,
+    additionalInformationWarranty: this.additionalInformationWarrantyOptions,
     preShipmentWarranty: this.preShipmentWarrantyOptions,
     returnPolicy: this.returnPolicyOptions
   };
@@ -84,8 +87,13 @@ export class AddProductComponent implements OnInit {
       artistName: new FormControl('', Validators.required),
       productCategory: new FormControl('', Validators.required),
       subCategory: new FormControl('', Validators.required),
-      productPrice: new FormControl('', Validators.required),
-      productDiscount: new FormControl('', Validators.required),
+      productPrice: new FormControl('', [Validators.required, Validators.pattern(/^[0-9]+\.[0-9]{2}$/)]),
+      productDiscount: new FormControl('', [
+        Validators.required,
+        Validators.pattern(/^[0-9]+\.[0-9]{2}$/),
+        Validators.min(0),
+        Validators.max(100),
+      ]),
       productSACHSNCode: new FormControl('', Validators.required),
       productCountry: new FormControl('', Validators.required),
       quantity: new FormControl('', Validators.required),
@@ -98,7 +106,7 @@ export class AddProductComponent implements OnInit {
       descriptionHeader: new FormControl('', Validators.required),
       Description: new FormControl('', Validators.required),
       imageCount: new FormControl(''),
-      finalProductPrice: new FormControl('', Validators.required),
+      finalProductPrice: new FormControl('', [Validators.required, Validators.pattern(/^[0-9]+\.[0-9]{2}$/)]),
       productSizeLength: new FormControl('', Validators.required),
       productSizeWidth: new FormControl('', Validators.required),
       productSizeHeight: new FormControl('', Validators.required),
@@ -128,6 +136,7 @@ export class AddProductComponent implements OnInit {
         this.incotermOptions = terms.filter(term => term.slug == 'incoterm');
         this.brandWarrantyOptions = terms.filter(term => term.slug == 'brand_warranty');
         this.deliveryWarrantyOptions = terms.filter(term => term.slug == 'delivery');
+        this.additionalInformationWarrantyOptions = terms.filter(term => term.slug == 'additional_information');
         this.preShipmentWarrantyOptions = terms.filter(term => term.slug == 'pre_shipment_inspection'); //additional_information_id
         this.returnPolicyOptions = terms.filter(term => term.slug == 'return_policy');
       }
@@ -307,6 +316,7 @@ export class AddProductComponent implements OnInit {
       uploadData.append('incoterm_id', this.formData.incotermId || '');
       uploadData.append('brand_warranty_id', this.formData.warranty || '');
       uploadData.append('delivery_id', this.formData.deliveryWarranty || '');
+      uploadData.append('additional_information_id', this.formData.additionalInformationWarranty || '');
       uploadData.append('pre_shipment_inspection_id', this.formData.preShipmentWarranty || '');
       uploadData.append('return_policy_id', this.formData.returnPolicy || '');
       uploadData.append('pre_shipment_inspection', this.formData.preShipmentInspectionId);

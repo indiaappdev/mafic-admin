@@ -40,23 +40,30 @@
         </div>
         <div class="form-group col-md-6 mb-3">
             <mat-form-field appearance="legacy" style="width: 100%;">
-                <mat-label>Product Price *</mat-label>
+                <mat-label>Product Price (₹)*</mat-label>
                 <input matInput required [(ngModel)]="formData.productPrice" name="productPrice" id="productPrice"
-                    #productPrice="ngModel" aria-describedby="productPrice">
+                    #productPrice="ngModel" aria-describedby="productPrice" pattern="^[0-9]+\.[0-9]{2}$">
+                <mat-error *ngIf="productPrice.invalid && productPrice.touched">Enter a valid price (e.g., 45.00)</mat-error>
             </mat-form-field>
         </div>
         <div class="form-group col-md-6 mb-3">
             <mat-form-field appearance="legacy" style="width: 100%;">
-                <mat-label>Product Discount *</mat-label>
-                <input matInput required [(ngModel)]="formData.productDiscount" name="productDiscount"
-                    id="productDiscount" #productDiscount="ngModel" aria-describedby="productDiscount">
+                <mat-label>Product Discount (%)*</mat-label>
+                <input matInput required [(ngModel)]="formData.productDiscount" name="productDiscount" id="productDiscount"
+                    #productDiscount="ngModel" aria-describedby="productDiscount" pattern="^[0-9]+\.[0-9]{2}$">
+                <mat-error *ngIf="productDiscount.invalid && productDiscount.touched">
+                    <ng-container *ngIf="productDiscount.errors?.pattern">Enter a valid discount (e.g., 10.50)</ng-container>
+                    <ng-container *ngIf="productDiscount.errors?.min">Discount cannot be less than 0.</ng-container>
+                    <ng-container *ngIf="productDiscount.errors?.max">Discount cannot exceed 100.</ng-container>
+                </mat-error>
             </mat-form-field>
-        </div>
+        </div>        
         <div class="form-group col-md-6 mb-3">
             <mat-form-field appearance="legacy" style="width: 100%;">
-                <mat-label>Final Product price and discount *</mat-label>
+                <mat-label>Discounted Price (₹)*</mat-label>
                 <input matInput required [(ngModel)]="formData.finalProductPrice" name="finalProductPrice" id="finalProductPrice"
-                    #finalProductPrice="ngModel" aria-describedby="finalProductPrice">
+                    #finalProductPrice="ngModel" aria-describedby="finalProductPrice" pattern="^[0-9]+\.[0-9]{2}$">
+                <mat-error *ngIf="productPrice.invalid && productPrice.touched">Enter a valid price (e.g., 45.00)</mat-error>
             </mat-form-field>
         </div>
         <div class="form-group col-md-6 mb-3">
@@ -338,14 +345,14 @@
 
         <div class="form-group col-md-6 mb-3 d-flex align-items-center" *ngIf="formData.additionalInformation == 'Yes'">
             <mat-form-field appearance="legacy" style="flex: 1; margin-right: 10px;">
-                <mat-label>Additional Information *</mat-label>
-                <mat-select required [(ngModel)]="formData.deliveryWarranty" (selectionChange)="onSelectionChange($event, 'deliveryWarranty')" name="deliveryWarranty" id="deliveryWarranty">
-                    <mat-option *ngFor="let item of deliveryWarrantyOptions" [value]="item.id">
+                <mat-label>Additional Information Warranty*</mat-label>
+                <mat-select required [(ngModel)]="formData.additionalInformationWarranty" (selectionChange)="onSelectionChange($event, 'additionalInformationWarranty')" name="additionalInformationWarranty" id="additionalInformationWarranty">
+                    <mat-option *ngFor="let item of additionalInformationWarrantyOptions" [value]="item.id">
                         {{ item.title }}
                     </mat-option>
                 </mat-select>
             </mat-form-field>
-            <span class="msg-tag bg-success cursor-pointer px-5" (click)="openViewContentPopup('deliveryWarranty')">View</span>
+            <span class="msg-tag bg-success cursor-pointer px-5" (click)="openViewContentPopup('additionalInformationWarranty')">View</span>
         </div>
 
         <div class="form-group col-md-6 mb-3">
@@ -366,7 +373,7 @@
         <div class="row">
             <div *ngFor="let fileInput of fileInputs; let i = index">
               <div class="form-group col-md-5">
-                <label for="imageUpload{{fileInput.id}}">Image Upload {{fileInput.id}}:</label>
+                <label for="imageUpload{{fileInput.id}}">Image No. {{fileInput.id}}:</label>
                 <input type="file" class="form-control-file" id="imageUpload{{fileInput.id}}" accept="image/*"
                   (change)="previewImage($event, fileInput.id)">
                 <img *ngIf="fileInput.previewSrc" [src]="fileInput.previewSrc" alt="Image Preview" class="img-thumbnail mt-2">

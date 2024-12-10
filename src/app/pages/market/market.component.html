@@ -157,15 +157,15 @@
                             <td mat-cell *matCellDef="let element"> {{element.category_name}} </td>
                           </ng-container>
                           <ng-container matColumnDef="PRICE" class="p-2">
-                            <th mat-header-cell *matHeaderCellDef> PRICE </th>
+                            <th mat-header-cell *matHeaderCellDef> PRICE (₹)</th>
                             <td mat-cell *matCellDef="let element"> {{element.price}} </td>
                           </ng-container>
                           <ng-container matColumnDef="DISCOUNT" class="p-2">
-                            <th mat-header-cell *matHeaderCellDef> DISCOUNT </th>
+                            <th mat-header-cell *matHeaderCellDef> DISCOUNT (%)</th>
                             <td mat-cell *matCellDef="let element"> {{element.discount}} </td>
                           </ng-container>
                           <ng-container matColumnDef="DISCOUNT_PRICE" class="p-2">
-                            <th mat-header-cell *matHeaderCellDef> DISCOUNTED PRICE </th>
+                            <th mat-header-cell *matHeaderCellDef> DISCOUNTED PRICE (₹)</th>
                             <td mat-cell *matCellDef="let element"> {{element.final_product_price_discount}} </td>
                           </ng-container>
                           <ng-container matColumnDef="QUANTITY" class="p-2">
@@ -177,11 +177,11 @@
                           <td mat-cell *matCellDef="let element"> {{element.sku}} </td>
                          </ng-container>
                           <ng-container matColumnDef="SIZE" class="p-2">
-                            <th mat-header-cell *matHeaderCellDef> SIZE </th>
-                            <td mat-cell *matCellDef="let element"> {{element.product_size_height}}x{{element.product_size_width}}x{{element.product_size_length}} </td>
+                            <th mat-header-cell *matHeaderCellDef> SIZE<br>(L x W x H)<br>in CM</th>
+                            <td mat-cell *matCellDef="let element"> {{element.product_size_length}}x{{element.product_size_width}}x{{element.product_size_height}} </td>
                           </ng-container>
                           <ng-container matColumnDef="WEIGHT" class="p-2">
-                            <th mat-header-cell *matHeaderCellDef> WEIGHT </th>
+                            <th mat-header-cell *matHeaderCellDef> WEIGHT <br> in KG</th>
                             <td mat-cell *matCellDef="let element"> {{element.net_weight}} </td>
                           </ng-container>
                           <ng-container matColumnDef="IMAGE" class="p-2">
