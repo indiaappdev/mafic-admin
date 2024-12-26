@@ -23,6 +23,7 @@ export class AddProductComponent implements OnInit {
   fileInputs: { id: number, previewSrc: any }[] = [{ id: 1, previewSrc: '' }];
   res: any;
   productSACHSNCode: any;
+  selectedGSTPercentage: string = '';
   productCountry: any;
   imagePreviews: string[] = [];
   deliveryOptions=['Yes','No']
@@ -104,6 +105,7 @@ export class AddProductComponent implements OnInit {
       delivery: new FormControl('', Validators.required),
       additionalInformation: new FormControl('', Validators.required),
       descriptionHeader: new FormControl('', Validators.required),
+      userProductNo: new FormControl('', Validators.required),
       Description: new FormControl('', Validators.required),
       imageCount: new FormControl(''),
       finalProductPrice: new FormControl('', [Validators.required, Validators.pattern(/^[0-9]+\.[0-9]{2}$/)]),
@@ -119,6 +121,11 @@ export class AddProductComponent implements OnInit {
       preShipmentInspectionId: new FormControl('', Validators.required),
       imgs: new FormControl([]) // Initialize as empty array
     });
+    const userData = localStorage.getItem('loggedUserDataDashboardTwoadmin');
+    if (userData) {
+      const parsedData = JSON.parse(userData);
+      this.formData.createdBy = `${parsedData.id}`;
+    }
     this.ProductCategoryList = this.sharedDataService.ProductCategoryList
     this.getSACData();
     this.getCountryData();
@@ -178,6 +185,21 @@ export class AddProductComponent implements OnInit {
       }
     });
   }  
+
+  onHSNCodeSelect(event: any) {
+    // Use type assertion for `code`
+    const selectedCode = this.productSACHSNCode.find(
+      (code: any) => code.id === event.value
+    );
+  
+    if (selectedCode) {
+      // Set the selected GST percentage
+      this.selectedGSTPercentage = selectedCode.gst_percentage;
+    } else {
+      // Reset GST percentage if no valid code is selected
+      this.selectedGSTPercentage = '';
+    }
+  }
 
   getCountryData() {
     this.sharedDataService.showLoader();  // Show loader before API call
@@ -270,7 +292,9 @@ export class AddProductComponent implements OnInit {
   
   addProductData(){
     this.sharedDataService.showLoader();
-    
+    const selectedHSNCode = this.productSACHSNCode.find(
+      (code: any) => code.id == this.formData.productSACHSNCode
+    );
     var uploadData;
     
       uploadData = new FormData();
@@ -282,6 +306,8 @@ export class AddProductComponent implements OnInit {
       }
       uploadData.append('name', this.formData.productName);
       uploadData.append('description_header', this.formData.descriptionHeader);
+      uploadData.append('created_by', this.formData.createdBy);
+      uploadData.append('user_product_no', this.formData.userProductNo);
       uploadData.append('description', this.formData.Description);
       uploadData.append('art_name', this.formData.artName);
       uploadData.append('artist_name', this.formData.artistName);
@@ -291,6 +317,7 @@ export class AddProductComponent implements OnInit {
       uploadData.append('discount', this.formData.productDiscount);
       uploadData.append('final_product_price_discount', this.formData.finalProductPrice);
       uploadData.append('hsn_code_id', this.formData.productSACHSNCode);
+      uploadData.append('gst_percentage', selectedHSNCode.gst_percentage);
       uploadData.append('quantity', this.formData.quantity);
       uploadData.append('product_size_length', this.formData.productSizeLength);
       uploadData.append('product_size_width', this.formData.productSizeWidth);

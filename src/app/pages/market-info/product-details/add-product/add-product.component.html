@@ -69,7 +69,7 @@
         <div class="form-group col-md-6 mb-3">
             <mat-form-field appearance="legacy" style="width: 100%;">
                 <mat-label>Product SAC/HSN Code *</mat-label>
-                <mat-select required [(ngModel)]="formData.productSACHSNCode" name="productSACHSNCode" id="productSACHSNCode">
+                <mat-select required [(ngModel)]="formData.productSACHSNCode" name="productSACHSNCode" id="productSACHSNCode" (selectionChange)="onHSNCodeSelect($event)">
                     <mat-option *ngFor="let code of productSACHSNCode" [value]="code.id">
                         {{ code.code }} - {{code.title}}
                     </mat-option>
@@ -78,9 +78,9 @@
         </div>
         <div class="form-group col-md-6 mb-3">
             <mat-form-field appearance="legacy" style="width: 100%;">
-                <mat-label>Product Quantity Available*</mat-label>
-                <input matInput required [(ngModel)]="formData.quantity" name="quantity" id="quantity"
-                    #quantity="ngModel" aria-describedby="quantity">
+              <mat-label>GST Percentage *</mat-label>
+              <input matInput readonly [(ngModel)]="selectedGSTPercentage" name="gstPercentage" id="gstPercentage" 
+                placeholder="GST Percentage" />
             </mat-form-field>
         </div>
         <div class="form-group col-md-6 mb-3">
@@ -137,6 +137,13 @@
                 <mat-label>Net Weight in Kg *</mat-label>
                 <input matInput required [(ngModel)]="formData.netWeight" name="netWeight" id="netWeight"
                     #netWeight="ngModel" aria-describedby="netWeight">
+            </mat-form-field>
+        </div>
+        <div class="form-group col-md-6 mb-3">
+            <mat-form-field appearance="legacy" style="width: 100%;">
+                <mat-label>Product Quantity Available*</mat-label>
+                <input matInput required [(ngModel)]="formData.quantity" name="quantity" id="quantity"
+                    #quantity="ngModel" aria-describedby="quantity">
             </mat-form-field>
         </div>
         <div class="form-group col-md-6 mb-3">
@@ -288,6 +295,14 @@
 
         <div class="form-group col-md-6 mb-3">
             <mat-form-field appearance="legacy" style="width: 100%;">
+                <mat-label>User Product No. *</mat-label>
+                <input matInput required [(ngModel)]="formData.userProductNo" name="userProductNo"
+                    id="userProductNo" #userProductNo="ngModel" aria-describedby="userProductNo">
+            </mat-form-field>
+        </div>
+
+        <div class="form-group col-md-6 mb-3">
+            <mat-form-field appearance="legacy" style="width: 100%;">
                 <mat-label>Pre-Shipment Inspection *</mat-label>
                 <mat-select required [(value)]="formData.preShipmentInspectionId" name="preShipmentInspectionId" id="preShipmentInspectionId">
                     <mat-option *ngFor="let option of preShipmentInspectionOptions" [value]="option">
@@ -299,7 +314,7 @@
 
         <div class="form-group col-md-6 mb-3 d-flex align-items-center" *ngIf="formData.preShipmentInspectionId == 'Yes'">
             <mat-form-field appearance="legacy" style="flex: 1; margin-right: 10px;">
-                <mat-label>Pre-Shipment Inspection Warranty *</mat-label>
+                <mat-label>Pre-Shipment Inspection Terms and Conditons *</mat-label>
                 <mat-select required [(ngModel)]="formData.preShipmentWarranty" (selectionChange)="onSelectionChange($event, 'preShipmentWarranty')" name="preShipmentWarranty" id="preShipmentWarranty">
                     <mat-option *ngFor="let item of preShipmentWarrantyOptions" [value]="item.id">
                         {{ item.title }}
@@ -322,7 +337,7 @@
 
         <div class="form-group col-md-6 mb-3 d-flex align-items-center" *ngIf="formData.delivery == 'Yes'">
             <mat-form-field appearance="legacy" style="flex: 1; margin-right: 10px;">
-                <mat-label>Delivery Warranty *</mat-label>
+                <mat-label>Delivery Terms and Conditons *</mat-label>
                 <mat-select required [(ngModel)]="formData.deliveryWarranty" (selectionChange)="onSelectionChange($event, 'deliveryWarranty')" name="deliveryWarranty" id="deliveryWarranty">
                     <mat-option *ngFor="let item of deliveryWarrantyOptions" [value]="item.id">
                         {{ item.title }}
@@ -345,7 +360,7 @@
 
         <div class="form-group col-md-6 mb-3 d-flex align-items-center" *ngIf="formData.additionalInformation == 'Yes'">
             <mat-form-field appearance="legacy" style="flex: 1; margin-right: 10px;">
-                <mat-label>Additional Information Warranty*</mat-label>
+                <mat-label>Additional Information Details*</mat-label>
                 <mat-select required [(ngModel)]="formData.additionalInformationWarranty" (selectionChange)="onSelectionChange($event, 'additionalInformationWarranty')" name="additionalInformationWarranty" id="additionalInformationWarranty">
                     <mat-option *ngFor="let item of additionalInformationWarrantyOptions" [value]="item.id">
                         {{ item.title }}
@@ -355,6 +370,13 @@
             <span class="msg-tag bg-success cursor-pointer px-5" (click)="openViewContentPopup('additionalInformationWarranty')">View</span>
         </div>
 
+        <!-- <div class="form-group col-md-6 mb-3">
+            <mat-form-field appearance="legacy" style="width: 100%;">
+                <mat-label>Created By *</mat-label>
+                <input matInput required [(ngModel)]="formData.createdBy" name="createdBy"
+                    id="createdBy" #createdBy="ngModel" aria-describedby="createdBy" readonly>
+            </mat-form-field>
+        </div> -->
         <div class="form-group col-md-6 mb-3">
             <mat-form-field appearance="legacy" style="width: 100%;">
                 <mat-label>Description Header *</mat-label>

@@ -23,6 +23,8 @@ export class EditProductDetailsComponent implements OnInit {
   fileInputs: { id: number, images: any }[] = [{ id: 1, images: '' }];
   res: any;
   productSACHSNCode: any;
+  selectedGSTPercentage: string = '';
+  createdBy: string = '';
   imagePreviews: string[] = [];
   deliveryOptions = ['Yes', 'No']
   additionalInformationOptions=['Yes','No']
@@ -111,6 +113,7 @@ export class EditProductDetailsComponent implements OnInit {
       sizeHeight: new FormControl('', Validators.required),
       delivery: new FormControl('', Validators.required),
       descriptionHeader: new FormControl('', Validators.required),
+      userProductNo: new FormControl('', Validators.required),
       Description: new FormControl('', Validators.required),
       imageCount: new FormControl(''),
       finalProductPrice: new FormControl('', Validators.required),
@@ -128,7 +131,6 @@ export class EditProductDetailsComponent implements OnInit {
       additionalInformation: new FormControl('', Validators.required),
       imgs: new FormControl([]) // Initialize as empty array
     });
-
     // Use getTermsFromSomeSource to fetch and assign terms
     this.getTermsFromSomeSource();
   }
@@ -213,6 +215,23 @@ export class EditProductDetailsComponent implements OnInit {
     });
   }  
 
+  onHSNCodeSelect(event: any) {
+    const selectedCode = this.productSACHSNCode.find(
+      (code: any) => code.id === event.value
+    );
+  
+    if (selectedCode) {
+      // Update GST Percentage
+      this.selectedGSTPercentage = selectedCode.gst_percentage;
+      // Update formData
+      this.formData.selectedGSTPercentage = selectedCode.gst_percentage;
+    } else {
+      this.selectedGSTPercentage = '';
+      this.formData.selectedGSTPercentage = '';
+    }
+  }
+  
+
   getCountryData() {
     this.sharedDataService.showLoader();  // Show loader before API call
   
@@ -254,7 +273,7 @@ export class EditProductDetailsComponent implements OnInit {
           this.fileInputs = this.productExistingImage = this.SingleProductData.images
           console.log(this.productData)
           console.log(this.productData.categoryId)
-          console.log(this.productExistingImage)
+          console.log("this.productData.gst_percentage ", this.productData.gst_percentage)
 
           this.formData = {
             productName: this.productData.name,
@@ -265,6 +284,8 @@ export class EditProductDetailsComponent implements OnInit {
             productPrice: this.productData.price,
             productDiscount: this.productData.discount,
             productSACHSNCode: this.productData.hsn_code_id,
+            userProductNo: this.productData.user_product_no,
+            selectedGSTPercentage: this.productData.gst_percentage,
             quantity: this.productData.quantity,
             productSKU: this.productData.sku,
             productSizeLength: this.productData.product_size_length,
@@ -408,7 +429,9 @@ export class EditProductDetailsComponent implements OnInit {
 
   addProductData() {
     this.sharedDataService.showLoader();
-  
+    const selectedHSNCode = this.productSACHSNCode.find(
+      (code: any) => code.id == this.formData.productSACHSNCode
+    );
     const uploadData = new FormData();
     
     // Append images to uploadData
@@ -420,6 +443,16 @@ export class EditProductDetailsComponent implements OnInit {
       uploadData.append('image_count', this.imgs.length.toString());
     } else {
       uploadData.append('image_count', '0');
+    }
+
+    const userData = localStorage.getItem('loggedUserDataDashboardTwoadmin');
+    if (userData) {
+      const parsedData = JSON.parse(userData);
+      console.log("parsedData :", parsedData);
+      console.log("parsedData Id:", parsedData.id);
+
+      // Correct way to set createdBy
+      this.createdBy = parsedData.id
     }
   
     // Append product form data to uploadData
@@ -439,7 +472,11 @@ export class EditProductDetailsComponent implements OnInit {
     uploadData.append('delivery', this.formData.delivery);
     uploadData.append('description_header', this.formData.descriptionHeader);
     uploadData.append('description', this.formData.Description);
-  
+    uploadData.append('gst_percentage', selectedHSNCode.gst_percentage);
+    uploadData.append('user_product_no', this.formData.userProductNo);
+    uploadData.append('created_by', this.createdBy);
+    // uploadData.append('created_by', this.formData.controls['createdBy'].value);
+
     uploadData.append('final_product_price_discount', this.formData.finalProductPrice);
     uploadData.append('product_size_length', this.formData.productSizeLength);
     uploadData.append('product_size_width', this.formData.productSizeWidth);
@@ -467,6 +504,8 @@ export class EditProductDetailsComponent implements OnInit {
     uploadData.append('delivery_id', this.formData.deliveryWarranty || '');
     uploadData.append('pre_shipment_inspection_id', this.formData.preShipmentWarranty || '');
     
+    console.log('Form Data:', this.formData.value);
+
     // Make the HTTP POST request
     this.http.post('https://api-dev.themafic.co.in/api/products/update', uploadData)
       .subscribe(
