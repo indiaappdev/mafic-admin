@@ -351,7 +351,7 @@ export class AddProductComponent implements OnInit {
       // uploadData.append('sku', this.formData.productSKU);
       
 
-      this.http.post('https://api-dev.themafic.co.in/api/products', uploadData)
+      this.http.post('https://api-dev.themafic.co.in/api/products/add', uploadData)
         .subscribe(data => {
           console.log(data);
           this.sharedDataService.hideLoader();

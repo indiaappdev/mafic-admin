@@ -133,7 +133,7 @@ export class AddProductTermsComponent implements OnInit {
       uploadData.append('file', this.selectedFile, this.selectedFile.name);
     }
 
-    this.http.post('https://api-dev.themafic.co.in/api/terms', uploadData)
+    this.http.post('https://api-dev.themafic.co.in/api/terms/add', uploadData)
       .subscribe(data => {
         console.log(data);
         this.sharedDataService.hideLoader();

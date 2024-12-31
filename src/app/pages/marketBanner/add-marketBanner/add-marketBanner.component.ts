@@ -106,7 +106,7 @@ export class AddMarketBannerComponent implements OnInit {
       this.data.showLoader();
       // this.http.post(`${this.data.apiDomainPathlocal}do_upload`, uploadData)
       // this.http.post(`${this.data.apiDomainPathserver}do_upload`, uploadData)
-      this.http.post(`${this.data.apiDomainPathDashTwo}banner`, uploadData)
+      this.http.post(`${this.data.apiDomainPathDashTwo}banner/add`, uploadData)
         .subscribe(
           (data: any) => {
             console.log(data);
